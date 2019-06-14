@@ -1,0 +1,3 @@
+<?php
+
+//formulaire d'inscription
