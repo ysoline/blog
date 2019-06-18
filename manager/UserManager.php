@@ -41,4 +41,10 @@ class User extends Manager{
 
         return $data;
     }
+
+    private function deleteUser($pseudo, $password, $email)
+    {
+        $db=$this->dbConnect();
+        $req= $db->exec('DELETE FROM users WHERE pseudo=?, password=?, email=?');
+    }
 }
