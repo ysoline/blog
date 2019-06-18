@@ -2,6 +2,8 @@
 
 <?php ob_start(); ?>
     
+    <h2>Inscription</h2>
+    
     <div class='d-flex justify-content-center'>
         <form action='index.php?action=newUser' method="post">
 
@@ -20,18 +22,20 @@
         </div>
 
         <div class="d-flex justify-content-center">
-            <label for ="mail">Mail : </label>
-            <input type="text" id="mail" name="mail"/>
+            <label for ="email">Mail : </label>
+            <input type="text" id="email" name="email"/>
         </div>  
         
         <div class="d-flex justify-content-center">
-            <label for ="mail">Confirmation mail : </label>
-            <input type="text" id="mail2" name="mail2"/>
+            <label for ="email">Confirmation mail : </label>
+            <input type="text" id="email2" name="email2"/>
         </div>
 
         <div class="d-flex justify-content-center pt-2">
             <input type="submit" value="S'incrire"/>
         </div>
+
+        <button type="button"><a href="../../index.php">Retour</a></button>
         </form>
     </div>
 
