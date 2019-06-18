@@ -1,6 +1,6 @@
 <?php
 //Contient les requêtes SQL concernant les commentaires
-//class comment
+//class comment CRUDE
 use \Julie\Blog;
 
 require_once('model/Manager.php');
@@ -19,7 +19,7 @@ class CommentManager extends Manager
     public function postComment($postId, $author, $comment)//Ajoute un commentaire
     {
         $db= $this->dbConnect();
-        $comments=$db->prepare('INSERT INTO comments(post_ID, author, comment, comment_date) VALUES(?,?,?, NOW())');
+        $comments=$db->prepare('INSERT INTO comments(postID, author, comment, comment_date) VALUES(?,?,?, NOW())');
         $affectedLines = $comments-> execute(array($postId, $author, $comment));
 
         return $affectedLines;
@@ -28,7 +28,7 @@ class CommentManager extends Manager
     public function deleteComment($postId, $author, $comment)// Supprime un commentaire
     {
         $db=$this->dbConnect();
-        $comments=$db->exec('DELETE FROM comments WHERE post_ID=?, author=?, comment=?, comment_date=?');
+        $comments=$db->exec('DELETE FROM comments WHERE postID=?, author=?, comment=?, comment_date=?');
     }
 
     public function editComment($commentId, $author, $comment)
@@ -39,4 +39,4 @@ class CommentManager extends Manager
 
         return $updateComment;
     }
-    }
+}
