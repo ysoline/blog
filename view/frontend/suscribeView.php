@@ -1,7 +1,4 @@
-<?php $title ?>
 
-<?php ob_start(); ?>
-    
     <h2>Inscription</h2>
     
     <div class='d-flex justify-content-center'>
@@ -38,6 +35,3 @@
         <button type="button"><a href="../../index.php">Retour</a></button>
         </form>
     </div>
-
-<?php $content = ob_get_clean(); ?>
-<?php require('template.php'); ?>

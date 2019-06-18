@@ -34,7 +34,7 @@ class PostManager extends Manager
         return $editPost;
     }
 
-    public function getPost($postId) //Supprimer un poste
+    public function deletePost($postId) //Supprimer un poste
     {
         $db = $this->dbConnect();
         $req = $db->exec('DELETE FROM posts WHERE postId=?, author=?, content=?, post_date=?');
