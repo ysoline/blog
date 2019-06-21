@@ -28,7 +28,7 @@ class PostManager extends Manager
     {
         $_bdd = $this->getDbConnect();
         $req = $_bdd->prepare('UPDATE posts SET title=?, content =?');
-        $req->execute(array($postId));
+        $editPost=$req->execute(array($postId));
         
         return $editPost;
     }
