@@ -2,8 +2,9 @@
 //Contient les requêtes SQL concernant les commentaires
 //class comment CRUDE
 use \Julie\Blog;
+namespace Julie\Blog\Model;
 
-require_once('model/Manager.php');
+require_once('Manager.php');
 
 class CommentManager extends Manager
 {

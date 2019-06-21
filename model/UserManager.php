@@ -1,36 +1,29 @@
 <?php
 
 use \Julie\Blog;
-
+namespace Julie\Blog\Model;
 
 require_once('model/Manager.php');
 
-class User extends Manager{
+class UserManager extends Manager{
 
-    private $pseudo,
-            $password,
-            $password2,
-            $email,
-            $email2,
-            $rank_id;
-
-    private function createUser($pseudo, $password, $email, $rank_id) //ajouter un utilisateur lors de l'inscription
+    public function createUser($pseudo, $pass1, $pass2, $email, $email2) //ajouter un utilisateur lors de l'inscription
     {
         $db=$this->dbConnect();
-        $reqUser= $db->prepare('INSERT INTO users(pseudo, password, password2, email, email2, rank_id) VALUES(?,?,?,?,?,?) ');
-        $newUser = $reqUser -> execute(array($pseudo, $password, $email, $rank_id));
+        $reqUser= $db->prepare('INSERT INTO users(pseudo, pass1, pass2, email, email2) VALUES(?,?,?,?,?) ');
+        $newUser = $reqUser -> execute(array($pseudo, $pass1, $pass2, $email, $email2));
 
         return $newUser; 
     }
 
-    private function getUser($pseudo, $password) //selectionner un utilisateur (verification) lors de la connexion
+
+    public function getUser($pseudo, $password) //selectionner un utilisateur (verification) lors de la connexion
     {
         $db=$this->dbConnect();
-        $req= $db->prepare('SELECT $pseudo, password FORM users WHERE pseudo=?, password=?');
+        $req= $db->prepare('SELECT $id, $pseudo, password FROM users WHERE pseudo=?');
         $user=$req->execute(array($pseudo, $password));
 
         return $user;
-
     }
 
     private function editUser($pseudo, $password)

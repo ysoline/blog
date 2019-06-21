@@ -1,3 +1,6 @@
 <?php
+foreach($posts as $post): ?>
+<h2><?= $post->title() ?></h2>
+<time><?= $post->datePost() ?> </time>
 
-//Affiche la liste des billets sur la page d'accueil sous forme d'extrait
+<?php endforeach; ?>
