@@ -1,28 +1,28 @@
 <?php
-
+namespace Julie\Blog\Model;
     class Post
     {
         private $_id,
                 $_title,
                 $_post,
-                $_post_date;
+                $_postDate;
 
-            //Constructeur
-        public function __construct(array $data)
-        {
-            $this->hydrate($data);
-        }
-            //Hydration
-        public function hydrate(array $data)
-        {
-            foreach($data as $key => $value)
-            {
-                $method= 'set'.ucfirst($key);
+        //     //Constructeur
+        // public function __construct(array $data)
+        // {
+        //     $this->hydrate($data);
+        // }
+        //     //Hydration
+        // public function hydrate(array $data)
+        // {
+        //     foreach($data as $key => $value)
+        //     {
+        //         $method= 'set'.ucfirst($key);
 
-                if(method_exists($this, $method))
-                $this->$method($value);
-            }
-        }
+        //         if(method_exists($this, $method))
+        //         $this->$method($value);
+        //     }
+        // }
 
         //SETTERS
 
@@ -30,22 +30,26 @@
         {
             $id = (int) $id;
             if($id >0)
-            $this->_id= $id;
+            {
+                $this->_id= $id;
+            }
         }
 
         public function setTitle($title)
         {
             if(is_string($title))
-            $this->_title = $title;
+            {
+                $this->_title = $title;
+            }
         }
         public function setContent($post)
         {
             if(is_string($post))
-            $this->_post = $post;
-        }
-        public function setPostDate($date)
+           { $this->_post = $post;
+        }}
+        public function setPostDate($postDate)
         {
-            $this->_date = $date;
+           { $this->_date = $postDate;}
         }
 
         //GETTERS
