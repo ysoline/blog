@@ -1,6 +1,6 @@
 <?php
 
-use \Julie\Blog\Model\Manager;
+// include('Manager.php');
 
 class CommentManager extends Manager
 {

@@ -1,5 +1,7 @@
 <?php
 
+require('controller/postController.php');
+
 try{
     if(isset($_GET['action']))
     {
@@ -9,9 +11,9 @@ try{
             listPosts();
         }
     }
-    // else{
-    //     listPosts();
-    // }
+     else{
+        listPosts();
+     }
 }
 catch(Exception $e){
     $errorMessage =$e->getMessage();
