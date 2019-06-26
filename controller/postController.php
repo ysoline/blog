@@ -1,26 +1,17 @@
 <?php
-
-use Julie\Blog\Model\PostManager;
-use Julie\Blog\Model\CommentManager;
-
-class PostController
+require_once('model/PostManager.php'); 
+require_once('model/CommentManager.php');
+function listPosts()
 {
-    public function listPosts()
-    {
-        $postManager = new PostManager(); 
-        $posts = $postManager->getPosts(); 
-
-        require('view/frontend/listPostView.php');
-    }
-
-    public function post()
-    {
-        $postManager= new PostManager();
-        $commentManager= new CommentManager();
-
-        $post= $postManager-> getPost($_GET['id']);
-        $comments= $commentManager-> getComments($_GET['id']);
-
-        require('view/frontend/postView.php');
-    }
+    $postManager= new \Julie\Blog\Model\PostManager(); 
+    $posts= $postManager->getPosts(); 
+    require('view/frontend/listPostView.php');
+}
+function post()
+{
+    $postManager= new \Julie\Blog\Model\PostManager();
+    $commentManager= new \Julie\Blog\Model\CommentManager();
+    $post= $postManager-> getPost($_GET['id']);
+    $comments= $commentManager-> getComments($_GET['id']);
+    require('view/frontend/postView.php');
 }

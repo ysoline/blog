@@ -3,7 +3,7 @@
 try{
     if(isset($_GET['action']))
     {
-        if(['action']== 'listPosts')
+        if($_GET['action']== 'listPosts')
         {
             //affiche listPosts (demande au controller)
             listPosts();

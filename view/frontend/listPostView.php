@@ -1,6 +1,8 @@
 <?php
-foreach($posts as $post): ?>
-<h2><?= $post->title() ?></h2>
-<p><?=$post->content() ?></p>
 
-<?php endforeach; ?>
+foreach ($posts as $post)
+{
+    echo $post['title'].'<br/>'.'<br/>';
+    
+    echo $post['post'].'<br/>'.'<br/>';
+}
