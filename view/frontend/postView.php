@@ -14,21 +14,11 @@
 
 <h3>Commentaires :</h3>
 
-<?php
-foreach ($comments as $comment) { ?>
-    <div class="jumbotron">
-        <h6> par <?= $comment['author'] ?></h6>
-        <p class="lead"><?= $comment['comment'] ?></p>
-        <p><?= $comment['comment_date_fr'] ?></p>
-
-    </div>
-<?php
-} ?>
 <h4>Ajouter un commentaire</h4>
 
     <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post" >
         <div class='d-flex justify-content-center flex-column'>
-            <label for="author">Auteur :</label><br />
+            <label for="author">Pseudo :</label><br />
             <input type="text" id="author" name="author" />
         </div>
         
@@ -42,9 +32,18 @@ foreach ($comments as $comment) { ?>
         </div>
     </form>
 
+<?php
+foreach ($comments as $comment) { ?>
+    <div class="jumbotron">
+        <h6> par <?= $comment['author'] ?></h6>
+        <p class="lead"><?= $comment['comment'] ?></p>
+        <p><?= $comment['comment_date_fr'] ?></p>
+
+    </div>
+<?php
+} ?>
 
 <?php
-
 $content = ob_get_clean();
 require('view/frontend/template.php');
 ?>
