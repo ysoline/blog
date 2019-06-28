@@ -22,8 +22,10 @@ try{
                 throw new Exception("Post introuvable !");                
             }} elseif ($_GET['action'] == 'addComment') {
                 if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+                    if (isset($_POST['author'],$_POST['comment']) && !empty($_POST['author']) && !empty($_POST['comment'])) {
                         addComment($_GET['id'], $_POST['author'], $_POST['comment']);
+                        $s_comment='<span style="green">Votre commentaire a bien été posté</span>';
+                                        
                     } else {
                         throw new Exception('Tous les champs ne sont pas remplis !');
                     }
