@@ -2,7 +2,7 @@
 
 
 
-class UserManager {
+class UserManager extends Manager {
 
     public function createUser($pseudo, $pass1, $pass2, $email, $email2) //ajouter un utilisateur lors de l'inscription
     {

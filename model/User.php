@@ -1,5 +1,5 @@
 <?php
-namespace Julie\Blog\Model;
+
 
 class User{
 

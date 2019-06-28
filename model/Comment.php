@@ -1,12 +1,11 @@
 <?php
-namespace Julie\Blog\Model;
+
 
 class Comment
 {
     private $_id,
-            $_title,
             $_comment,
-            $_id_author,
+            $_author,
             $_comment_date,
             $_post_id,
             $_status;
@@ -15,17 +14,13 @@ class Comment
     {
         return $this->_id();
     }
-    public function title()
-    {
-        return $this->_title();
-    }
     public function comment()
     {
         return $this->_comment();
     }
-    public function id_author()
+    public function author()
     {
-        return $this->_id_author();
+        return $this->_author();
     }
     public function comment_date()
     {
@@ -48,26 +43,19 @@ class Comment
             $this->_id=$id;
         }
     }
-    public function setTitle($title)
-    {
-        if(is_string($title))
-        {
-            $this->_title=$title;
-        }
-    }
-    public function setComment($comment)
+   public function setComment($comment)
     {
         if(is_string($comment))
         {
             $this->_comment=$comment;
         }
     }
-    public function setId_Author($id_author)
+    public function setAuthor($author)
     {
-        $id_author =(int) $id_author;
-        if($id_author >0)
+        $id_author =(int) $author;
+        if($author >0)
         {
-            $this->_id_author=$id_author;
+            $this->_author=$author;
         }
     }
     public function setComment_Date($comment_date)

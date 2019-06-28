@@ -1,5 +1,5 @@
 <?php
-namespace Julie\Blog\Model;
+
     class Post
     {
         private $_id,
