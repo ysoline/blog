@@ -1,7 +1,5 @@
 <?php
 
-// include('Manager.php');
-use \Blog\model\Manager;
 
 class PostManager extends Manager
 {

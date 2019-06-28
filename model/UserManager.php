@@ -1,8 +1,8 @@
 <?php
 
-use \Julie\Blog\Model\Manager;
 
-class UserManager extends Manager{
+
+class UserManager {
 
     public function createUser($pseudo, $pass1, $pass2, $email, $email2) //ajouter un utilisateur lors de l'inscription
     {

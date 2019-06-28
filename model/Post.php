@@ -6,6 +6,7 @@ namespace Julie\Blog\Model;
                 $_title,
                 $_post,
                 $_postDate;
+                
 
         //     //Constructeur
         // public function __construct(array $data)
@@ -66,9 +67,9 @@ namespace Julie\Blog\Model;
         {
             return $this->_post;
         }
-        public function datePost()
+        public function postDate()
         {
-            return $this->_datePost;
+            return $this->_postDate;
         }
 
     }

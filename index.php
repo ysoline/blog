@@ -1,6 +1,8 @@
 <?php
+require 'Autoloader.php'; 
+Autoloader::register(); 
 
-require('controller/postController.php');
+include('controller/PostController.php');
 
 try{
     if(isset($_GET['action']))
@@ -9,6 +11,15 @@ try{
         {
             //affiche listPosts (demande au controller)
             listPosts();
+        }elseif($_GET['action'] == 'post')
+        {
+            if(isset($_GET['id']) && $_GET['id']>0)
+            {
+                post();
+            }
+            else{
+                throw new Exception("Post introuvable !");                
+            }
         }
     }
      else{

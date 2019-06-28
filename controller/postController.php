@@ -1,6 +1,6 @@
 <?php
-require_once('model/PostManager.php'); 
-require_once('model/CommentManager.php');
+include('model/PostManager.php'); 
+include('model/CommentManager.php');
 
 function listPosts()
 {

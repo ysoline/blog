@@ -1,10 +1,8 @@
 <?php
-use Julie\Blog\Model;
-use Julie\Blog\Model\User;
 
 //regroupe les fonctionnalités lié aux utillisateurs 
 // inscription/connexion... 
-require_once('model/UserManager.php');
+include('model/UserManager.php');
 
 function newUser($pseudo, $pass1, $pass2, $email, $email2)
 {
