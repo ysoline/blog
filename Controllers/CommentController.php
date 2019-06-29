@@ -23,7 +23,7 @@ class CommentController
         $commentManager = new \Julie\Blog\Model\CommentManager();
         $comment = $commentManager->getComment($_GET['id']);
 
-        require('view\frontend\commentView.php');
+        require('Views\Frontend\commentViews.php');
     }
 
     public function editComment($commentId, $author, $comment, $post_id)

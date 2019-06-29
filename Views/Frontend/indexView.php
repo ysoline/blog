@@ -6,7 +6,7 @@
         <input type="submit" value="Connexion">
     </form>
 
-    <form action="view/frontend/suscribeView.php" method="post">
+    <form action="Views/Frontend/suscribeViews.php" method="post">
         <input type="submit" value="Inscription">
     </form>
 

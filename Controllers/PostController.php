@@ -7,7 +7,7 @@ class PostController
     {
         $postManager= new PostManager(); 
         $posts= $postManager->getPosts(); 
-        require('view/frontend/listPostView.php');
+        require('Views/Frontend/listPostView.php');
     }
     function post()
     {
@@ -15,6 +15,6 @@ class PostController
         $commentManager= new CommentManager();
         $post= $postManager-> getPost($_GET['id']);
         $comments= $commentManager-> getComments($_GET['id']);
-        require('view/frontend/postView.php');
+        require('Views/Frontend/postView.php');
     }
 }

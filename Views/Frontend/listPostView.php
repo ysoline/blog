@@ -19,5 +19,5 @@ foreach ($posts as $post)
 <?php } 
 $posts->closeCursor();
 $content = ob_get_clean();
-require('view/frontend/template.php');
+require('Views/Frontend/template.php');
 ?>

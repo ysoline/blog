@@ -45,5 +45,5 @@ foreach ($comments as $comment) { ?>
 
 <?php
 $content = ob_get_clean();
-require('view/frontend/template.php');
+require('Views/Frontend/template.php');
 ?>
