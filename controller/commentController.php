@@ -2,38 +2,39 @@
 
 //fonctionnalités des commentaires 
 //ajout/édition...
+class CommentController
 
-require_once('model/CommentManager.php');
-
-function addComment($post_id, $author, $comment)
 {
-    $commentManager= new CommentManager();
+        public function addComment($post_id, $author, $comment)
+    {
+        $commentManager= new CommentManager();
 
-    $affectedLines = $commentManager->postComment($post_id, $author, $comment);
+        $affectedLines = $commentManager->postComment($post_id, $author, $comment);
 
-    if($affectedLines === false){
-        throw new Exception('Impossible d\'ajouter le commentaire !');
-    }else{
-        header('Location: index.php?action=post&id='.$post_id);
+        if($affectedLines === false){
+            throw new Exception('Impossible d\'ajouter le commentaire !');
+        }else{
+            header('Location: index.php?action=post&id='.$post_id);
+        }
     }
-}
 
-function updateComment($commentId)
-{
-    $commentManager = new \Julie\Blog\Model\CommentManager();
-    $comment = $commentManager->getComment($_GET['id']);
+    public function updateComment($commentId)
+    {
+        $commentManager = new \Julie\Blog\Model\CommentManager();
+        $comment = $commentManager->getComment($_GET['id']);
 
-    require('view\frontend\commentView.php');
-}
-
-function editComment($commentId, $author, $comment, $post_id)
-{
-    $commentManager = new CommentManager();
-    $affectedLines = $commentManager->editComment($author, $comment, $commentId);
-    if ($affectedLines === false) {
-        throw new Exception('Impossible de modifier le commentaire !');
+        require('view\frontend\commentView.php');
     }
-    else {
-        header('Location: index.php?action=post&id=' . $post_id);
+
+    public function editComment($commentId, $author, $comment, $post_id)
+    {
+        $commentManager = new CommentManager();
+        $affectedLines = $commentManager->editComment($author, $comment, $commentId);
+        if ($affectedLines === false) {
+            throw new Exception('Impossible de modifier le commentaire !');
+        }
+        else {
+            header('Location: index.php?action=post&id=' . $post_id);
+        }
     }
 }
