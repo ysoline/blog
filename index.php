@@ -1,22 +1,23 @@
 <?php
-require 'Autoloader.php'; 
-Autoloader::register(); 
+ require ('Autoloader.php'); 
+ Autoloader::register(); 
 
-include('controller/postController.php');
-include('controller/commentController.php');
+
 
 try{
     if(isset($_GET['action']))
     {
         if($_GET['action']== 'listPosts')
         {
-            //affiche listPosts (demande au controller)
-            listPosts();
+            $posts= new PostController;
+            $posts->listPosts();            
+            
         }elseif($_GET['action'] == 'post')
         {
             if(isset($_GET['id']) && $_GET['id']>0)
             {
-                post();
+                $post =new PostController;
+                $post ->post();
             }
             else{
                 throw new Exception("Post introuvable !");                
@@ -35,10 +36,11 @@ try{
         }
     }
      else{
-        listPosts();
+        $posts= new PostController;
+        $posts ->listPosts();
      }
 }
 catch(Exception $e){
     $errorMessage =$e->getMessage();
-    require('view/frontend/error.php');
+    require('Views/Frontend/error.php');
 }
