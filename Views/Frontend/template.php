@@ -12,6 +12,14 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+          <a class="nav-link" href="index.php?action=auth">Connexion</a>
+    </li>
+    <li class="nav-item active">
+          <a class="nav-link" href="index.php?action=suscribe">Inscription</a>
+    </li>
+  </ul>
 </nav>
 
         <?= $content ?>
