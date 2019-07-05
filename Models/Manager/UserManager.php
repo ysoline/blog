@@ -11,34 +11,33 @@ class UserManager extends Manager {
         return $newUser; 
     }
 
-    public function pseudoExist($pseudo)
+    public function getUser() //selectionner un utilisateur (verification) lors de la connexion
     {
         $_bdd=$this->dbConnect();
-        $pseudoExist = $_bdd->prepare('SELECT pseudo FROM users WHERE pseudo=?');
-        $pseudoExist->execute(array($pseudo));
+        $req= $_bdd->prepare('SELECT $id, $pseudo, pass FROM users WHERE pseudo=?');
+        
+        $count = $req-> rowCount(); //Vérification de l'existence d'un pseudo;
 
-        return $pseudoExist;
-    }
+        if($count == 1)
+        {
+            return $count;
+        }
+        else {
+            throw new Exception("Identifiants inconnu");
+            
+        }         
+     }
 
-    public function getUser($pseudo, $password) //selectionner un utilisateur (verification) lors de la connexion
-    {
-        $_bdd=$this->dbConnect();
-        $req= $_bdd->prepare('SELECT $id, $pseudo, password FROM users WHERE pseudo=?');
-        $user=$req->execute(array($pseudo, $password));
+    // public function editUser($pseudo, $pass)
+    // {
+    //     $_bdd=$this->dbConnect();
+    //     $data= $_bdd->prepare('UPDATE users set pseudo =?, pass=? WHERE id=?');
+    //     $data->execute(array($pseudo, $pass));
 
-        return $user;
-    }
+    //     return $data;
+    // }
 
-    private function editUser($pseudo, $password)
-    {
-        $_bdd=$this->dbConnect();
-        $data= $_bdd->prepare('UPDATE users set pseudo =?, password=? WHERE id=?');
-        $data->execute(array($pseudo, $password));
-
-        return $data;
-    }
-
-    // private function deleteUser($pseudo, $password, $email)
+    // public function deleteUser($pseudo, $password, $email)
     // {
     //     $_bdd=$this->dbConnect();
     //     $req= $_bdd->exec('DELETE FROM users WHERE pseudo=?, password=?, email=?');

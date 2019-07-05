@@ -17,7 +17,7 @@
           <a class="nav-link" href="index.php?action=auth">Connexion</a>
     </li>
     <li class="nav-item active">
-          <a class="nav-link" href="index.php?action=suscribe">Inscription</a>
+          <a class="nav-link" href="index.php?action=suscribePage">Inscription</a>
     </li>
   </ul>
 </nav>

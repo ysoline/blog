@@ -50,7 +50,16 @@ class User{
     {
         if(is_string($pseudo))
         {
-            $this->_pseudo = $pseudo;
+            if(strlen($pseudo) > 5 && strlen($pseudo) < 12)
+            {
+                $this->_pseudo = $pseudo;
+            }
+            else {
+                {
+                    trigger_error('Le pseudo doit être compris entre 5 et 12 charactère', E_USER_WARNING);
+            return;
+                }
+            }
         }
     }
     public function setPass1($pass1)
