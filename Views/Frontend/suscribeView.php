@@ -30,10 +30,10 @@
         </div>
 
         <div>
-            <input type="submit" value="S'incrire"/>
+            <input type="submit" value="S'incrire" class='btn btn-primary btn'>
         </div>
 
-        <button type="button"><a href="../../index.php">Retour</a></button>
+        <a href="index.php?action=listPosts" class='btn btn-primary btn'>Retour</a>
         </form>
     </div>
 
