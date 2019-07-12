@@ -4,19 +4,13 @@
 // inscription/connexion... 
 class UserController
 {
-    public function newUser($pseudo, $pass1, $pass2, $email, $email2)
+    public function newUser($pseudo, $pass, $email)
     {
         $userManager = new UserManager;
-        $newUser = $userManager -> addUser();
+        $newUser = $userManager -> addUser($pseudo, $pass, $email);
+
+        header('Location: index.php?action=listPosts');
     }
-
-    // public function getUser($pseudo, $pass1)
-    // {
-    //     $userManager = new UserManager;
-    //     $user = $userManager->getUser($pseudo, $pass1);
-
-    //     require('Views/Frontend/authView.php');
-    // }
 
     // public function editUser($id)
     // {
@@ -26,12 +20,12 @@ class UserController
     //     return $editUser;
     // }
 
-    public function connectUser()
+    public function connectUser($pseudo, $pass)
     {
         $coUser = new UserManager;
-        $coUser -> getUser();
-
-        require('Views/Frontend/authView.php');
+        $coUser -> getUser($pseudo, $pass);
+       
+        header('Location: index.php?action=listPosts');
     }
 
     public function connectPage()

@@ -5,10 +5,8 @@ class User{
 
     private $id,
             $pseudo,
-            $pass1,
-            $pass2,
-            $email,
-            $email2;
+            $pass,
+            $email;
 
     public function id()
     {
@@ -18,22 +16,16 @@ class User{
     {
         return $this->_pseudo();
     }
-    public function pass1()
+    public function pass()
     {
-        return $this->_pass1();
+        return $this->_pass();
     }
-    public function pass2()
-    {
-        return $this->_pass2();
-    }
+  
     public function email()
     {
         return $this->_email();
     }
-    public function email2()
-    {
-        return $this->_email2();
-    }
+
 
     //SETTER
 
@@ -62,20 +54,14 @@ class User{
             }
         }
     }
-    public function setPass1($pass1)
+    public function setPass($pass)
     {
-        if(is_string($pass1))
+        if(is_string($pass))
         {
-            $this->_pass1=$pass1;
+            $this->_pass1=$pass;
         }
     }
-    public function setPass2($pass2)
-    {
-        if(is_string($pass2))
-        {
-            $this->_pass2=$pass2;
-        }
-    }
+
     public function setEmail($email)
     {
         if(is_string($email))
@@ -83,8 +69,5 @@ class User{
             $this->_email=$email;
         }
     }
-    public function setEmail2($email2)
-    {
-        $this->_email2=$email2;
-    }
+
 }
