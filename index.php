@@ -40,20 +40,23 @@ try {
         }
         elseif($_GET['action'] == 'connect') //Connexion d'un membre
         {
-            if(isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass1'] && !empty($_POST['pass1']))
-            {
+            if (isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass'] && !empty($_POST['pass'])) {
                 $coUser = new UserController;
-                $coUser -> connectUser();
-            }
+                $coUser -> connectUser($_POST['pseudo'], $_POST['pass']);
+            } 
         }
         elseif($_GET['action'] == 'suscribe') //Connexion d'un membre
         {
-            if(isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass1'] && !empty($_POST['pass1']) && $_POST['pass2'] && !empty($_POST['pass2']) && $_POST['email'] && !empty($_POST['email']) && $_POST['email2'] && !empty($_POST['email2']))
+            if(isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass'] && !empty($_POST['pass']) && $_POST['pass2'] && !empty($_POST['pass2']) && $_POST['email'] && !empty($_POST['email']) && $_POST['email2'] && !empty($_POST['email2']))
             {
-                if(isset($_POST['pass1']) == ($_POST['pass2']))
+                if(isset($_POST['pass']) == ($_POST['pass2']))
                 {                    
                     $newUser = new UserController;                    
-                    $newUser -> newUser($pseudo, $pass1, $pass2, $email, $email2);
+                    $newUser -> newUser($_POST['pseudo'], $_POST['pass'], $_POST['email']);
+                }
+                else{
+                    throw new Exception("Les mots de passes ne sont pas identiques");
+                    
                 }
             }
         }
