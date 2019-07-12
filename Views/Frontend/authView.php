@@ -2,7 +2,7 @@
     <h2>Connexion</h2>
     
     <div class='d-flex justify-content-center'>
-        <form action='../../index.php?action=connect' method="post">
+        <form action='index.php?action=connect' method="post">
 
         <div class="d-flex justify-content-center">
             <label for ="pseudo">Pseudo : </label>

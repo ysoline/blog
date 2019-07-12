@@ -2,7 +2,7 @@
     <h2>Inscription</h2>
     
     <div class='d-flex justify-content-center'>
-        <form action='../../index.php?action=suscribe' method="post">
+        <form action='index.php?action=suscribe' method="post">
         
 
         <div class="d-flex justify-content-center">
@@ -12,7 +12,7 @@
 
         <div class="d-flex justify-content-center">
             <label for ="password">Mot de passe : </label>
-            <input type="password" id="pass1" name="pass1"/>
+            <input type="password" id="pass" name="pass"/>
         </div>
         <div class="d-flex justify-content-center">
             <label for ="password">Confirmation mot de passe : </label>
@@ -32,8 +32,8 @@
         <div>
             <input type="submit" value="S'incrire" class='btn btn-primary btn'>
         </div>
-
         <a href="index.php?action=listPosts" class='btn btn-primary btn'>Retour</a>
+
         </form>
     </div>
 
