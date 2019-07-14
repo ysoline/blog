@@ -30,28 +30,29 @@ try {
         }
         elseif ($_GET['action'] == 'auth') //Redirection de page vers connexion
         {
-            $authUser = new UserController;
+            $authUser = new AuthController;
             $authUser -> connectPage();
         }
         elseif($_GET['action'] ==  'suscribePage') //Redirection de page vers inscription
         {
-            $suscribeUser = new UserController;
+            $suscribeUser = new AuthController;
             $suscribeUser -> suscribePage();
         }
         elseif($_GET['action'] == 'connect') //Connexion d'un membre
         {
-            if (isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass'] && !empty($_POST['pass'])) {
-                $coUser = new UserController;
-                $coUser -> connectUser($_POST['pseudo'], $_POST['pass']);
+            if (isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass'] && !empty($_POST['pass'])) 
+            {
+                $coUser = new AuthController;
+                $coUser-> connectUser($_POST['pseudo'], $_POST['pass']);
             } 
         }
-        elseif($_GET['action'] == 'suscribe') //Connexion d'un membre
+        elseif($_GET['action'] == 'suscribe') //Inscription d'un membre
         {
             if(isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass'] && !empty($_POST['pass']) && $_POST['pass2'] && !empty($_POST['pass2']) && $_POST['email'] && !empty($_POST['email']) && $_POST['email2'] && !empty($_POST['email2']))
             {
                 if(isset($_POST['pass']) == ($_POST['pass2']))
                 {                    
-                    $newUser = new UserController;                    
+                    $newUser = new AuthController;                    
                     $newUser -> newUser($_POST['pseudo'], $_POST['pass'], $_POST['email']);
                 }
                 else{
