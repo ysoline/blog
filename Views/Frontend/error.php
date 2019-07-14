@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 <span>ERREUR !</span>
-<p>Une erreur a été detecté</p>
+<p><?= $errorMessage ?></p>
 
 <?php 
     error_reporting(E_ALL);
