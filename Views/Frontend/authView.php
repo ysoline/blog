@@ -11,7 +11,7 @@
 
         <div class="d-flex justify-content-center">
             <label for ="password">Mot de passe : </label>
-            <input type="password" id="pass1" name="pass1"/>
+            <input type="password" id="pass" name="pass"/>
         </div>
 
         <div>
