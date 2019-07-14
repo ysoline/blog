@@ -1,17 +1,39 @@
 <?php 
-//Regrouppe toutes les fonctionnalités liès à l'authentification: connexion, inscription, mot de passe oublié, changer mot de passe)
+//Regrouppe toutes les fonctionnalités liès à l'authentification: connexion, inscription, mot de passe oublié)
 
-class Auth{
-    function newUser($pseudo, $pass1, $pass2, $email, $email2)
-{
-    $userManager= new User;
-    $newUser= $userManager-> createUser($pseudo, $pass1, $pass2, $email, $email2);
+class AuthController{
+    public function newUser($pseudo, $pass, $email)//Inscription
+    {
+        $userManager = new AuthManager;
+        $newUser = $userManager -> addUser($pseudo, $pass, $email);
 
-    if ($newUser === false){
-        throw new Exception('Inscription impossible');
+        header('Location: index.php?action=listPosts');
     }
-    else{
-        echo 'Enregistré !';
+
+    public function loginVerify($pass)//Vérification du mot de passe lors de la connexion
+    {
+        $checkPass = new AuthManager;
+        
+        $checkPass -> getPass($pass);
+
+        if($checkPass == password_verify($_POST['pass'], $pass))
+        {
+            $coUser = new AuthManager;
+            $coUser -> getUser($_POST['pseudo'], $_POST['pass']);
+        }
+        else{
+            throw new Exception("Mauvais identifiants et/ou mot de passe");
+            
+        }
     }
-}
+
+    public function connectPage()//Redirection page connexion
+    {
+        require('Views/Frontend/authView.php');
+    }
+    public function suscribePage()//Redirection page inscription
+    {
+        require('Views/Frontend/suscribeView.php');
+    }
+
 }
