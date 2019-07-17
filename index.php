@@ -43,7 +43,7 @@ try {
             if (isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass'] && !empty($_POST['pass'])) 
             {
                 $coUser = new AuthController;
-                $coUser-> connectUser($_POST['pseudo'], $_POST['pass']);
+                $coUser-> login($_POST['pseudo'], $_POST['pass']);
             } 
         }
         elseif($_GET['action'] == 'suscribe') //Inscription d'un membre
