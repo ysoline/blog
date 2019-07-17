@@ -2,6 +2,13 @@
 //Regrouppe toutes les fonctionnalités liès à l'authentification: connexion, inscription, mot de passe oublié)
 
 class AuthController{
+
+    public function startSession(){
+        if(!isset($_SESSION))
+        {
+            session_start();
+        }
+    }
     public function newUser($pseudo, $pass, $email)//Inscription
     {
         $userManager = new AuthManager;
@@ -10,21 +17,27 @@ class AuthController{
         header('Location: index.php?action=listPosts');
     }
 
-    public function loginVerify($pass)//Vérification du mot de passe lors de la connexion
+    public function login($pseudo, $pass)//Vérification du mot de passe lors de la connexion
     {
-        $checkPass = new AuthManager;
-        
-        $checkPass -> getPass($pass);
+       $verifyUser = new AuthManager;
+       $verifyUser -> checkUser($pseudo);
 
-        if($checkPass == password_verify($_POST['pass'], $pass))
-        {
-            $coUser = new AuthManager;
-            $coUser -> getUser($_POST['pseudo'], $_POST['pass']);
-        }
-        else{
-            throw new Exception("Mauvais identifiants et/ou mot de passe");
-            
-        }
+       if($verifyUser == false){
+           throw new Exception("Mauvais identifiant ou mot de passe!");
+       }
+       else {
+           $verifyPass = new AuthManager;
+           $verifyPass = password_verify($pass, $verifyUser->checkPass($pass));
+           
+           if($verifyPass == true){
+               startSession();            
+               header('Location: index.php?action=listPosts');
+           }
+           else {
+               throw new Exception("Mauvais identifiant ou mot de passe!", 1);
+               
+           }
+       }
     }
 
     public function connectPage()//Redirection page connexion

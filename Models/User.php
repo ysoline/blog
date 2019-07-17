@@ -8,6 +8,23 @@ class User{
             $pass,
             $email;
 
+    function __construct(array $data)
+    {
+        $this->hydrate($data);
+    }
+    private function hydrate($data)
+    {
+        foreach ($data as $key=>$value)
+        {
+            $method = 'set'.ucfirst($key);
+
+            if (method_exists($this, $method))
+            {
+                $this->$method($value);
+            }
+        }
+    }
+
     public function id()
     {
         return $this->_id;
@@ -42,16 +59,7 @@ class User{
     {
         if(is_string($pseudo))
         {
-            if(strlen($pseudo) > 5 && strlen($pseudo) < 12)
-            {
                 $this->_pseudo = $pseudo;
-            }
-            else {
-                {
-                    trigger_error('Le pseudo doit être compris entre 5 et 12 charactère', E_USER_WARNING);
-            return;
-                }
-            }
         }
     }
     public function setPass($pass)
