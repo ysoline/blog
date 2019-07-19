@@ -9,13 +9,14 @@ class AuthController{
             session_start();
         }
     }
-    public function newUser($pseudo, $pass,$pass2, $email)//Inscription
+    public function newUser()//Inscription
     {
-        if(isset($_POST['pass']) == $_POST['pass2']){
-            if(isset($_POST['email']) == $_POST['email2'])
+        if($_POST['pass'] == $_POST['pass2']){
+            if($_POST['email'] == $_POST['email2'])
                 {
-                    $userManager = new AuthManager;           
-                    $newUser = $userManager -> addUser($pseudo, $pass, $email);
+                    $userManager = new AuthManager;
+                    $_POST['pass']= password_hash($_POST['pass'], PASSWORD_DEFAULT);           
+                    $newUser = $userManager -> addUser($_POST['pseudo'],$_POST['pass'],$_POST['email']);
                 }
                 else{
                     throw new Exception('Les adresses emails ne sont pas identiques');
@@ -44,7 +45,7 @@ class AuthController{
                header('Location: index.php?action=listPosts');
            }
            else {
-               throw new Exception("Mauvais identifiant ou mot de passe!", 1);
+               throw new Exception("Mauvais identifiant ou mot de passe!");
                
            }
        }

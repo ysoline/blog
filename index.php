@@ -38,24 +38,24 @@ try {
             $suscribeUser = new AuthController;
             $suscribeUser -> suscribePage();
         }
-        // elseif($_GET['action'] == 'connect') //Connexion d'un membre
-        // {
-        //     if (isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass'] && !empty($_POST['pass'])) 
-        //     {
-        //         $coUser = new AuthController;
-        //         $coUser-> login($_POST['pseudo'], $_POST['pass']);
-        //     } 
-        //     else{
-        //         throw new Exception("Veuillez remplir tout les champs");
+        elseif($_GET['action'] == 'connect') //Connexion d'un membre
+        {
+            if (isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass'] && !empty($_POST['pass'])) 
+            {
+                $coUser = new AuthController;
+                $coUser-> login($_POST['pseudo'], $_POST['pass']);
+            } 
+            else{
+                throw new Exception("Veuillez remplir tout les champs");
                 
-        //     }
-        // }
+            }
+        }
         elseif($_GET['action'] == 'suscribe') //Inscription d'un membre
         {
             if(isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass'] && !empty($_POST['pass']) && $_POST['pass2'] && !empty($_POST['pass2']) && $_POST['email'] && !empty($_POST['email']) && $_POST['email2'] && !empty($_POST['email2']))
             {               
                 $newUser = new AuthController;                    
-                $newUser -> newUser($_POST['pseudo'], $_POST['pass'],$_POST['pass2'], $_POST['email']); 
+                $newUser -> newUser($_POST['pseudo'], $_POST['pass'],$_POST['pass2'], $_POST['email'], $_POST['email2']); 
                 echo'inscription réussi!';                           
             }
             else{
