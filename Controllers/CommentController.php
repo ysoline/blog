@@ -9,7 +9,7 @@ class CommentController
     {
         $commentManager= new CommentManager();
 
-        $affectedLines = $commentManager->postComment($post_id, $author, $comment);
+        $affectedLines = $commentManager->postComment($_GET['post_id'], $_POST['author'], $_POST['comment']);
 
         if($affectedLines === false){
             throw new Exception('Impossible d\'ajouter le commentaire !');
@@ -29,7 +29,7 @@ class CommentController
     public function editComment($commentId, $author, $comment, $post_id)
     {
         $commentManager = new CommentManager();
-        $affectedLines = $commentManager->editComment($author, $comment, $commentId);
+        $affectedLines = $commentManager->editComment($_POST['author'], $_POST['comment'],$_GET['post_id']);
         if ($affectedLines === false) {
             throw new Exception('Impossible de modifier le commentaire !');
         }

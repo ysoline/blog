@@ -31,18 +31,20 @@ class AuthController{
     public function login($pseudo, $pass)//Vérification du mot de passe lors de la connexion
     {
        $verifyUser = new AuthManager;
-       $verifyUser -> checkUser($pseudo);
+       $verifyUser -> checkUser($_POST['pseudo']);
 
        if($verifyUser == false){
            throw new Exception("Mauvais identifiant ou mot de passe!");
        }
        else {
-           $verifyPass = new AuthManager;
-           $verifyPass = password_verify($pass, $verifyUser->checkPass($pass));
+
+            $pass_hash= password_hash($_POST['pass'], PASSWORD_DEFAULT);              
+            $verifyPass = new AuthManager;
+            $verifyPass ->checkPass($pass);
            
-           if($verifyPass == true){
-               startSession();            
-               header('Location: index.php?action=listPosts');
+           if(password_verify($pass, $pass_hash)){
+                        echo 'connecté !';  
+            //    header('Location: index.php?action=listPosts');
            }
            else {
                throw new Exception("Mauvais identifiant ou mot de passe!");
