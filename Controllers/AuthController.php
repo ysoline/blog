@@ -28,7 +28,7 @@ class AuthController{
          
     }
 
-    public function login($pseudo, $pass)//Vérification du mot de passe lors de la connexion
+    public function login($pseudo, $pass)//Vérification pseudo et mot de passe si existant dans la bdd
     {
        $verifyUser = new AuthManager;
        $verifyUser -> checkUser($_POST['pseudo']);
@@ -37,13 +37,12 @@ class AuthController{
            throw new Exception("Mauvais identifiant ou mot de passe!");
        }
        else {
-
-            $pass_hash= password_hash($_POST['pass'], PASSWORD_DEFAULT);              
+            $pass_hash= password_hash($_POST['pass'], PASSWORD_DEFAULT);  
             $verifyPass = new AuthManager;
-            $verifyPass ->checkPass($pass);
-           
+            $verifyPass ->checkPass($pass);    
            if(password_verify($pass, $pass_hash)){
-                        echo 'connecté !';  
+                   $_SESSION['pseudo'] =$pseudo;
+            
             //    header('Location: index.php?action=listPosts');
            }
            else {

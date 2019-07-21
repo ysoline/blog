@@ -2,6 +2,10 @@
 require('Autoloader.php');
 Autoloader::register();
 
+if(!isset($_SESSION))
+{
+    session_start();
+}
 
 
 try {
@@ -55,8 +59,7 @@ try {
             if(isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass'] && !empty($_POST['pass']) && $_POST['pass2'] && !empty($_POST['pass2']) && $_POST['email'] && !empty($_POST['email']) && $_POST['email2'] && !empty($_POST['email2']))
             {               
                 $newUser = new AuthController;                    
-                $newUser -> newUser($_POST['pseudo'], $_POST['pass'],$_POST['pass2'], $_POST['email'], $_POST['email2']); 
-                echo'inscription réussi!';                           
+                $newUser -> newUser($_POST['pseudo'], $_POST['pass'],$_POST['pass2'], $_POST['email'], $_POST['email2']);                            
             }
             else{
                 
