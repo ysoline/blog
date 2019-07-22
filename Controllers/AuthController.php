@@ -31,12 +31,18 @@ class AuthController{
 
     public function login($pseudo, $pass)//Vérification pseudo et mot de passe si existant dans la bdd
     {
-        $user= new AuthManager;
-        $user ->connect($pseudo);
+        $userManager= new AuthManager;
+        $pass_hash = password_hash($_POST['pass'], PASSWORD_DEFAULT);
 
-        $verifyPass =password_verify($_POST['pass'], $pass);
-        if($verifyPass){
-            echo 'connecté';
+        $verifyPass = $userManager->connect($_POST['pseudo'], $pass_hash);
+      
+        $passOk = password_verify($_POST['pass'], $verifyPass['pass']);
+
+        if($passOk){
+            session_start();
+            $_SESSION['id'] = $passOk['id'];
+            $_SESSION['pseudo'] = $_POST['pseudo'];
+            header('Location: index.php?action=listPosts');
         }
         else{
             throw new Exception('Mauvais identifiant ou mot de passe');
@@ -52,4 +58,10 @@ class AuthController{
         require('Views/Frontend/suscribeView.php');
     }
 
+    public function disconnect()
+    {
+        $_SESSION = array();
+        session_destroy();
+        header ('Location: index.php?action=listPosts');
+    }
 }

@@ -1,6 +1,12 @@
 <?php
 
 class AuthManager extends Manager{
+
+    public function sessionStart()
+    {
+        $Session = new Session();
+        
+    }
     
     public function addUser($pseudo, $pass, $email) //ajouter un utilisateur lors de l'inscription
     {
@@ -15,10 +21,10 @@ class AuthManager extends Manager{
     {
         
         $_bdd=$this->dbConnect();
-        $req= $_bdd->prepare('SELECT id, pseudo, pass,email FROM users WHERE pseudo=:pseudo');
+        $req= $_bdd->prepare('SELECT id, pseudo, pass FROM users WHERE pseudo=:pseudo');
         $req->execute(array('pseudo' => $pseudo));
        $user = $req->fetch();
 
-       return new User($user['id'], $user['pseudo'], $user['pass'], $user['email']);
+       return $user;
     }
 }
