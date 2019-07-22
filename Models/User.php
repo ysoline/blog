@@ -8,9 +8,12 @@ class User{
             $pass,
             $email;
 
-    function __construct(array $data)
+    public function __construct($id, $pseudo, $pass, $email)
     {
-        $this->hydrate($data);
+        $this->id=$id;
+        $this ->pseudo =$pseudo;
+        $this->pass=$pass;
+        $this->email=$email;
     }
     private function hydrate($data)
     {

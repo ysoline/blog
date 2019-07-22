@@ -17,6 +17,7 @@ class AuthController{
                     $userManager = new AuthManager;
                     $_POST['pass']= password_hash($_POST['pass'], PASSWORD_DEFAULT);           
                     $newUser = $userManager -> addUser($_POST['pseudo'],$_POST['pass'],$_POST['email']);
+                    header('Location index.php?action=listPosts');
                 }
                 else{
                     throw new Exception('Les adresses emails ne sont pas identiques');
@@ -30,26 +31,16 @@ class AuthController{
 
     public function login($pseudo, $pass)//Vérification pseudo et mot de passe si existant dans la bdd
     {
-       $verifyUser = new AuthManager;
-       $verifyUser -> checkUser($_POST['pseudo']);
+        $user= new AuthManager;
+        $user ->connect($pseudo);
 
-       if($verifyUser == false){
-           throw new Exception("Mauvais identifiant ou mot de passe!");
-       }
-       else {
-            $pass_hash= password_hash($_POST['pass'], PASSWORD_DEFAULT);  
-            $verifyPass = new AuthManager;
-            $verifyPass ->checkPass($pass);    
-           if(password_verify($pass, $pass_hash)){
-                   $_SESSION['pseudo'] =$pseudo;
-            
-            //    header('Location: index.php?action=listPosts');
-           }
-           else {
-               throw new Exception("Mauvais identifiant ou mot de passe!");
-               
-           }
-       }
+        $verifyPass =password_verify($_POST['pass'], $pass);
+        if($verifyPass){
+            echo 'connecté';
+        }
+        else{
+            throw new Exception('Mauvais identifiant ou mot de passe');
+        }
     }
 
     public function connectPage()//Redirection page connexion

@@ -11,24 +11,14 @@ class AuthManager extends Manager{
         return $newUser; 
     }
 
-    public function checkUser($pseudo) //selectionner un utilisateur (verification) lors de la connexion
+    public function connect($pseudo) //selectionner un utilisateur (verification) lors de la connexion
     {
+        
         $_bdd=$this->dbConnect();
-        $req= $_bdd->prepare('SELECT id, pseudo, pass FROM users WHERE pseudo=:pseudo');
+        $req= $_bdd->prepare('SELECT id, pseudo, pass,email FROM users WHERE pseudo=:pseudo');
         $req->execute(array('pseudo' => $pseudo));
-        while ($data = $req->fetch(PDO::FETCH_ASSOC))
-        {
-            $user = new User($data);
-        }
-        return $user;
-    }
-    
-     public function checkPass($pass)//Récupère le mot de passe
-     {
-        $_bdd=$this->dbConnect();
-        $req= $_bdd->prepare('SELECT id, pseudo, pass FROM users WHERE pass=?');    
+       $user = $req->fetch();
 
-        $checkpass= $req ->execute(array($pass));
-        return $checkpass;
-     }
+       return new User($user['id'], $user['pseudo'], $user['pass'], $user['email']);
+    }
 }
