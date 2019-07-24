@@ -7,7 +7,10 @@ class CommentController
 {
         public function addComment($post_id, $author, $comment)
     {
-        $commentManager= new CommentManager();
+        logSession();
+        if(isset($_SESSION['pseudo']))
+        {
+            $commentManager= new CommentManager();
 
         $affectedLines = $commentManager->postComment($_GET['post_id'], $_POST['author'], $_POST['comment']);
 
@@ -17,18 +20,14 @@ class CommentController
             header('Location: index.php?action=post&id='.$post_id);
         }
     }
-
-    public function updateComment($commentId)
-    {
-        $commentManager = new \Julie\Blog\Model\CommentManager();
-        $comment = $commentManager->getComment($_GET['id']);
-
-        require('Views\Frontend\commentViews.php');
     }
 
     public function editComment($commentId, $author, $comment, $post_id)
     {
-        $commentManager = new CommentManager();
+        logSession();
+        if(isset($_SESSION['pseudo']))
+        {
+            $commentManager = new CommentManager();
         $affectedLines = $commentManager->editComment($_POST['author'], $_POST['comment'],$_GET['post_id']);
         if ($affectedLines === false) {
             throw new Exception('Impossible de modifier le commentaire !');
@@ -36,5 +35,6 @@ class CommentController
         else {
             header('Location: index.php?action=post&id=' . $post_id);
         }
+    }
     }
 }

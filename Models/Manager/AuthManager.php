@@ -2,7 +2,7 @@
 
 class AuthManager extends Manager{
 
-    public function sessionStart()
+    public function logSession()
     {
         $Session = new Session();
         

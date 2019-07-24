@@ -19,10 +19,20 @@ class PostController
     }
     public function addPost()
     {
+        logSession();
+
         if(isset($_SESSION['pseudo']))
-        {
+           {
             $postManager = new PostManager;
             $postManager->add($_POST['title'], $_POST['content']);
+        }
+    }
+    public function editPost()
+    {
+        logSession();
+        if(isset($_SESSION['pseudo']))
+        {
+            
         }
     }
 }

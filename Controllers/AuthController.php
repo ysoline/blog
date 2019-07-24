@@ -3,7 +3,7 @@
 
 class AuthController{
 
-    public function startSession(){
+    public function log(){
         if(!isset($_SESSION))
         {
             session_start();
