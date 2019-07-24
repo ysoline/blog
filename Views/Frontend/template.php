@@ -19,6 +19,9 @@
     <li class="nav-item active">
           <a class="nav-link" href="index.php?action=suscribePage">Inscription</a>
     </li>
+    <li class="nav-item active">
+          <a class="nav-link" href="index.php?action=profil">Profil</a>
+    </li>
   </ul>
 </nav>
 

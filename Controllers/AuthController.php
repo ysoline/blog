@@ -17,7 +17,7 @@ class AuthController{
                     $userManager = new AuthManager;
                     $_POST['pass']= password_hash($_POST['pass'], PASSWORD_DEFAULT);           
                     $newUser = $userManager -> addUser($_POST['pseudo'],$_POST['pass'],$_POST['email']);
-                    header('Location index.php?action=listPosts');
+                    header('Location: index.php?action=listPosts');
                 }
                 else{
                     throw new Exception('Les adresses emails ne sont pas identiques');
@@ -40,9 +40,10 @@ class AuthController{
 
         if($passOk){
             session_start();
-            $_SESSION['id'] = $passOk['id'];
             $_SESSION['pseudo'] = $_POST['pseudo'];
-            header('Location: index.php?action=listPosts');
+            $_SESSION['pass'] = $_POST['pass'];
+
+            header('Location: index.php?action=profil');
         }
         else{
             throw new Exception('Mauvais identifiant ou mot de passe');
@@ -60,7 +61,8 @@ class AuthController{
 
     public function disconnect()
     {
-        $_SESSION = array();
+        session_start();
+        session_unset ();
         session_destroy();
         header ('Location: index.php?action=listPosts');
     }
