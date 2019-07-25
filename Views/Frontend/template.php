@@ -13,15 +13,24 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <ul class="navbar-nav mr-auto">
+    
+  <?php if(!isset($_SESSION['pseudo'])) {?>
     <li class="nav-item active">
           <a class="nav-link" href="index.php?action=auth">Connexion</a>
     </li>
     <li class="nav-item active">
           <a class="nav-link" href="index.php?action=suscribePage">Inscription</a>
     </li>
+    <?php } ?>
+
+    <?php if(isset($_SESSION['pseudo'])) {?>
     <li class="nav-item active">
           <a class="nav-link" href="index.php?action=profil">Profil</a>
     </li>
+    <li class="nav-item active">
+          <a class="nav-link" href="index.php?action=disconnect">Déconnexion</a>
+    </li>
+    <?php } ?>
   </ul>
 </nav>
 

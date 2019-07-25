@@ -8,4 +8,12 @@ class UserController
     {
         require('Views/Frontend/profilView.php');
     }
+
+    public function getId($id)
+    {
+        $getId = new Usermanager;
+        $getId -> getId($id);
+
+        return $getId;
+    }
 }

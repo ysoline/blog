@@ -6,12 +6,12 @@
 
         <div class="d-flex justify-content-center">
             <label for ="pseudo">Pseudo : </label>
-            <input type="text" id="pseudo" name="pseudo"/>
+            <input type="text" id="pseudo" name="pseudo"  required>
         </div>
 
         <div class="d-flex justify-content-center">
             <label for ="password">Mot de passe : </label>
-            <input type="password" id="pass" name="pass"/>
+            <input type="password" id="pass" name="pass" required>
         </div>
 
         <div>

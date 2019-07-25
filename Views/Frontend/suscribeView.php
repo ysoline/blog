@@ -7,26 +7,26 @@
 
         <div class="d-flex justify-content-center">
             <label for ="pseudo">Pseudo : </label>
-            <input type="text" id="pseudo" name="pseudo"/>
+            <input type="text" id="pseudo" name="pseudo" required>
         </div>
 
         <div class="d-flex justify-content-center">
             <label for ="password">Mot de passe : </label>
-            <input type="password" id="pass" name="pass"/>
+            <input type="password" id="pass" name="pass" required>
         </div>
         <div class="d-flex justify-content-center">
             <label for ="password">Confirmation mot de passe : </label>
-            <input type="password" id="pass2" name="pass2"/>
+            <input type="password" id="pass2" name="pass2" required>
         </div>
 
         <div class="d-flex justify-content-center">
             <label for ="email">Mail : </label>
-            <input type="email" id="email" name="email"/>
+            <input type="email" id="email" name="email" required>
         </div>  
         
         <div class="d-flex justify-content-center">
             <label for ="email">Confirmation mail : </label>
-            <input type="email" id="email2" name="email2"/>
+            <input type="email" id="email2" name="email2"required>
         </div>
 
         <div>

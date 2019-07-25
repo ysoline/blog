@@ -40,10 +40,11 @@ class AuthController{
 
         if($passOk){
             session_start();
+            
             $_SESSION['pseudo'] = $_POST['pseudo'];
             $_SESSION['pass'] = $_POST['pass'];
 
-            header('Location: index.php?action=profil');
+            header('Location: index.php?action=listPosts');
         }
         else{
             throw new Exception('Mauvais identifiant ou mot de passe');

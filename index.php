@@ -23,9 +23,9 @@ try {
             }
         } elseif ($_GET['action'] == 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                if (isset($_POST['author'], $_POST['comment']) && !empty($_POST['author']) && !empty($_POST['comment'])) {
+                if (isset($_POST['comment']) && !empty($_POST['comment'])) {
                     $affectedLines = new CommentController;
-                    $affectedLines->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
+                    $affectedLines->addComment($_GET['id'], $_POST['comment']);
                 } else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
                 }
@@ -45,6 +45,11 @@ try {
             if (isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass'] && !empty($_POST['pass'])) {
                 $coUser = new AuthController;
                 $coUser->login($_POST['pseudo'], $_POST['pass']);
+
+                $userId = new UserController; 
+                $userId -> getId($id);
+
+                
             } else {
                 throw new Exception("Veuillez remplir tout les champs");
             }

@@ -5,14 +5,14 @@
 class CommentController
 
 {
-        public function addComment($post_id, $author, $comment)
+        public function addComment($post_id, $comment)
     {
         logSession();
         if(isset($_SESSION['pseudo']))
         {
             $commentManager= new CommentManager();
 
-        $affectedLines = $commentManager->postComment($_GET['post_id'], $_POST['author'], $_POST['comment']);
+        $affectedLines = $commentManager->postComment($_GET['post_id'], $_POST['comment']);
 
         if($affectedLines === false){
             throw new Exception('Impossible d\'ajouter le commentaire !');

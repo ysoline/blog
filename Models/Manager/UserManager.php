@@ -16,4 +16,12 @@ class UserManager extends Manager {
     //     $_bdd=$this->dbConnect();
     //     $req= $_bdd->exec('DELETE FROM users WHERE pseudo=?, password=?, email=?');
     // }
+    public function getId($id)
+    {
+        $_bdd=$this->dbConnect();
+        $req = $_bdd-> prepare('SELECT id FROM users WHERE id=?');
+        $idUser = $req->execute($id):
+
+        return $idUser;
+    }
 }
