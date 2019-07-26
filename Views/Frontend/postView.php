@@ -41,7 +41,6 @@ foreach ($comments as $comment) { ?>
     </div>
 <?php
 } ?>
-
 <?php
 $content = ob_get_clean();
 require('Views/Frontend/template.php');

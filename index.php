@@ -45,11 +45,6 @@ try {
             if (isset($_POST['pseudo']) && !empty($_POST['pseudo']) && $_POST['pass'] && !empty($_POST['pass'])) {
                 $coUser = new AuthController;
                 $coUser->login($_POST['pseudo'], $_POST['pass']);
-
-                $userId = new UserController; 
-                $userId -> getId($id);
-
-                
             } else {
                 throw new Exception("Veuillez remplir tout les champs");
             }
@@ -65,7 +60,6 @@ try {
         } elseif ($_GET['action'] == 'profil') {
             $profil = new UserController;
             $profil->profilPage();
-            
         } elseif ($_GET['action'] == "disconnect") {
             $disconnect = new AuthController;
             $disconnect->disconnect();

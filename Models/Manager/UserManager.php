@@ -20,7 +20,7 @@ class UserManager extends Manager {
     {
         $_bdd=$this->dbConnect();
         $req = $_bdd-> prepare('SELECT id FROM users WHERE id=?');
-        $idUser = $req->execute($id):
+        $idUser = $req->execute($id);
 
         return $idUser;
     }
