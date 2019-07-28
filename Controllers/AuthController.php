@@ -10,12 +10,17 @@ class AuthController
             session_start();
         }
     }
-    public function newUser($pseudo, $email) //Inscription
+    /**
+     * newUser
+     * Inscription
+     * @return void
+     */
+    public function newUser()
     {
-        $userManager = new AuthManager;
-        $userCheck = $userManager->getPseudo($pseudo);
-        $userMail = $userManager->getMail($email);
 
+        $userManager = new AuthManager;
+        $userCheck = $userManager->getInfo($_POST['pseudo']);
+        $userMail = $userManager->getMail($_POST['email']);
 
         if ($userCheck == 0) {
             if ($_POST['pass'] == $_POST['pass2']) {
@@ -38,23 +43,27 @@ class AuthController
         }
     }
 
-    public function login($pseudo, $pass) //Vérification pseudo et mot de passe si existant dans la bdd
+    /**
+     * login
+     * Connexion
+     * @return void
+     */
+    public function login() 
     {
         $userManager = new AuthManager;
-        $pass_hash = password_hash($_POST['pass'], PASSWORD_DEFAULT);
 
-        $verifyPass = $userManager->getPseudo($_POST['pseudo'], $pass_hash);
+        $user = $userManager->getInfo($_POST['pseudo']);
 
-        $passOk = password_verify($_POST['pass'], $verifyPass['pass']);
+        $passOk = password_verify($_POST['pass'], $user['pass']);
 
         if ($passOk) {
+
+            $_SESSION['pseudo'] = $user['pseudo'];
+            // $_SESSION['id'] = $user['id'];
+            $_SESSION['pass'] = $user['pass'];
+            $_SESSION['email'] = $user['email'];
+
             session_start();
-
-            $_SESSION['pseudo'] = $_POST['pseudo'];
-            $_SESSION['id'] = $verifyPass['id'];
-
-
-
 
             header('Location: index.php?action=listPosts');
         } else {
@@ -62,15 +71,31 @@ class AuthController
         }
     }
 
+    /**
+     * Renvoie la page de connexion
+     *
+     * @return void
+     */
     public function connectPage() //Redirection page connexion
     {
         require('Views/Frontend/authView.php');
     }
+    
+    /**
+     * Renvoi la page d'inscription
+     *
+     * @return void
+     */
     public function suscribePage() //Redirection page inscription
     {
         require('Views/Frontend/suscribeView.php');
     }
 
+    /**
+     * Déconnection
+     *
+     * @return void
+     */
     public function disconnect()
     {
         session_start();
