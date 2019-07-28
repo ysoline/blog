@@ -29,7 +29,7 @@ class AuthManager extends Manager
     {
         $user = [];
         $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('SELECT id, pseudo, pass, email FROM users WHERE pseudo=:pseudo');
+        $req = $_bdd->prepare('SELECT * FROM users WHERE pseudo=:pseudo');
         $req->execute(array(
             'pseudo' => $pseudo
         ));

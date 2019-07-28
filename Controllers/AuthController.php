@@ -48,7 +48,7 @@ class AuthController
      * Connexion
      * @return void
      */
-    public function login() 
+    public function login()
     {
         $userManager = new AuthManager;
 
@@ -59,11 +59,9 @@ class AuthController
         if ($passOk) {
 
             $_SESSION['pseudo'] = $user['pseudo'];
-            // $_SESSION['id'] = $user['id'];
+            $_SESSION['user_id'] = $user['id'];
             $_SESSION['pass'] = $user['pass'];
             $_SESSION['email'] = $user['email'];
-
-            session_start();
 
             header('Location: index.php?action=listPosts');
         } else {
@@ -80,7 +78,7 @@ class AuthController
     {
         require('Views/Frontend/authView.php');
     }
-    
+
     /**
      * Renvoi la page d'inscription
      *
