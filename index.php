@@ -33,7 +33,7 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['comment'])) {
                     $affectedLines = new CommentController;
-                    $affectedLines->addComment($_GET['id'], $_POST['comment']);
+                    $affectedLines->addComment($_GET['id'], $_SESSION['user_id'], $_SESSION['pseudo'], $_POST['comment']);
                 } else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
                 }

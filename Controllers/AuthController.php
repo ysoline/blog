@@ -59,8 +59,7 @@ class AuthController
         if ($passOk) {
 
             $_SESSION['pseudo'] = $user['pseudo'];
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['pass'] = $user['pass'];
+            $_SESSION['id_user'] = $user['id'];
             $_SESSION['email'] = $user['email'];
 
             header('Location: index.php?action=listPosts');
