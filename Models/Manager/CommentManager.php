@@ -23,14 +23,22 @@ class CommentManager extends Manager
     public function deleteComment($postId, $comment) // Supprime un commentaire
     {
         $_bdd = $this->dConnect();
-        $comments = $_bdd->exec('DELETE FROM comments, id_user WHERE postID=?, comment=?, comment_date=?');
+        $comments = $_bdd->exec('DELETE FROM comments, id_user WHERE postID=?, comment=?, comment_date=?, id_user =?');
     }
 
-    public function editComment($commentId, $pseudo, $comment)
+    /**
+     * Edition commentaire
+     *
+     * @param mixed $commentId
+     * @param mixed $pseudo
+     * @param mixed $comment
+     * @return void
+     */
+    public function editComment($commentId, $id_user, $comment)
     {
         $_bdd = $this->dbConnect();
-        $comment = $_bdd->prepare('UPDATE comments SET comment=?, commentId= ?');
-        $updateComment = $comment->execute(array($commentId, $comment, $pseudo));
+        $comment = $_bdd->prepare('UPDATE comments SET comment=?, commentId= ?, id_user= ?');
+        $updateComment = $comment->execute(array($commentId, $comment, $id_user));
 
         return $updateComment;
     }
