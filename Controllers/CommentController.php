@@ -16,17 +16,14 @@ class CommentController
         }
     }
 
-    public function editComment($post_id)
+    public function editComment($post_id, $id_user)
     {
 
         if (isset($_SESSION['pseudo'])) {
             $commentManager = new CommentManager();
-            $affectedLines = $commentManager->editComment($_SESSION['pseudo'], $_POST['comment'], $_GET['post_id']);
-            if ($affectedLines === false) {
-                throw new Exception('Impossible de modifier le commentaire !');
-            } else {
-                header('Location: index.php?action=post&id=' . $post_id);
-            }
+            $editcomment = $commentManager->editComment($_SESSION['pseudo'], $_SESSION['user_id'], $_POST['comment'], $_GET['post_id']);
+
+            if ($_SESSION['id_user'] = $editcomment['id_user']) { }
         }
     }
 }
