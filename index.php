@@ -87,6 +87,22 @@ try {
             $disconnect->disconnect();
         }
 
+        //Edition de commentaire 
+        elseif ($_GET['action'] == "editcom") { }
+
+        //Edition du pseudo
+        elseif ($_GET['action'] == "editPseudo") {
+            if (!empty($_POST['pseudo'])) {
+                $editPseudo = new UserController;
+                $editPseudo->editPseudo($_POST['pseudo']);
+            } else {
+                throw new Exception("Veuillir remplir le champ Pseudo");
+            }
+        }
+
+        //Edition du mot de passe
+        elseif ($_GET['action'] == "editPass") { }
+
         // Retourne la liste de tous les posts sur aucunes actions n'est faite
     } else {
         $posts = new PostController;

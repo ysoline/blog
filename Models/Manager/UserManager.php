@@ -1,27 +1,45 @@
 <?php
 
-class UserManager extends Manager {
+class UserManager extends Manager
+{
 
-    // public function editUser($pseudo, $pass)
-    // {
-    //     $_bdd=$this->dbConnect();
-    //     $data= $_bdd->prepare('UPDATE users set pseudo =?, pass=? WHERE id=?');
-    //     $data->execute(array($pseudo, $pass));
 
-    //     return $data;
-    // }
-
-    // public function deleteUser($pseudo, $password, $email)
-    // {
-    //     $_bdd=$this->dbConnect();
-    //     $req= $_bdd->exec('DELETE FROM users WHERE pseudo=?, password=?, email=?');
-    // }
-    public function getId($id)
+    /**
+     * Edition du pseudo 
+     *
+     * @param mixed $pseudo
+     * @return void
+     */
+    public function editPseudo($pseudo)
     {
-        $_bdd=$this->dbConnect();
-        $req = $_bdd-> prepare('SELECT id FROM users WHERE id=?');
-        $idUser = $req->execute($id);
+        $_bdd = $this->dbConnect();
+        $req = $_bdd->prepare('UPDATE users SET pseudo= ? WHERE id_user = ?');
+        $editPseudo = $req->execute();
+        return $editPseudo;
+    }
 
-        return $idUser;
+    /**
+     * Edition du pass
+     *
+     * @param mixed $pass
+     * @return void
+     */
+    public function editPass($pass)
+    {
+        $_bdd = $this->dbConnect();
+        $req = $_bdd->prepare('UPDATE users SET pass =? WHERE id_user =?');
+        $req->execute(array('pass => $pass'));
+
+        $editPass = $req->fetch();
+        return $editPass;
+    }
+
+    public function deleteUser($id_user)
+    {
+        $_bdd = $this->dbConnect();
+        $req = $_bdd->prepare('DELETE FROM users WHERE id_user =?');
+        $deleteUser = $req->execute(array('id_user => id_user'));
+
+        return  $deleteUser;
     }
 }
