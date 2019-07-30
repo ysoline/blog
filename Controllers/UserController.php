@@ -14,11 +14,12 @@ class UserController
      *
      * @return void
      */
-    public function editPseudo($pseudo)
+    public function editPseudo()
     {
-        $userManager = new UserManager;
-
-        $changePseudo = $userManager->editPseudo($_POST['pseudo']);
+        $id = $_SESSION['id_user'];
+        $userEdit = new UserManager;
+        $changePseudo = $userEdit->editPseudo($id, $_POST['pseudo']);
+        echo ('ok');
     }
 
     /**

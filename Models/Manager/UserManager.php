@@ -10,11 +10,11 @@ class UserManager extends Manager
      * @param mixed $pseudo
      * @return void
      */
-    public function editPseudo($pseudo)
+    public function editPseudo($id, $pseudo)
     {
         $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('UPDATE users SET pseudo= ? WHERE id_user = ?');
-        $editPseudo = $req->execute();
+        $req = $_bdd->prepare("UPDATE users SET pseudo= ? WHERE id= ?");
+        $editPseudo = $req->execute(array($id, $pseudo));
         return $editPseudo;
     }
 
