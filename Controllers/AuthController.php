@@ -50,7 +50,7 @@ class AuthController
      */
     public function login()
     {
-        $userManager = new AuthManager;
+        $userManager = new UserManager;
 
         $user = $userManager->getInfo($_POST['pseudo']);
 
