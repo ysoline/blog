@@ -60,12 +60,12 @@ class UserManager extends Manager
      * @param mixed $pseudo
      * @return void
      */
-    public function editPseudo($id, $pseudo)
+    public function editProfil($id, $pseudo, $email)
     {
         $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare("UPDATE users SET pseudo= ? WHERE id= ?");
-        $editPseudo = $req->execute(array($id, $pseudo));
-        return $editPseudo;
+        $req = $_bdd->prepare("UPDATE users SET pseudo= ?, email=? WHERE id= ?");
+        $editProfil = $req->execute(array($pseudo, $email, $id));
+        return $editProfil;
     }
 
     /**
@@ -74,13 +74,11 @@ class UserManager extends Manager
      * @param mixed $pass
      * @return void
      */
-    public function editPass($pass)
+    public function editPass($id, $pass)
     {
         $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('UPDATE users SET pass =? WHERE id_user =?');
-        $req->execute(array('pass => $pass'));
-
-        $editPass = $req->fetch();
+        $req = $_bdd->prepare('UPDATE users SET pass =? WHERE id =?');
+        $editPass = $req->execute(array($pass, $id));
         return $editPass;
     }
 

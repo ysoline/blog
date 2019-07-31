@@ -91,17 +91,22 @@ try {
         elseif ($_GET['action'] == "editcom") { }
 
         //Edition du pseudo
-        elseif ($_GET['action'] == "editPseudo") {
+        elseif ($_GET['action'] == "editProfil") {
             if (!empty($_POST['pseudo'])) {
-                $editPseudo = new UserController;
-                $editPseudo->editPseudo($_POST['pseudo']);
+                $editProfil = new UserController;
+                $editProfil->editProfil($_SESSION['id_user'], $_POST['pseudo'], $_POST['email']);
             } else {
                 throw new Exception("Veuillir remplir le champ Pseudo");
             }
         }
 
         //Edition du mot de passe
-        elseif ($_GET['action'] == "editPass") { }
+        elseif ($_GET['action'] == "editPass") {
+            if (!empty($_POST['pass']) && !empty($_POST['pass2'])) {
+                $editPass = new UserController;
+                $editPass->editPass($_SESSION['id_user'], $_POST['pass']);
+            }
+        }
 
         // Retourne la liste de tous les posts sur aucunes actions n'est faite
     } else {

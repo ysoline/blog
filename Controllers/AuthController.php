@@ -18,7 +18,7 @@ class AuthController
     public function newUser()
     {
 
-        $userManager = new AuthManager;
+        $userManager = new UserManager;
         $userCheck = $userManager->getInfo($_POST['pseudo']);
         $userMail = $userManager->getMail($_POST['email']);
 
@@ -60,6 +60,7 @@ class AuthController
 
             $_SESSION['pseudo'] = $user['pseudo'];
             $_SESSION['id_user'] = $user['id'];
+            $_SESSION['pass'] = $user['pass'];
             $_SESSION['email'] = $user['email'];
 
             header('Location: index.php?action=listPosts');

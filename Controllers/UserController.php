@@ -14,11 +14,12 @@ class UserController
      *
      * @return void
      */
-    public function editPseudo()
+    public function editProfil($id, $pseudo, $email)
     {
         $id = $_SESSION['id_user'];
+
         $userEdit = new UserManager;
-        $changePseudo = $userEdit->editPseudo($id, $_POST['pseudo']);
+        $changePseudo = $userEdit->editProfil($id, $pseudo, $email);
         echo ('ok');
     }
 
@@ -27,9 +28,12 @@ class UserController
      *
      * @return void
      */
-    public function editPass()
+    public function editPass($id, $pass)
     {
-        $userManager = new UserManager;
+        $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+        $userEdit = new UserManager;
+        $changePseudo = $userEdit->editPass($id, $_POST['pass']);
+        echo ('ok');
     }
     /**
      * Edition du mail
