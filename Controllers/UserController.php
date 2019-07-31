@@ -20,7 +20,7 @@ class UserController
 
         $userEdit = new UserManager;
         $changePseudo = $userEdit->editProfil($id, $pseudo, $email);
-        echo ('ok');
+        header('Location: index.php?action=profil');
     }
 
     /**
@@ -33,7 +33,7 @@ class UserController
         $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
         $userEdit = new UserManager;
         $changePseudo = $userEdit->editPass($id, $_POST['pass']);
-        echo ('ok');
+        header('Location: index.php?action=profil');
     }
     /**
      * Edition du mail
