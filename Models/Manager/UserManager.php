@@ -82,11 +82,18 @@ class UserManager extends Manager
         return $editPass;
     }
 
-    public function deleteUser($id_user)
+
+    /**
+     * Suppression d'un compte utilisateur
+     *
+     * @param mixed $id_user
+     * @return void
+     */
+    public function deleteUser($id)
     {
         $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('DELETE FROM users WHERE id_user =?');
-        $deleteUser = $req->execute(array('id_user => id_user'));
+        $req = $_bdd->prepare('DELETE FROM users WHERE id =?');
+        $deleteUser = $req->execute(array($id));
 
         return  $deleteUser;
     }

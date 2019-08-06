@@ -3,7 +3,7 @@
 
 class CommentManager extends Manager
 {
-    public function getComments($post_id) //Récupère un commentaire
+    public function getComments($post_id) //Récupère les commentaire
     {
         $_bdd = $this->dbConnect();
         $comments = $_bdd->prepare('SELECT id, comment, id_user, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, pseudo FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
@@ -34,12 +34,22 @@ class CommentManager extends Manager
      * @param mixed $comment
      * @return void
      */
-    public function editComment($commentId, $id_user, $comment)
+    public function editComment($comment, $id)
     {
         $_bdd = $this->dbConnect();
-        $comment = $_bdd->prepare('UPDATE comments SET comment=?, commentId= ?, id_user= ?');
-        $updateComment = $comment->execute(array($commentId, $comment, $id_user));
+        $updateComment = $_bdd->prepare('UPDATE comments SET comment=?, comment_date = NOW() WHERE id=?');
+        $updateComment->execute(array($comment, $id));
 
         return $updateComment;
+    }
+
+    public function getComment()
+    {
+        $_bdd = $this->dbConnect();
+        $req = $_bdd->prepare('SELECT id, comment, pseudo, id_user, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ?');
+        $req->execute(array());
+        $comment = $req->fetch();
+
+        return $comment;
     }
 }

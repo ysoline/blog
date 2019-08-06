@@ -32,16 +32,21 @@ class UserController
     {
         $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
         $userEdit = new UserManager;
-        $changePseudo = $userEdit->editPass($id, $_POST['pass']);
+        $changePseudo = $userEdit->editPass($_GET['id'], $_POST['pass']);
         header('Location: index.php?action=profil');
     }
     /**
-     * Edition du mail
+     * Suppression d'un compte utilisateur
      *
+     * @param mixed $id
      * @return void
      */
-    public function editMail()
+    public function deleteUser($id)
     {
-        $userManager = new UserManager;
+        $id = $_SESSION['id_user'];
+
+        $deleteUser = new UserManager;
+        $deleteUser->deleteUser($id);
+        header('Location: index.php?action=profil');
     }
 }

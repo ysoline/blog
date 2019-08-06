@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-<a href="index.php" class="btn btn-outline-secondary">Retour</a>
+<a href="index.php" class="btn btn-outline-secondary">Accueil</a>
 
 <div class="jumbotron">
     <h1><?= $post['title'] ?></h1>
@@ -38,6 +38,10 @@ foreach ($comments as $comment) { ?>
     <p class="lead"><?= $comment['comment'] ?></p>
     <p><?= $comment['comment_date_fr'] ?></p>
 
+
+    <?php if (isset($_SESSION['pseudo'])) { ?>
+    <a href="index.php?action=comment&amp;id=<?= $comment['id']; ?>">Modifier</a>
+    <?php } ?>
 </div>
 <?php
 } ?>

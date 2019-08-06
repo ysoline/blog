@@ -87,16 +87,34 @@ try {
             $disconnect->disconnect();
         }
 
+        //Page d'édition de commentaire
+        elseif ($_GET['action'] == 'comment') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $comment = new CommentController;
+                $comment->comment($_GET['id']);
+            } else {
+                throw new Exception("Commentaire introuvable !");
+            }
+        }
+
         //Edition de commentaire 
-        elseif ($_GET['action'] == "editcom") { }
+        elseif ($_GET['action'] == "editComment") {
+
+            if (!empty($_POST['updateComment'])) {
+                $editComment = new CommentController;
+                $editComment->editComment($_POST['updateComment'], $_GET['id']);
+            } else {
+                throw new Exception('Impossible de modifier le commentaire');
+            }
+        }
 
         //Edition du pseudo
         elseif ($_GET['action'] == "editProfil") {
-            if (!empty($_POST['pseudo'])) {
+            if (!empty($_POST['pseudo'] && !empty($_POST['email']))) {
                 $editProfil = new UserController;
                 $editProfil->editProfil($_SESSION['id_user'], $_POST['pseudo'], $_POST['email']);
             } else {
-                throw new Exception("Veuillir remplir le champ Pseudo");
+                throw new Exception("Veuillir remplir tout les champs");
             }
         }
 
@@ -106,6 +124,15 @@ try {
                 $editPass = new UserController;
                 $editPass->editPass($_SESSION['id_user'], $_POST['pass']);
             }
+        }
+
+        //Suppression de compte
+        elseif ($_GET['action'] == "deleteUser") {
+            $deleteUser = new UserController;
+            $deleteUser->deleteUser($_SESSION['id_user']);
+
+            $disconnect = new AuthController;
+            $disconnect->disconnect();
         }
 
         // Retourne la liste de tous les posts sur aucunes actions n'est faite
