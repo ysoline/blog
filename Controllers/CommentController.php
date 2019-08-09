@@ -29,18 +29,11 @@ class CommentController
      * @param mixed $id_user
      * @return void
      */
-    public function editComment($id_user)
+    public function editComment()
     {
-        $commentManager = new CommentManager();
-        $id_user->getComment($id_user);
-
-        if ($_SESSION['id_user'] == $id_user) {
-            $editcomment = $commentManager->editComment($_POST['updateComment'], $_GET['id']);
-
-            header('Location: Views/Frontend/commentView.php');
-        } else {
-            throw new Exception('Vous n\'avez pas l\'autorisation de modifier ce commentaire');
-        }
+        $editcomment = new CommentManager;
+        $editcomment->editComment($_POST['updateComment'], $_GET['id']);
+        header('Location: index.php?action=comment&id');
     }
 
     /**
@@ -66,5 +59,17 @@ class CommentController
     public function getCommentPage()
     {
         require('Views/Frontend/commentView.php');
+    }
+
+    /**
+     * Suppression d'un commentaire
+     *
+     * @return void
+     */
+    public function deleteComment()
+    {
+        $deleteCom = new CommentManager();
+        $deleteCom->deleteComment($_GET['id']);
+        header('Location: index.php?action=listPosts');
     }
 }

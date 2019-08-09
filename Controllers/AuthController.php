@@ -3,13 +3,6 @@
 
 class AuthController
 {
-
-    public function log()
-    {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-    }
     /**
      * newUser
      * Inscription
@@ -19,7 +12,7 @@ class AuthController
     {
 
         $userManager = new UserManager;
-        $userCheck = $userManager->getInfo($_POST['pseudo']);
+        $userCheck = $userManager->getPseudo($_POST['pseudo']);
         $userMail = $userManager->getMail($_POST['email']);
 
         if ($userCheck == 0) {
@@ -52,16 +45,13 @@ class AuthController
     {
         $userManager = new UserManager;
 
-        $user = $userManager->getInfo($_POST['pseudo']);
+        $user = $userManager->getPseudo($_POST['pseudo']);
 
         $passOk = password_verify($_POST['pass'], $user['pass']);
 
         if ($passOk) {
 
-            $_SESSION['pseudo'] = $user['pseudo'];
             $_SESSION['id_user'] = $user['id'];
-            $_SESSION['pass'] = $user['pass'];
-            $_SESSION['email'] = $user['email'];
 
             header('Location: index.php?action=listPosts');
         } else {

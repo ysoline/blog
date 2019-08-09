@@ -27,7 +27,7 @@
         </button>
         <ul class="navbar-nav mr-auto">
 
-            <?php if (!isset($_SESSION['pseudo'])) { ?>
+            <?php if (!isset($_SESSION['id_user'])) { ?>
             <li class="nav-item active">
                 <a class="nav-link" href="index.php?action=auth">Connexion</a>
             </li>
@@ -36,7 +36,7 @@
             </li>
             <?php } ?>
 
-            <?php if (isset($_SESSION['pseudo'])) { ?>
+            <?php if (isset($_SESSION['id_user'])) { ?>
             <li class="nav-item active">
                 <a class="nav-link" href="index.php?action=profil">Profil</a>
             </li>

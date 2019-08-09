@@ -8,6 +8,18 @@ class UserController
     {
         require('Views/Frontend/profilView.php');
     }
+    /**
+     * Récupère info utilisateur
+     *
+     * @return void
+     */
+    public function getInfo()
+    {
+        $userInfo = new UserManager;
+        $userInfo->getInfo($_SESSION['id_user']);
+
+        require('Views/Frontend/profilVIew.php');
+    }
 
     /**
      * Edition du Pseudo

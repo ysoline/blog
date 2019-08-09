@@ -3,7 +3,13 @@
 
 class CommentManager extends Manager
 {
-    public function getComments($post_id) //Récupère les commentaire
+    /**
+     * Récupération de tous les commentaires
+     *
+     * @param mixed $post_id
+     * @return void
+     */
+    public function getComments($post_id)
     {
         $_bdd = $this->dbConnect();
         $comments = $_bdd->prepare('SELECT id, comment, id_user, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, pseudo FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
@@ -12,7 +18,16 @@ class CommentManager extends Manager
         return $comments;
     }
 
-    public function addComment($post_id, $id_user, $pseudo, $comment) //Ajoute un commentaire
+    /**
+     * Ajout de commentaire
+     *
+     * @param mixed $post_id
+     * @param mixed $id_user
+     * @param mixed $pseudo
+     * @param mixed $comment
+     * @return void
+     */
+    public function addComment($post_id, $id_user, $pseudo, $comment)
     {
         $_bdd = $this->dbConnect();
         $comments = $_bdd->prepare('INSERT INTO comments(post_id, id_user, pseudo, comment, comment_date) VALUES(?,?,?,?, NOW())');
@@ -20,10 +35,18 @@ class CommentManager extends Manager
         return $affectedLines;
     }
 
-    public function deleteComment($postId, $comment) // Supprime un commentaire
+    /**
+     * Suppression de commentaire
+     *
+     * @param mixed $postId
+     * @param mixed $comment
+     * @return void
+     */
+    public function deleteComment($id)
     {
-        $_bdd = $this->dConnect();
-        $comments = $_bdd->exec('DELETE FROM comments, id_user WHERE postID=?, comment=?, comment_date=?, id_user =?');
+        $_bdd = $this->dbConnect();
+        $comments = $_bdd->prepare('DELETE FROM comments WHERE id=?');
+        $comments->execute(array($id));
     }
 
     /**
@@ -43,11 +66,17 @@ class CommentManager extends Manager
         return $updateComment;
     }
 
-    public function getComment()
+    /**
+     * Récupération d'un commentaire
+     *
+     * @param mixed $id
+     * @return void
+     */
+    public function getComment($id)
     {
         $_bdd = $this->dbConnect();
         $req = $_bdd->prepare('SELECT id, comment, pseudo, id_user, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ?');
-        $req->execute(array());
+        $req->execute(array($id));
         $comment = $req->fetch();
 
         return $comment;

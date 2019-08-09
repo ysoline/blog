@@ -4,7 +4,7 @@ class UserManager extends Manager
 {
     /**
      * Inscription
-     *
+     * Rang par défault: 1=utilisateur
      * @param mixed $pseudo
      * @param mixed $pass
      * @param mixed $email
@@ -13,7 +13,7 @@ class UserManager extends Manager
     public function addUser($pseudo, $pass, $email)
     {
         $_bdd = $this->dbConnect();
-        $reqUser = $_bdd->prepare('INSERT INTO users(pseudo, pass, email) VALUES(?,?,?)');
+        $reqUser = $_bdd->prepare('INSERT INTO users(pseudo, pass, email, rank) VALUES(?,?,?,1)');
         $newUser = $reqUser->execute(array($pseudo, $pass, $email));
         return $newUser;
     }
@@ -24,7 +24,7 @@ class UserManager extends Manager
      * @param mixed $pseudo
      * @return void
      */
-    public function getInfo($pseudo)
+    public function getPseudo($pseudo)
     {
         $user = [];
         $_bdd = $this->dbConnect();
@@ -52,7 +52,35 @@ class UserManager extends Manager
         return $userMail;
     }
 
+    /**
+     * Récupération des infos utilisateur
+     * 
+     * Rang:
+     * 1 = utilisateur (par défault)
+     * 2 = modérateur
+     * 3 = administrateur
+     *
+     * @param mixed $rank
+     * @return void
+     */
+    public function getInfo($id)
+    {
+        $_bdd = $this->dbConnect();
+        $userInfo = $_bdd->prepare('SELECT * FROM users WHERE id = ?');
+        $userInfo->execute(array($id));
+        $userInfo->fetch();
 
+        return $userInfo;
+    }
+
+    /**
+     * Edition du rang utilisateur
+     *
+     * @param mixed $rank
+     * @return void
+     */
+    public function editRank($rank)
+    { }
 
     /**
      * Edition du pseudo 

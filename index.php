@@ -108,6 +108,17 @@ try {
             }
         }
 
+        //Suppression de commentaire
+        elseif ($_GET['action'] == "deleteComment") {
+            if ($_POST['deleteCom'] == "SUPPRIMER") {
+                $deleteComment = new CommentController;
+                $deleteComment->deleteComment($_GET['id']);
+            } else { {
+                    throw new Exception('Impossible de supprimer le commentaire');
+                }
+            }
+        }
+
         //Edition du pseudo
         elseif ($_GET['action'] == "editProfil") {
             if (!empty($_POST['pseudo'] && !empty($_POST['email']))) {

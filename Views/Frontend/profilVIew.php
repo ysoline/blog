@@ -1,17 +1,16 @@
 <?php ob_start(); ?>
 
 
-Pseudo : <?= $_SESSION['pseudo'] ?>
-
-
-email : <?= $_SESSION['email'] ?><br />
+Pseudo : <?= $userInfo['pseudo'] ?><br />
+email : <br />
+Rang:
 
 <form action="index.php?action=editProfil" method='POST'>
     <label>Nouveau Pseudo :</label>
-    <input type="text" id="pseudo" name="pseudo" value="<?= $_SESSION['pseudo'] ?>"><br />
+    <input type="text" id="pseudo" name="pseudo" value=""><br />
 
     <label>Nouveau email :</label>
-    <input type="email" id="email" name="email" value="<?= $_SESSION['email'] ?>"><br />
+    <input type="email" id="email" name="email" value=""><br />
 
     <input type="submit" class='btn btn-primary' value="Modifier mon profil">
 
