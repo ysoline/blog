@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-<a href="index.php" class="btn btn-outline-secondary">Accueil</a>
+<a href="index.php?action=listPosts" class="btn btn-outline-secondary">Accueil</a>
 
 
 <div class="jumbotron">

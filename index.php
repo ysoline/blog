@@ -28,6 +28,18 @@ try {
             }
         }
 
+        //Ajout d'un post
+        elseif ($_GET['action'] == 'addPost')
+        {
+            if(!empty($_POST['title']) && !empty($_POST['editor'])){
+                $addPost = new PostController;
+                $addPost-> addPost($_POST['title'], $_POST['editor']);
+            }
+            else{
+                throw new Exception('Impossible d\'ajouter l\'article');
+            }
+        }
+
         //Ajout d'un commentaire
         elseif ($_GET['action'] == 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
