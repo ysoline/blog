@@ -63,11 +63,11 @@ class UserManager extends Manager
      * @param mixed $rank
      * @return void
      */
-    public function getInfo($id)
+    public function getInfo($id, $pseudo, $email)
     {
         $_bdd = $this->dbConnect();
-        $userInfo = $_bdd->prepare('SELECT * FROM users WHERE id = ?');
-        $userInfo->execute(array($id));
+        $userInfo = $_bdd->prepare('SELECT pseudo, email FROM users WHERE id = ?');
+        $userInfo->execute(array($pseudo, $email, $_SESSION['id_user']));
         $userInfo->fetch();
 
         return $userInfo;

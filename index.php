@@ -78,7 +78,7 @@ try {
         //page de profil
         elseif ($_GET['action'] == 'profil') {
             $profil = new UserController;
-            $profil->profilPage();
+            $profil->profilPage($_SESSION['id_user'], $pseudo, $email);
         }
 
         //déconnexion

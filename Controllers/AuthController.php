@@ -14,13 +14,14 @@ class AuthController
         $userManager = new UserManager;
         $userCheck = $userManager->getPseudo($_POST['pseudo']);
         $userMail = $userManager->getMail($_POST['email']);
+        $passHach = $_POST['pass'];
 
         if ($userCheck == 0) {
             if ($_POST['pass'] == $_POST['pass2']) {
                 if ($userMail == 0) {
                     if ($_POST['email'] == $_POST['email2']) {
-                        $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-                        $newUser = $userManager->addUser($_POST['pseudo'], $_POST['pass'], $_POST['email']);
+                        $passHach = password_hash($passHach, PASSWORD_DEFAULT);
+                        $newUser = $userManager->addUser($_POST['pseudo'], $passHach, $_POST['email']);
                         header('Location: index.php?action=listPosts');
                     } else {
                         throw new Exception("Les adresses emails ne sont pas identiques");

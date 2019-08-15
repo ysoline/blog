@@ -1,3 +1,6 @@
 blog.sql
 blog-1.zip
-AuthManager.php
+Models/Manager/AuthManager.php
+Models/Manager/Comment.php
+Models/Manager/Post.php
+Models/Manager/User.php
