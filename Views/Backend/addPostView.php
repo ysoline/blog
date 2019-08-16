@@ -28,7 +28,7 @@
     <!-- Insérer une image -->
     <button id="" onclick="commande('insertImage');"><i class="far fa-image"></i></button>
 
-    <!-- Titres -->
+    <!-- Titres  -->
     <select onchange="commande('formatBlock', this.value); this.selectedIndex = 0;">
         <option value="">Titre</option>
         <option value="h1">Titre 1</option>
