@@ -33,11 +33,18 @@ class PostManager extends Manager
         $req = $_bdd->exec('DELETE FROM posts WHERE postId=?, author=?, content=?, post_date=?');
     }
 
+    /**
+     * Ajout de billet
+     *
+     * @param mixed $title
+     * @param mixed $post
+     * @return void
+     */
     public function addPost($title, $post)
     {
         $_bdd = $this->dbConnect();
-        $addPost = $_bdd-> preapre('INSERT INTO posts(title, post, postDate) VALUES(?,?, NOW())');
-        $addPost-> execute(array($title, $post));
+        $addPost = $_bdd->prepare('INSERT INTO posts(title, post, postDate) VALUES(?,?, NOW())');
+        $addPost->execute(array($title, $post));
 
         return $addPost;
     }

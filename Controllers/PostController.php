@@ -17,16 +17,19 @@ class PostController
         $comments = $commentManager->getComments($_GET['id']);
         require('Views/Frontend/postView.php');
     }
-    public function addPost()
+    /**
+     * Ajout de billet
+     *
+     * @return void
+     */
+    public function addPost($title, $post)
     {
-        if (isset($_SESSION['pseudo'])) {
-            $postManager = new PostManager;
-            $postManager->addPost($_POST['title'], $_POST['editor']);
-        }
+        $addPost = new PostManager;
+        $addPost->addPost($_POST['title'], $_POST['post']);
     }
-    public function editPost()
-    {
+    // public function editPost()
+    // {
 
-        if (isset($_SESSION['pseudo'])) { }
-    }
+    //     if (isset($_SESSION['pseudo'])) { }
+    // }
 }

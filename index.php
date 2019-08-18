@@ -7,8 +7,6 @@ if (isset($_SESSION['id'])) {
     header("location: index.php?action=auth");
 }
 
-
-
 try {
     if (isset($_GET['action'])) {
 
@@ -29,14 +27,12 @@ try {
         }
 
         //Ajout d'un post
-        elseif ($_GET['action'] == 'addPost')
-        {
-            if(!empty($_POST['title']) && !empty($_POST['editor'])){
+        elseif ($_GET['action'] == 'addPost') {
+            if (!empty($_POST['title']) && !empty($_POST['post'])) {
                 $addPost = new PostController;
-                $addPost-> addPost($_POST['title'], $_POST['editor']);
-            }
-            else{
-                throw new Exception('Impossible d\'ajouter l\'article');
+                $addPost->addPost($_POST['title'], $_POST['post']);
+            } else {
+                throw new Exception('Tous les champs ne sont pas remplis !');
             }
         }
 
