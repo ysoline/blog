@@ -1,7 +1,8 @@
 <?php ob_start(); ?>
 
 
-Pseudo : <?= $userInfo['pseudo'] ?><br />
+Pseudo : <?= $getUser['pseudo'] ?>
+<br />
 email : <br />
 Rang:
 

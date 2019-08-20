@@ -3,9 +3,6 @@ require('Autoloader.php');
 Autoloader::register();
 
 session_start();
-if (isset($_SESSION['id'])) {
-    header("location: index.php?action=auth");
-}
 
 
 
@@ -77,8 +74,11 @@ try {
 
         //page de profil
         elseif ($_GET['action'] == 'profil') {
+
+            // $profil = new UserController;
+            // $profil->profilPage($_SESSION['id_user']);
             $profil = new UserController;
-            $profil->profilPage($_SESSION['id_user'], $pseudo, $email);
+            $profil->profilPage($_SESSION['id_user']);
         }
 
         //déconnexion
