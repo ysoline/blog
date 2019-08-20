@@ -19,8 +19,6 @@ class PostController
     }
     public function addPost()
     {
-
-
         if (isset($_SESSION['pseudo'])) {
             $postManager = new PostManager;
             $postManager->add($_POST['title'], $_POST['content']);

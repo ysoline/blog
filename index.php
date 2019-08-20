@@ -141,9 +141,19 @@ try {
 
             $disconnect = new AuthController;
             $disconnect->disconnect();
+
+
+            //Accès panel admin
         } elseif ($_GET['action'] == "panelAdmin") {
-            $adminPanel = new AdminController;
-            $adminPanel->getPost();
+            $findPost = new AdminController;
+            $findPost->getPost();
+        }
+
+        //Ajout de post
+        elseif($_GET['action'] == "addPost")
+        {
+            $addPost = new PostController;
+            $addPost-> addPost()
         }
 
         // Retourne la liste de tous les posts sur aucunes actions n'est faite
