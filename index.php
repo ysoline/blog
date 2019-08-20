@@ -141,11 +141,9 @@ try {
 
             $disconnect = new AuthController;
             $disconnect->disconnect();
-        }
-        elseif ($_GET['action'] == "panelAdmin"){
-            $panelAdmin = new UserController;
-            $panelAdmin = ;
-            require('Views/Backend/panelAdminView.php');
+        } elseif ($_GET['action'] == "panelAdmin") {
+            $adminPanel = new AdminController;
+            $adminPanel->getPost();
         }
 
         // Retourne la liste de tous les posts sur aucunes actions n'est faite
