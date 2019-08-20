@@ -74,9 +74,6 @@ try {
 
         //page de profil
         elseif ($_GET['action'] == 'profil') {
-
-            // $profil = new UserController;
-            // $profil->profilPage($_SESSION['id_user']);
             $profil = new UserController;
             $profil->profilPage($_SESSION['id_user']);
         }

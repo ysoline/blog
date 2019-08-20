@@ -6,10 +6,9 @@ class UserController
 {
     public function profilPage()
     {
-        $id = $_SESSION['id_user'];
         $getUser = new UserManager;
-        $getUser->getInfo($id);
-        return $getUser;
+        $getUser->getInfo($_SESSION['id_user']);
+        //return $getUser;
         require('Views/Frontend/profilVIew.php');
     }
 

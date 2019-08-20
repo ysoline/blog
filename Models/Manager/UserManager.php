@@ -61,10 +61,9 @@ class UserManager extends Manager
     {
 
         $_bdd = $this->dbConnect();
-        $userInfo = $_bdd->prepare('SELECT pseudo, email, rank_id FROM users WHERE id=' . $_SESSION['id_user']);
+        $userInfo = $_bdd->prepare('SELECT pseudo, email FROM users WHERE id=?');
         $userInfo->execute(array($id));
-
-        $userInfo->fetch(PDO::FETCH_ASSOC);
+        $userInfo->fetch();
         return $userInfo;
     }
 
