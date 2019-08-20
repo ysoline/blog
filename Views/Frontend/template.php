@@ -38,10 +38,16 @@
             <li class="nav-item active">
                 <a class="nav-link" href="index.php?action=profil">Profil</a>
             </li>
+            <?php if (($_SESSION['rank']) == 1) { ?>
+            <li class="nav-item active">
+                <a class="nav-link" href="index.php?action=panelAdmin">Administration</a>
+            </li>
+            <?php } ?>
             <li class="nav-item active">
                 <a class="nav-link" href="index.php?action=disconnect">Déconnexion</a>
             </li>
-            <?php } ?>
+            <?php
+            } ?>
         </ul>
     </nav>
 

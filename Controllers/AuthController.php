@@ -53,6 +53,7 @@ class AuthController
         if ($passOk) {
 
             $_SESSION['id_user'] = $user['id'];
+            $_SESSION['rank'] = $user['rank_id'];
 
             header('Location: index.php?action=listPosts');
         } else {

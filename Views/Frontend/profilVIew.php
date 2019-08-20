@@ -3,15 +3,14 @@
 
 Pseudo : <?= $getUser['pseudo'] ?>
 <br />
-email : <br />
-Rang:
-
+email :<?= $getUser['email'] ?> <br />
+rang:<?= $_SESSION['rank'] ?>
 <form action="index.php?action=editProfil" method='POST'>
     <label>Nouveau Pseudo :</label>
-    <input type="text" id="pseudo" name="pseudo" value=""><br />
+    <input type="text" id="pseudo" name="pseudo" value="<?= $getUser['pseudo'] ?>"><br />
 
     <label>Nouveau email :</label>
-    <input type="email" id="email" name="email" value=""><br />
+    <input type="email" id="email" name="email" value="<?= $getUser['email'] ?>"><br />
 
     <input type="submit" class='btn btn-primary' value="Modifier mon profil">
 

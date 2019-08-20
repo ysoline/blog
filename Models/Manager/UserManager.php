@@ -4,7 +4,7 @@ class UserManager extends Manager
 {
     /**
      * Inscription
-     * Rang par défault: 1=utilisateur
+     * Rang par défault: 2: membre
      * @param mixed $pseudo
      * @param mixed $pass
      * @param mixed $email
@@ -13,7 +13,7 @@ class UserManager extends Manager
     public function addUser($pseudo, $pass, $email)
     {
         $_bdd = $this->dbConnect();
-        $reqUser = $_bdd->prepare('INSERT INTO users(pseudo, pass, email, rank_id) VALUES(?,?,?,1)');
+        $reqUser = $_bdd->prepare('INSERT INTO users(pseudo, pass, email, rank_id) VALUES(?,?,?,2)');
         $newUser = $reqUser->execute(array($pseudo, $pass, $email));
         return $newUser;
     }
@@ -61,9 +61,10 @@ class UserManager extends Manager
     {
 
         $_bdd = $this->dbConnect();
-        $userInfo = $_bdd->prepare('SELECT pseudo, email FROM users WHERE id=?');
-        $userInfo->execute(array($id));
-        $userInfo->fetch();
+        $info = $_bdd->prepare('SELECT * FROM users WHERE id=?');
+        $info->execute(array($id));
+        $userInfo = $info->fetch();
+
         return $userInfo;
     }
 
@@ -80,6 +81,7 @@ class UserManager extends Manager
         $editProfil = $req->execute(array($pseudo, $email, $id));
         return $editProfil;
     }
+
 
     /**
      * Edition du pass
