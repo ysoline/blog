@@ -150,10 +150,9 @@ try {
         }
 
         //Ajout de post
-        elseif($_GET['action'] == "addPost")
-        {
+        elseif ($_GET['action'] == "addPost") {
             $addPost = new PostController;
-            $addPost-> addPost()
+            $addPost->addPost();
         }
 
         // Retourne la liste de tous les posts sur aucunes actions n'est faite
