@@ -4,11 +4,12 @@
 // modification mot de passe, changement de pseudo, édition profil...
 class UserController
 {
-    public function profilPage($id, $pseudo, $email)
+    public function profilPage()
     {
-        $userInfo = new UserManager;
-        $userInfo->getInfo($_SESSION['id_user'], $pseudo, $email);
-        require('Views/Frontend/profilView.php');
+        $user = new UserManager;
+        $getUser = $user->getInfo($_SESSION['id_user']);
+        require('Views/Frontend/profilVIew.php');
+        return $getUser;
     }
 
     /**

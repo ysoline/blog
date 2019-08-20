@@ -4,7 +4,7 @@ class UserManager extends Manager
 {
     /**
      * Inscription
-     * Rang par défault: 1=utilisateur
+     * Rang par défault: 2: membre
      * @param mixed $pseudo
      * @param mixed $pass
      * @param mixed $email
@@ -13,7 +13,7 @@ class UserManager extends Manager
     public function addUser($pseudo, $pass, $email)
     {
         $_bdd = $this->dbConnect();
-        $reqUser = $_bdd->prepare('INSERT INTO users(pseudo, pass, email, rank) VALUES(?,?,?,1)');
+        $reqUser = $_bdd->prepare('INSERT INTO users(pseudo, pass, email, rank_id) VALUES(?,?,?,2)');
         $newUser = $reqUser->execute(array($pseudo, $pass, $email));
         return $newUser;
     }
@@ -26,7 +26,6 @@ class UserManager extends Manager
      */
     public function getPseudo($pseudo)
     {
-        $user = [];
         $_bdd = $this->dbConnect();
         $req = $_bdd->prepare('SELECT * FROM users WHERE pseudo=:pseudo');
         $req->execute(array(
@@ -53,34 +52,21 @@ class UserManager extends Manager
     }
 
     /**
-     * Récupération des infos utilisateur
-     * 
-     * Rang:
-     * 1 = utilisateur (par défault)
-     * 2 = modérateur
-     * 3 = administrateur
+     * Récupère info utilisateur
      *
-     * @param mixed $rank
+     * @param mixed $id
      * @return void
      */
-    public function getInfo($id, $pseudo, $email)
+    public function getInfo($id)
     {
+
         $_bdd = $this->dbConnect();
-        $userInfo = $_bdd->prepare('SELECT pseudo, email FROM users WHERE id = ?');
-        $userInfo->execute(array($pseudo, $email, $_SESSION['id_user']));
-        $userInfo->fetch();
+        $info = $_bdd->prepare('SELECT * FROM users WHERE id=?');
+        $info->execute(array($id));
+        $userInfo = $info->fetch();
 
         return $userInfo;
     }
-
-    /**
-     * Edition du rang utilisateur
-     *
-     * @param mixed $rank
-     * @return void
-     */
-    public function editRank($rank)
-    { }
 
     /**
      * Edition du pseudo 
@@ -95,6 +81,7 @@ class UserManager extends Manager
         $editProfil = $req->execute(array($pseudo, $email, $id));
         return $editProfil;
     }
+
 
     /**
      * Edition du pass

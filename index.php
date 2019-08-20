@@ -3,9 +3,6 @@ require('Autoloader.php');
 Autoloader::register();
 
 session_start();
-if (isset($_SESSION['id'])) {
-    header("location: index.php?action=auth");
-}
 
 try {
     if (isset($_GET['action'])) {
@@ -86,7 +83,7 @@ try {
         //page de profil
         elseif ($_GET['action'] == 'profil') {
             $profil = new UserController;
-            $profil->profilPage($_SESSION['id_user'], $pseudo, $email);
+            $profil->profilPage($_SESSION['id_user']);
         }
 
         //déconnexion
@@ -152,6 +149,18 @@ try {
 
             $disconnect = new AuthController;
             $disconnect->disconnect();
+
+
+            //Accès panel admin
+        } elseif ($_GET['action'] == "panelAdmin") {
+            $findPost = new AdminController;
+            $findPost->getPost();
+        }
+
+        //Ajout de post
+        elseif ($_GET['action'] == "addPost") {
+            $addPost = new PostController;
+            $addPost->addPost();
         }
 
         // Retourne la liste de tous les posts sur aucunes actions n'est faite

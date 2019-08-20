@@ -24,8 +24,15 @@ class PostController
      */
     public function addPost($title, $post)
     {
+<<<<<<< HEAD
         $addPost = new PostManager;
         $addPost->addPost($_POST['title'], $_POST['post']);
+=======
+        if (isset($_SESSION['pseudo'])) {
+            $postManager = new PostManager;
+            $postManager->add($_POST['title'], $_POST['content']);
+        }
+>>>>>>> origin/adminPanel
     }
     // public function editPost()
     // {
