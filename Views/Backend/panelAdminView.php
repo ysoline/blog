@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 
-<a type="button" href="index.php?action=addPost" class="btn btn-primary">Ajouter billet</a>
+<a type="button" href="index.php?action=postPage" class="btn btn-primary">Ajouter billet</a>
 
 <div class="jumbotron border border-secondary">
     <?php foreach ($findPost as $post) { ?>

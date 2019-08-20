@@ -157,10 +157,10 @@ try {
             $findPost->getPost();
         }
 
-        //Ajout de post
-        elseif ($_GET['action'] == "addPost") {
-            $addPost = new PostController;
-            $addPost->addPost($_POST['title'], $_POST['post']);
+        //redirection page ajout de post
+        elseif ($_GET['action'] == "postPage") {
+            $addPost = new AdminController;
+            $addPost->postPage();
         }
 
         // Retourne la liste de tous les posts sur aucunes actions n'est faite

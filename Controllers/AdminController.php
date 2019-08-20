@@ -10,4 +10,9 @@ class AdminController
 
         require('Views/Backend/panelAdminView.php');
     }
+
+    public function postPage()
+    {
+        require('Views/Backend/addPostView.php');
+    }
 }
