@@ -13,6 +13,7 @@ class AdminController
 
     public function postPage()
     {
+
         require('Views/Backend/addPostView.php');
     }
 }

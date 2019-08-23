@@ -12,7 +12,8 @@ class CommentManager extends Manager
     public function getComments($post_id)
     {
         $_bdd = $this->dbConnect();
-        $comments = $_bdd->prepare('SELECT id, comment, id_user, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, pseudo FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
+        $comments = $_bdd->prepare('SELECT id, comment, id_user, report, published, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr
+         FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
         $comments->execute(array($post_id));
 
         return $comments;
@@ -27,11 +28,11 @@ class CommentManager extends Manager
      * @param mixed $comment
      * @return void
      */
-    public function addComment($post_id, $id_user, $pseudo, $comment)
+    public function addComment($post_id, $id_user, $comment)
     {
         $_bdd = $this->dbConnect();
-        $comments = $_bdd->prepare('INSERT INTO comments(post_id, id_user, pseudo, comment, comment_date) VALUES(?,?,?,?, NOW())');
-        $affectedLines = $comments->execute(array($post_id, $id_user, $pseudo, $comment));
+        $comments = $_bdd->prepare('INSERT INTO comments(post_id, id_user, comment, comment_date,report,published) VALUES(?,?,?, NOW(),0, 1)');
+        $affectedLines = $comments->execute(array($post_id, $id_user, $comment));
         return $affectedLines;
     }
 
@@ -75,10 +76,55 @@ class CommentManager extends Manager
     public function getComment($id)
     {
         $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('SELECT id, comment, pseudo, id_user, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ?');
+        $req = $_bdd->prepare('SELECT id, comment, id_user, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ?');
         $req->execute(array($id));
         $comment = $req->fetch();
 
         return $comment;
+    }
+    /**
+     * Récupère l'autheur d'un commentaire (page d'édition commentaire)
+     *
+     * @param mixed $id
+     * @return void
+     */
+    public function getAuthor($id)
+    {
+        $_bdd = $this->dbConnect();
+        $req = $_bdd->prepare('SELECT users.pseudo FROM users INNER JOIN comments ON users.id = comments.id_user WHERE comments.id = ?');
+        $req->execute(array($id));
+        $getAuthor = $req->fetch();
+
+        return $getAuthor;
+    }
+
+    /**
+     * getCommentAuthor
+     *
+     * @param mixed $id
+     * @return void
+     */
+    public function getCommentAuthor($id)
+    {
+        $_bdd = $this->dbConnect();
+        $req = $_bdd->prepare('SELECT users.pseudo FROM users INNER JOIN comments ON users.id=comments.id_user WHERE comments.id IN(SELECT id FROM comments WHERE post_id =?)');
+        $req->execute(array($id));
+        $getComAuthor = $req->fetch();
+
+        return $getComAuthor;
+    }
+
+    /**
+     * Défini si un commentaire est publié ou non
+     *
+     * @param mixed $id
+     * @return void
+     */
+    public function published($id)
+    {
+        $_bdd = $this->dbConnect();
+        $req = $_bdd->prepare('UPDATE comments SET published = ? WHERE id = ?');
+        $published = $req->execute(array($id));
+        return $published;
     }
 }

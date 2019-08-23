@@ -52,7 +52,7 @@ class UserManager extends Manager
     }
 
     /**
-     * Récupère info utilisateur
+     * Récupère info utilisateur grâce à son id
      *
      * @param mixed $id
      * @return void

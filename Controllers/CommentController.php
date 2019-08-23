@@ -11,14 +11,15 @@ class CommentController
      * @param mixed $post_id
      * @return void
      */
-    public function addComment($post_id)
+    public function addComment()
     {
         $commentManager = new CommentManager();
-        $affectedLines = $commentManager->addComment($post_id, $_SESSION['id_user'], $_SESSION['pseudo'], $_POST['comment']);
+        $affectedLines = $commentManager->addComment($_GET['id'], $_SESSION['id_user'], $_POST['comment']);
+
         if ($affectedLines === false) {
             throw new Exception('Impossible d\'ajouter le commentaire !');
         } else {
-            header('Location: index.php?action=post&id=' . $post_id);
+            header('Location: index.php?action=post&id=' . $_GET['id']);
         }
     }
 
@@ -31,9 +32,15 @@ class CommentController
      */
     public function editComment()
     {
-        $editcomment = new CommentManager;
-        $editcomment->editComment($_POST['updateComment'], $_GET['id']);
-        header('Location: index.php?action=comment&id');
+        $commentManager = new CommentManager;
+        $checkIdUser = $commentManager->getComment($_GET['id']);
+
+        if ($checkIdUser['id_user'] == $_SESSION['id_user']) {
+            $editcomment = $commentManager->editComment($_POST['updateComment'], $_GET['id']);
+            header('Location: index.php?action=listPosts');
+        } else {
+            throw new Exception("Vous n'avez l'autorisation de faire ceci");
+        }
     }
 
     /**
@@ -47,8 +54,10 @@ class CommentController
     public function comment()
     {
         $commentManager = new CommentManager();
+        $getAuthor = $commentManager->getAuthor($_GET['id']);
         $comment = $commentManager->getComment($_GET['id']);
         require('Views/Frontend/commentView.php');
+        return $getAuthor;
     }
 
     /**

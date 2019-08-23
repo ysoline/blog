@@ -54,6 +54,7 @@ class AuthController
 
             $_SESSION['id_user'] = $user['id'];
             $_SESSION['rank'] = $user['rank_id'];
+            $_SESSION['pseudo'] = $user['pseudo'];
 
             header('Location: index.php?action=listPosts');
         } else {

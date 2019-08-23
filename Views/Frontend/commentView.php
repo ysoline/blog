@@ -6,7 +6,7 @@
 
 
 <div class="jumbotron">
-    <h6> par <?= $comment['pseudo'] ?></h6>
+    <h6> par <?= $getAuthor['pseudo'] ?></h6>
     <p class="lead"><?= $comment['comment'] ?></p>
     <p><?= $comment['comment_date_fr'] ?></p>
 </div>
@@ -34,7 +34,7 @@
     <div class="card-header">Suppression du commentaire</div>
     <div class="card-body">
         <form action="index.php?action=deleteComment&amp;id=<?= $comment['id']; ?>" method="post">
-            <label>Veuillez confirmer la supprimer en écrivant "SUPPRIMER"</label>
+            <label>Veuillez confirmer la suppression en écrivant "SUPPRIMER"</label>
             <input id="deleteCom" name="deleteCom" required><br />
             <small class='text-danger'>Attention, cette action est irréverssible </small><br />
             <input class='btn btn-outline-danger' type="submit" value="Supprimer">

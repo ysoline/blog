@@ -33,12 +33,40 @@ try {
             }
         }
 
+        //Accés page édition d'un post
+        elseif ($_GET['action'] == "editPostPage") {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $editPPage = new PostController;
+                $editPPage->editPostPage($_GET['id']);
+            }
+        }
+
+        //Edition d'un post
+        elseif ($_GET['action'] == "editPost") {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $editPost = new PostController;
+                $editPost->editPost($_GET['id'], $_POST['title'], $_POST['post']);
+            } else {
+                throw new Exception("Impossible d'éditer le post !");
+            }
+        }
+
+        //Suppression de post
+        elseif ($_GET['action'] == "deletePost") {
+            if ($_POST['deletePost'] == "SUPPRIMER") {
+                $deletePost = new PostController;
+                $deletePost->deletePost($_GET['id']);
+            } else {
+                throw new Exception('Impossible de supprimer le post');
+            }
+        }
+
         //Ajout d'un commentaire
         elseif ($_GET['action'] == 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['comment'])) {
                     $affectedLines = new CommentController;
-                    $affectedLines->addComment($_GET['id'], $_SESSION['user_id'], $_SESSION['pseudo'], $_POST['comment']);
+                    $affectedLines->addComment($_GET['id'], $_SESSION['id_user'], $_POST['comment']);
                 } else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
                 }
@@ -53,7 +81,7 @@ try {
             $authUser->connectPage();
         }
 
-        //Page d'insciption
+        //Page d'inscription
         elseif ($_GET['action'] ==  'suscribePage') {
             $suscribeUser = new AuthController;
             $suscribeUser->suscribePage();

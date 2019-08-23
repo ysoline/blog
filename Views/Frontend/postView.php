@@ -9,7 +9,6 @@
     <p class="lead"><?= $post['post'] ?></p>
     <hr class="my-4">
     <p><?= $post['date_creation_fr'] ?></p>
-
 </div>
 
 <h3>Commentaires :</h3>
@@ -18,7 +17,7 @@
 
 <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
     <div class='d-flex justify-content-center flex-column'>
-        <h6 for="author"><?= $_SESSION['pseudo'] ?></h6><br />
+        <h6 for="author"><?= $_SESSION['pseudo']; ?></h6><br />
     </div>
 
     <div class='d-flex justify-content-center flex-column mt-2'>
@@ -37,7 +36,7 @@
 
 foreach ($comments as $comment) { ?>
 <div class="jumbotron">
-    <h6> par <?= $comment['pseudo'] ?></h6>
+    <h6> par <?= $getComAuthor['pseudo'] ?></h6>
     <p class="lead"><?= $comment['comment'] ?></p>
     <p><?= $comment['comment_date_fr'] ?></p>
 
