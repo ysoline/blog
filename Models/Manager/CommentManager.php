@@ -76,14 +76,14 @@ class CommentManager extends Manager
     public function getComment($id)
     {
         $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('SELECT id, comment, id_user, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ?');
+        $req = $_bdd->prepare('SELECT id, comment, id_user, published,report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ?');
         $req->execute(array($id));
         $comment = $req->fetch();
 
         return $comment;
     }
     /**
-     * Récupère l'autheur d'un commentaire (page d'édition commentaire)
+     * Récupère l'autheur d'un commentaire (page d'édition commentaire)[un seul commentaire]
      *
      * @param mixed $id
      * @return void
@@ -99,7 +99,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * getCommentAuthor
+     * Récupère les pseudos des commentaires
      *
      * @param mixed $id
      * @return void
@@ -115,16 +115,58 @@ class CommentManager extends Manager
     }
 
     /**
-     * Défini si un commentaire est publié ou non
+     * Ne publie plus un commentaire (administrateur)
      *
      * @param mixed $id
      * @return void
      */
-    public function published($id)
+    public function unpublished($id)
     {
         $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('UPDATE comments SET published = ? WHERE id = ?');
+        $req = $_bdd->prepare('UPDATE comments SET published = 0 WHERE id = ?');
         $published = $req->execute(array($id));
         return $published;
+    }
+
+    /**
+     * Signalement d'un commentaire (tous le monde)
+     *
+     * @param mixed $id
+     * @return void
+     */
+    public function reportComment($id)
+    {
+        $_bdd = $this->dbConnect();
+        $req = $_bdd->prepare('UPDATE comments SET report = 1 WHERE id =?');
+        $report = $req->execute(array($id));
+        return $report;
+    }
+
+    /**
+     * Reset un report de commentaire
+     *
+     * @param mixed $id
+     * @return void
+     */
+    public function resetReport($id)
+    {
+        $_bdd = $this->dbConnect();
+        $req = $_bdd->prepare('UPDATE comments SET report =0 WHERE id= ?');
+        $resetReport = $req->execute(array($id));
+        return $resetReport;
+    }
+
+    /**
+     * Selectionne les tous les commentaires
+     *
+     * @return void
+     */
+    public function getReport()
+    {
+        $_bdd = $this->dbConnect();
+        $req = $_bdd->prepare('SELECT comment,report FROM comments');
+        $getReport = $req->execute();
+
+        return $getReport;
     }
 }

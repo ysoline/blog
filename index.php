@@ -61,6 +61,36 @@ try {
             }
         }
 
+        //Signalement d'un commentaire
+        elseif ($_GET['action'] == 'report') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $reportCom = new CommentController;
+                $reportCom->reportComment($_GET['id']);
+            } else {
+                throw new Exception('Aucun commentaire trouvé');
+            }
+        }
+
+        //Reset le signalement d'un commentaire
+        elseif ($_GET['action'] == 'resetReport') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $resetReport = new CommentController;
+                $resetReport->resertReport($_GET['id']);
+            } else {
+                throw new Exception('Impossible de trouvé le commentaire');
+            }
+        }
+
+        //N'affiche plus un commentaire
+        elseif ($_GET['action'] == "unpublished") {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $unpublished = new CommentController;
+                $unpublished->unpublished($_GET['id']);
+            } else {
+                throw new Exception('Impossible de trouvé le commentaire');
+            }
+        }
+
         //Ajout d'un commentaire
         elseif ($_GET['action'] == 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -179,15 +209,15 @@ try {
             $disconnect->disconnect();
 
 
-            //Accès panel admin
+            //Accès panel admin liste tous les billets
         } elseif ($_GET['action'] == "panelAdmin") {
-            $findPost = new AdminController;
+            $findPost = new PostController;
             $findPost->getPost();
         }
 
         //redirection page ajout de post
         elseif ($_GET['action'] == "postPage") {
-            $addPost = new AdminController;
+            $addPost = new PostController;
             $addPost->postPage();
         }
 

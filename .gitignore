@@ -4,3 +4,4 @@ Models/Manager/AuthManager.php
 Models/Manager/Comment.php
 Models/Manager/Post.php
 Models/Manager/User.php
+Controllers/AdminController.php

@@ -34,19 +34,21 @@
 }
 
 
-foreach ($comments as $comment) { ?>
+foreach ($comments as $comment) {
+    if ($comment['published'] == 1) { ?>
 <div class="jumbotron">
     <h6> par <?= $getComAuthor['pseudo'] ?></h6>
     <p class="lead"><?= $comment['comment'] ?></p>
     <p><?= $comment['comment_date_fr'] ?></p>
 
-
+    <a class="btn btn-outline-danger" href='index.php?action=report&amp;id=<?= $comment['id']; ?>'>Signaler</a>
     <?php if (isset($_SESSION['id_user'])) {
-            if ($_SESSION['id_user'] == $comment['id_user']) { ?>
+                if ($_SESSION['id_user'] == $comment['id_user']) { ?>
     <a class="btn btn-outline-secondary" href="index.php?action=comment&amp;id=<?= $comment['id']; ?>">Modifier</a>
-    <?php } ?>
+    <?php }  ?>
 </div>
 <?php
+        }
     }
 } ?>
 <?php

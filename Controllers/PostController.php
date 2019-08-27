@@ -80,4 +80,28 @@ class PostController
         $deletePost->deletePost($_GET['id']);
         header('Location: index.php?action=panelAdmin');
     }
+
+    /**
+     * Récupère les billets pour affichage partie administration
+     *
+     * @return void
+     */
+    public function getPost()
+    {
+        $postManager = new PostManager;
+        $findPost = $postManager->getPosts();
+
+        require('Views/Backend/panelAdminView.php');
+    }
+
+    /**
+     * Redirection page ajout de billet
+     *
+     * @return void
+     */
+    public function postPage()
+    {
+
+        require('Views/Backend/addPostView.php');
+    }
 }
