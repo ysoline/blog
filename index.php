@@ -74,22 +74,32 @@ try {
         //Reset le signalement d'un commentaire
         elseif ($_GET['action'] == 'resetReport') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $resetReport = new CommentController;
-                $resetReport->resertReport($_GET['id']);
+                $resetReport = new AdminController;
+                $resetReport->resetReport($_GET['id']);
             } else {
                 throw new Exception('Impossible de trouvé le commentaire');
             }
         }
 
-        //N'affiche plus un commentaire
-        elseif ($_GET['action'] == "unpublished") {
+        //Re publie un commentaire
+        elseif ($_GET['action'] == "published") {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $unpublished = new CommentController;
-                $unpublished->unpublished($_GET['id']);
+                $published = new AdminController;
+                $published->published($_GET['id']);
             } else {
                 throw new Exception('Impossible de trouvé le commentaire');
             }
         }
+
+                //N'affiche plus un commentaire
+                elseif ($_GET['action'] == "unpublished") {
+                    if (isset($_GET['id']) && $_GET['id'] > 0) {
+                        $unpublished = new AdminController;
+                        $unpublished->getUnpublished($_GET['id']);
+                    } else {
+                        throw new Exception('Impossible de trouvé le commentaire');
+                    }
+                }
 
         //Ajout d'un commentaire
         elseif ($_GET['action'] == 'addComment') {
@@ -211,13 +221,14 @@ try {
 
             //Accès panel admin liste tous les billets
         } elseif ($_GET['action'] == "panelAdmin") {
-            $findPost = new PostController;
-            $findPost->getPost();
+            
+            $adminPanel = new AdminController;
+            $adminPanel->adminPanel();
         }
 
         //redirection page ajout de post
         elseif ($_GET['action'] == "postPage") {
-            $addPost = new PostController;
+            $addPost = new AdminController;
             $addPost->postPage();
         }
 

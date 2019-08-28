@@ -12,7 +12,6 @@ class PostManager extends Manager
     {
         $_bdd = $this->dbConnect();
         $req = $_bdd->prepare('SELECT id, title, post, DATE_FORMAT(postDate, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM posts');
-
         $req->execute();
         return $req;
     }

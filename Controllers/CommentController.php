@@ -103,32 +103,4 @@ class CommentController
         }
     }
 
-    /**
-     * N'affiche plus un commentaire 
-     *
-     * @return void
-     */
-    public function unpublished()
-    {
-        $commentManager = new CommentManager;
-        $unpublished = $commentManager->unpublished($_GET['id']);
-    }
-
-    /**
-     * Reset le signalement d'un commentaire
-     *
-     * @return void
-     */
-    public function resetReport()
-    {
-        $commentManager = new CommentManager;
-        $resetReport = $commentManager->resetReport($_GET['id']);
-    }
-
-    public function getReport()
-    {
-        $commentManager = new CommentManager;
-        $getReport = $commentManager->getReport();
-        require('Views/Backend/panelAdminView.php');
-    }
 }

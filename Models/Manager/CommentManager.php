@@ -115,6 +115,19 @@ class CommentManager extends Manager
     }
 
     /**
+     * Re publie un commentaire (administrateur)
+     *
+     * @param mixed $id
+     * @return void
+     */
+    public function published($id)
+    {
+        $_bdd = $this->dbConnect();
+        $req = $_bdd->prepare('UPDATE comments SET published = 1 WHERE id = ?');
+        $published = $req->execute(array($id));
+        return $published;
+    }
+        /**
      * Ne publie plus un commentaire (administrateur)
      *
      * @param mixed $id
@@ -124,8 +137,8 @@ class CommentManager extends Manager
     {
         $_bdd = $this->dbConnect();
         $req = $_bdd->prepare('UPDATE comments SET published = 0 WHERE id = ?');
-        $published = $req->execute(array($id));
-        return $published;
+        $unpublished = $req->execute(array($id));
+        return $unpublished;
     }
 
     /**
@@ -157,16 +170,26 @@ class CommentManager extends Manager
     }
 
     /**
-     * Selectionne les tous les commentaires
+     * Selectionne tous les commentaires
      *
      * @return void
      */
     public function getReport()
     {
         $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('SELECT comment,report FROM comments');
-        $getReport = $req->execute();
+        $req = $_bdd->prepare('SELECT comments.id AS c_id, comments.comment, comments.id_user,comments.report, comments.published, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, users.id AS u_id, users.pseudo FROM users INNER JOIN comments ON users.id=comments.id_user WHERE report =1 AND published = 1');
+        $req->execute();
 
-        return $getReport;
+        return $req;
     }
+
+    public function getUnpublished()
+    {
+        $_bdd = $this->dbConnect();
+        $unpublished = $_bdd->prepare('SELECT comments.id AS c_id, comments.comment, comments.id_user,comments.report, comments.published, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, users.id AS u_id, users.pseudo FROM users INNER JOIN comments ON users.id=comments.id_user WHERE  published = 0');
+        $unpublished->execute();
+
+        return $unpublished;
+    }
+    
 }
