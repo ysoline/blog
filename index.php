@@ -91,15 +91,15 @@ try {
             }
         }
 
-                //N'affiche plus un commentaire
-                elseif ($_GET['action'] == "unpublished") {
-                    if (isset($_GET['id']) && $_GET['id'] > 0) {
-                        $unpublished = new AdminController;
-                        $unpublished->getUnpublished($_GET['id']);
-                    } else {
-                        throw new Exception('Impossible de trouvé le commentaire');
-                    }
-                }
+        //N'affiche plus un commentaire
+        elseif ($_GET['action'] == "unpublished") {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $unpublished = new AdminController;
+                $unpublished->getUnpublished($_GET['id']);
+            } else {
+                throw new Exception('Impossible de trouvé le commentaire');
+            }
+        }
 
         //Ajout d'un commentaire
         elseif ($_GET['action'] == 'addComment') {
@@ -221,7 +221,7 @@ try {
 
             //Accès panel admin liste tous les billets
         } elseif ($_GET['action'] == "panelAdmin") {
-            
+
             $adminPanel = new AdminController;
             $adminPanel->adminPanel();
         }
