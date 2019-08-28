@@ -38,7 +38,7 @@ class PostController
     public function addPost($title, $post)
     {
         $addPost = new PostManager;
-        $addPost->addPost($_POST['title'], $_POST['post']);
+        $addPost->addPost(htmlspecialchars($_POST['title']), htmlspecialchars($_POST['post']));
     }
     /**
      * Edition de post
@@ -53,7 +53,7 @@ class PostController
     public function editPost()
     {
         $postManager = new PostManager;
-        $editPost = $postManager->editPost($_GET['id'], $_POST['title'], $_POST['post']);
+        $editPost = $postManager->editPost($_GET['id'], htmlspecialchars($_POST['title']), htmlspecialchars($_POST['post']));
         header('Location: index.php?action=panelAdmin');
     }
     /**

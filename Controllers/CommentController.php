@@ -14,7 +14,7 @@ class CommentController
     public function addComment()
     {
         $commentManager = new CommentManager;
-        $affectedLines = $commentManager->addComment($_GET['id'], $_SESSION['id_user'], $_POST['comment']);
+        $affectedLines = $commentManager->addComment($_GET['id'], $_SESSION['id_user'], htmlspecialchars($_POST['comment']));
 
         if ($affectedLines === false) {
             throw new Exception('Impossible d\'ajouter le commentaire !');
@@ -36,7 +36,7 @@ class CommentController
         $checkIdUser = $commentManager->getComment($_GET['id']);
 
         if ($checkIdUser['id_user'] == $_SESSION['id_user']) {
-            $editcomment = $commentManager->editComment($_POST['updateComment'], $_GET['id']);
+            $editcomment = $commentManager->editComment(htmlspecialchars($_POST['updateComment']), $_GET['id']);
             header('Location: index.php?action=listPosts');
         } else {
             throw new Exception("Vous n'avez l'autorisation de faire ceci");

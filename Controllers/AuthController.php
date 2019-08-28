@@ -12,16 +12,16 @@ class AuthController
     {
 
         $userManager = new UserManager;
-        $userCheck = $userManager->getPseudo($_POST['pseudo']);
-        $userMail = $userManager->getMail($_POST['email']);
-        $passHach = $_POST['pass'];
+        $userCheck = $userManager->getPseudo(htmlspecialchars($_POST['pseudo']));
+        $userMail = $userManager->getMail(htmlspecialchars($_POST['email']));
+        $passHach = htmlspecialchars($_POST['pass']);
 
         if ($userCheck == 0) {
             if ($_POST['pass'] == $_POST['pass2']) {
                 if ($userMail == 0) {
                     if ($_POST['email'] == $_POST['email2']) {
                         $passHach = password_hash($passHach, PASSWORD_DEFAULT);
-                        $newUser = $userManager->addUser($_POST['pseudo'], $passHach, $_POST['email']);
+                        $newUser = $userManager->addUser(htmlspecialchars($_POST['pseudo']), $passHach, htmlspecialchars($_POST['email']));
                         header('Location: index.php?action=listPosts');
                     } else {
                         throw new Exception("Les adresses emails ne sont pas identiques");
@@ -46,9 +46,9 @@ class AuthController
     {
         $userManager = new UserManager;
 
-        $user = $userManager->getPseudo($_POST['pseudo']);
+        $user = $userManager->getPseudo(htmlspecialchars($_POST['pseudo']));
 
-        $passOk = password_verify($_POST['pass'], $user['pass']);
+        $passOk = password_verify(htmlspecialchars($_POST['pass']), htmlspecialchars($user['pass']));
 
         if ($passOk) {
 

@@ -33,9 +33,9 @@ class UserController
      */
     public function editPass($id, $pass)
     {
-        $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+        $_POST['pass'] = password_hash(htmlspecialchars($_POST['pass']), PASSWORD_DEFAULT);
         $userEdit = new UserManager;
-        $changePseudo = $userEdit->editPass($_GET['id'], $_POST['pass']);
+        $changePseudo = $userEdit->editPass($_GET['id'], htmlspecialchars($_POST['pass']));
         header('Location: index.php?action=profil');
     }
     /**
