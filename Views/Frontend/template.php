@@ -56,7 +56,7 @@
     <div class="px-0">
     <h1 class="display-4 font-italic text-center">Billet simple pour l'Alaska</h1>
         <img src="public\img\aigle_alaska.png" class="img-fluid rounded shadow" alt='aigle_alaska'>       
-      <p class="lead my-3 font-italic text-muted">Partez l'aventure en compagnie de votre écrivain favori, Jean Forteroche.</p>      
+      <p class="lead my-3 font-italic text-muted">Partez à l'aventure en compagnie de votre écrivain favori, Jean Forteroche.</p>      
     </div>
   </div>
         </header>
