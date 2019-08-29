@@ -67,7 +67,7 @@
 
 <footer class="blog-footer text-center">
 <hr class="my-4">
-  <p>Développé par Julie Pilarski.</p>
+  <p>Copyright © Julie Pilarski - 2019 - Tous droits réservés</p>
   <small>Projet 4 - Formation Développeur Web Junior</small>
 </footer>
 
