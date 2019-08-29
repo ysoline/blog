@@ -10,7 +10,7 @@
     <input type="submit" class="btn btn-primary" value="Publier">
 </form>
 
-<div class="card border-danger mb-3" style="max-width: 20rem;">
+<div class="card border-danger m-3" style="max-width: 20rem;">
     <div class="card-header">Suppression du post</div>
     <div class="card-body">
         <form action="index.php?action=deletePost&amp;id=<?= $post['id']; ?>" method="post">
