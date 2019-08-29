@@ -1,18 +1,19 @@
 <?php ob_start(); ?>
 <h2>Connexion </h2>
 
+
 <div class='d-flex justify-content-center'>
-    <form action='index.php?action=connect' method="post">
+    <form class="form-signin" action='index.php?action=connect' method="post">
 
         <div class="flex-nowrap justify-content-center">
             <div class=" d-flex justify-content-end mb-2">
-                <label for="pseudo">Pseudo : </label>
-                <input class="ml-1" type="text" id="pseudo" name="pseudo" required>
+                <label for="pseudo" class="sr-only">Pseudo : </label>
+                <input class="form-control" type="text" id="pseudo" name="pseudo" placeholder="Pseudo" required autofocus>
             </div>
 
             <div class="d-flex justify-content-end">
-                <label for="password">Mot de passe : </label>
-                <input class="ml-1" type="password" id="pass" name="pass" required>
+                <label for="password" class="sr-only">Mot de passe : </label>
+                <input class="form-control" type="password" id="pass" name="pass" placeholder="Mot de passe" required>
             </div>
 
             <div class="d-flex justify-content-center mt-2">
@@ -25,5 +26,7 @@
         </div>
     </form>
 
+</div>
+</div>
 
-    <?php $content = ob_get_clean(); ?> <?php require('template.php'); ?>
+<?php $content = ob_get_clean(); ?> <?php require('template.php'); ?>

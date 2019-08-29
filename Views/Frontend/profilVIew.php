@@ -1,58 +1,76 @@
 <?php ob_start(); ?>
 
 
-<div class="d-flex flex-column">
+<div class="d-flex flex-column text-center">
     <h4>Mes informations :</h4>
     <p>Pseudo : <?= strtoupper($getUser['pseudo']) ?></p>
     <p>Email : <?= $getUser['email'] ?></p>
 </div>
 <hr class="my-4">
 
-<h4>Modifier mes informations :</h4>
+<h4 class="text-center">Modifier mes informations :</h4>
 <div class='d-flex justify-content-center'>
-    <form action="index.php?action=editProfil" method='POST'>
+    
+    <form class="form-signin" action="index.php?action=editProfil" method='POST'>
 
-        <div class=" d-flex justify-content-end mb-2  align-items-center">
-            <label>Nouveau Pseudo :</label>
-            <input class="ml-1" type="text" id="pseudo" name="pseudo" value="<?= strtoupper($getUser['pseudo']) ?>">
-        </div>
-        <div class=" d-flex justify-content-end mb-2 align-items-center">
-            <label>Nouveau email :</label>
-            <input class="ml-1" type="email" id="email" name="email" value="<?= $getUser['email'] ?>">
-        </div>
+        <div class="flex-nowrap justify-content-center">
 
-        <div class="d-flex justify-content-center mt-2">
-            <input type="submit" class='btn btn-primary' value="Modifier">
+            <div class="d-inline-flex justify-content-end mb-2 align-items-center">
+                <label>Nouveau Pseudo :</label>
+                <input class="form-control" type="text" id="pseudo" name="pseudo" value="<?= strtoupper($getUser['pseudo']) ?>">
+            </div>
+
+            <div class=" d-flex justify-content-end mb-2 align-items-center">
+                <label>Nouvel email :</label>
+                <input class="form-control" type="email" id="email" name="email" value="<?= $getUser['email'] ?>">
+            </div>
+
+            <div class="d-flex justify-content-center mt-2">
+                <input type="submit" class='btn btn-primary' value="Modifier">
+            </div>
         </div>
+    </form>
 </div>
-</form>
+    <hr class="my-4">
+    <h4 class="text-center">Modifier mon mot de passe :</h4>
+    <div class='d-flex justify-content-center'>
 
-<hr class="my-4">
-<h4>Modifier mon mot de passe :</h4>
-<form action="index.php?action=editPass" method='POST'>
-    <div class="d-flex flex-column col-sm-4 mb-2">
-        <label>Nouveau mot de passe :</label>
-        <input class="mt-2" type="password" id="pass" name="pass" required>
+    <form class="form-signin" action="index.php?action=editPass" method='POST'>
 
-        <label>Confirmation mot de passe :</label>
-        <input class="mt-2" type="password" id="pass2" name="pass2" required>
+        <div class="flex-nowrap justify-content-center">
 
-        <div class="d-flex justify-content-center mt-2">
-            <input type="submit" class='btn btn-primary' value="Modifier">
+            <div class=" d-flex justify-content-end mb-2">
+                <label class="sr-only">Nouveau mot de passe :</label>
+                <input class="mt-2 form-control" type="password" id="pass" name="pass" placeholder="Mot de passe" required>
+            </div>
+
+            <div class=" d-flex justify-content-end mb-2">
+                <label class="sr-only">Confirmation mot de passe :</label>
+                <input class="mt-2 form-control" type="password" id="pass2" name="pass2" placeholder="Confirmer mot de passe" required>
+            </div>
+
+            <div class="d-flex justify-content-center mt-2">
+                <input type="submit" class='btn btn-primary' value="Modifier">
+            </div>
+
         </div>
-    </div>
-</form>
-<hr class="my-4">
-<h4>Supprimer mon compte :</h4>
-<form action="index.php?action=deleteUser" method='POST'>
-    <div class="d-flex flex-column col-sm-4 mb-2">
-        <label>Attention, cette action est irréverssible</label><br />
-        <div class="d-flex justify-content-center mt-2">
-            <input type="submit" class='btn btn-primary' value="Supprimer">
+    </form>
+</div>
+    <hr class="my-4">
+    <h4 class="text-center">Supprimer mon compte :</h4>
+
+    
+    <form class="form-signin" action="index.php?action=deleteUser" method='POST'>
+    <div class="d-flex align-items-center flex-column">
+        
+            <label>Attention, cette action est irréverssible</label>
+
+        <div class="d-flex justify-content-center">
+                <input type="submit" class='btn btn-primary' value="Supprimer">
+            </div>
         </div>
-    </div>
-</form>
+    </form>
 
-<?php $content = ob_get_clean(); ?>
+    <?php $content = ob_get_clean(); ?>
 
-<?php require('template.php'); ?>
+    <?php require('template.php'); ?>
