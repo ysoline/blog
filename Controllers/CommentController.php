@@ -81,9 +81,14 @@ class CommentController
      */
     public function deleteComment()
     {
-        $deleteCom = new CommentManager;
-        $deleteCom->deleteComment($_GET['id']);
-        header('Location: index.php?action=listPosts');
+        $commentManager = new CommentManager;
+        $checkIdUser = $commentManager->getComment($_GET['id']);
+        if ($checkIdUser['id_user'] == $_SESSION['id_user']) {
+            $deleteCom = $commentManager->deleteComment($_GET['id']);
+            header('Location: index.php?action=listPosts');
+        } else {
+            throw new Exception("Vous n'avez l'autorisation de faire ceci");
+        }
     }
 
     /**
@@ -102,5 +107,4 @@ class CommentController
             throw new Exception('Commentaire déjà signalé');
         }
     }
-
 }
