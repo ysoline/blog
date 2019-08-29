@@ -8,7 +8,7 @@
 <div class="jumbotron">
     <h6> par <?= $getAuthor['pseudo'] ?></h6>
     <p class="lead"><?= $comment['comment'] ?></p>
-    <p><?= $comment['comment_date_fr'] ?></p>
+    <p><small><?= $comment['comment_date_fr'] ?></small></p>
 </div>
 
 <h3>Modification de commentaires :</h3>
