@@ -177,7 +177,7 @@ class CommentManager extends Manager
     public function getReport()
     {
         $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('SELECT comments.id AS c_id, comments.comment, comments.id_user,comments.report, comments.published, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, users.id AS u_id, users.pseudo FROM users INNER JOIN comments ON users.id=comments.id_user WHERE report =1 AND published = 1');
+        $req = $_bdd->prepare('SELECT comments.id AS c_id, comments.comment, comments.id_user,comments.report, comments.published, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, users.id AS u_id, users.pseudo FROM users INNER JOIN comments ON users.id=comments.id_user WHERE report =1 AND published = 1 ORDER BY comment_date DESC');
         $req->execute();
 
         return $req;
@@ -186,7 +186,7 @@ class CommentManager extends Manager
     public function getUnpublished()
     {
         $_bdd = $this->dbConnect();
-        $unpublished = $_bdd->prepare('SELECT comments.id AS c_id, comments.comment, comments.id_user,comments.report, comments.published, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, users.id AS u_id, users.pseudo FROM users INNER JOIN comments ON users.id=comments.id_user WHERE  published = 0');
+        $unpublished = $_bdd->prepare('SELECT comments.id AS c_id, comments.comment, comments.id_user,comments.report, comments.published, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, users.id AS u_id, users.pseudo FROM users INNER JOIN comments ON users.id=comments.id_user WHERE  published = 0 ORDER BY comment_date DESC');
         $unpublished->execute();
 
         return $unpublished;
