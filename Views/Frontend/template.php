@@ -26,34 +26,25 @@
     }
 </style>
 <div class="container-fluid">
-    <header class="blog-header py-3 px-5">
-        <div class="text-center">
-            <a class="blog-header-logo text-light text-decoration-none" href="index.php?action=listPosts">
-                <h2>Jean Forteroche</h2>
-            </a>
-        </div>
-        <div class="row flex-nowrap border-bottom justify-content-between align-items-center" id="navbar">
+    <header class="blog-header">
 
-            <div class="col-3 col-sm-4 d-flex justify-content-around">
-                <div>
-                    <?php if (!isset($_SESSION['id_user'])) { ?>
-                    <a class="text-light text-decoration-none" href="index.php?action=suscribePage">Inscription</a>
-                    <?php } ?>
-                    <?php if (isset($_SESSION['id_user'])) { ?>
-                    <a class="text-light text-decoration-none" href="index.php?action=profil">Profil</a>
-                </div>
-                <div>
-                    <?php if (($_SESSION['rank']) == 1) { ?>
-                    <a class="text-light text-decoration-none" href="index.php?action=panelAdmin">Administration</a>
-                    <?php }
-                    } ?>
-                </div>
-            </div>
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="d-flex justify-content-between align-items-center p-4 rounded border">
+                <a class="text-light" href="index.php?action=listPosts">
+                    <h1>Jean Forteroche</h1>
+                </a>
 
+                <?php if (!isset($_SESSION['id_user'])) { ?>
+                <a class="text-light" href="index.php?action=suscribePage">Inscription</a>
+                <?php } ?>
+                <?php if (isset($_SESSION['id_user'])) { ?>
+                <a class="text-light text-decoration-none mx-2" href="index.php?action=profil">Profil</a>
 
+                <?php if (($_SESSION['rank']) == 1) { ?>
+                <a class="text-light" href="index.php?action=panelAdmin">Administration</a>
+                <?php }
+                } ?>
 
-
-            <div class="col-3 col-sm-4 d-flex justify-content-end align-items-center">
                 </a>
                 <?php if (!isset($_SESSION['id_user'])) { ?>
                 <a class="btn btn-sm btn-outline-light" href="index.php?action=auth">Connexion</a>
@@ -64,17 +55,24 @@
             </div>
         </div>
 
-        <div class=" px-5 mt-2">
-            <div class="col-lg d-flex justify-content-center align-items-center card p-0">                
-                <img src="public\img\aigle_alaska.png" class="card-img rounded shadow d-none d-lg-block" alt='aigle_alaska'>                
-                <h1 class="font-italic text-center text-light font-weight-bold card-img-overlay d-none d-lg-block">Billet simple pour l'Alaska</h1>                   
+        <nav class="nav navbar-light">
+            <button class="navbar-toggler font-weight-bold" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span> Menu
+            </button>
+        </nav>
+        <div>
+            <div class=" px-5 mt-2">
+                <div class="col-lg d-flex justify-content-center align-items-center card p-0">
+                    <img src="public\img\aigle_alaska.png" class="card-img rounded shadow d-none d-lg-block" alt='aigle_alaska'>
+                    <h2 class="font-italic text-center text-light font-weight-bold card-img-overlay d-none d-lg-block">Billet simple pour l'Alaska</h2>
+                </div>
             </div>
-        </div>
-        <h1 class="font-italic text-center  font-weight-bold d-lg-none">Billet simple pour l'Alaska</h1>           
+            <h1 class="font-italic text-center  font-weight-bold d-lg-none">Billet simple pour l'Alaska</h1>
+
     </header>
 
     <body>
-        <div class="container-fluid">
+        <div class="container-fluid mt-2">
             <?= $content ?>
         </div>
     </body>
