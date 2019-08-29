@@ -35,10 +35,16 @@ class PostController
      *
      * @return void
      */
-    public function addPost($title, $post)
+    public function addPost()
     {
+        $userManager = new UserManager;
+        $infoUser = $userManager->getInfo($_SESSION['id_user']);
+        if ($_SESSION['id_user'] == $infoUser['id'] AND $infoUser['rank_id']==1) {
         $addPost = new PostManager;
-        $addPost->addPost(htmlspecialchars($_POST['title']), htmlspecialchars($_POST['post']));
+        $addPost->addPost(htmlspecialchars($_POST['title']),($_POST['post']));
+    } else {
+        throw new Exception('Vous n\'êtes pas autorisé à faire cela');
+    }
     }
     /**
      * Edition de post
@@ -46,27 +52,41 @@ class PostController
      * @return void
      */
     /**
-     * eAction édition d'un post
+     * édition d'un post (formulaire édition)
      *
      * @return void
      */
     public function editPost()
     {
+        $userManager = new UserManager;
+        $infoUser = $userManager->getInfo($_SESSION['id_user']);
+        if ($_SESSION['id_user'] == $infoUser['id'] AND $infoUser['rank_id']==1) {
         $postManager = new PostManager;
-        $editPost = $postManager->editPost($_GET['id'], htmlspecialchars($_POST['title']), htmlspecialchars($_POST['post']));
+        $editPost = $postManager->editPost($_GET['id'], htmlspecialchars($_POST['title']), ($_POST['post']));
         header('Location: index.php?action=panelAdmin');
+        
+    } else {
+        throw new Exception('Vous n\'êtes pas autorisé à faire cela');
+    }
     }
     /**
-     * Accès page d'édition de post
+     * Accès page d'édition de post (récupération article)
      *
      * @return void
      */
     public function editPostPage()
     {
+        $userManager = new UserManager;
+        $infoUser = $userManager->getInfo($_SESSION['id_user']);
+        if ($_SESSION['id_user'] == $infoUser['id'] AND $infoUser['rank_id']==1) {
+        
         $postManager = new PostManager;
         $post = $postManager->getPost($_GET['id']);
         require('Views/Backend/editPostView.php');
-        return $post;
+        
+    } else {
+        throw new Exception('Vous n\'êtes pas autorisé à faire cela');
+    }
     }
 
     /**
@@ -76,10 +96,26 @@ class PostController
      */
     public function deletePost()
     {
+        $userManager = new UserManager;
+        $infoUser = $userManager->getInfo($_SESSION['id_user']);
+        if ($_SESSION['id_user'] == $infoUser['id'] AND $infoUser['rank_id']==1) {
+
         $deletePost = new PostManager();
         $deletePost->deletePost($_GET['id']);
         header('Location: index.php?action=panelAdmin');
+    } else {
+        throw new Exception('Vous n\'êtes pas autorisé à faire cela');
+    }
     }
 
+    /**
+     * Redirection page ajout de billet
+     *
+     * @return void
+     */
+    public function postPage()
+    {
+        require('Views/Backend/addPostView.php');
+    }
 
 }

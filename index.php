@@ -228,7 +228,7 @@ try {
 
         //redirection page ajout de post
         elseif ($_GET['action'] == "postPage") {
-            $addPost = new AdminController;
+            $addPost = new PostController;
             $addPost->postPage();
         }
 
