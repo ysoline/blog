@@ -21,7 +21,7 @@
 
     <div class='d-flex justify-content-center flex-column mt-2'>
         <label for="comment">Commentaire :</label><br />
-        <textarea id="updateComment" name="updateComment" required></textarea>
+        <textarea id="updateComment" name="updateComment" required><?= $comment['comment'] ?></textarea>
     </div>
 
     <div class="row justify-content-md-center mt-3 mb-2">
