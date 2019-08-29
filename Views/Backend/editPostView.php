@@ -5,7 +5,7 @@
     <input type="text" id="title" name="title" required value="<?= $post['title'] ?>">
     <br />
     <br />
-    <textarea id="post" name="post" value=""></textarea>
+    <textarea id="post" name="post"><?= $post['post'] ?></textarea>
     <br />
     <input type="submit" class="btn btn-primary" value="Publier">
 </form>
