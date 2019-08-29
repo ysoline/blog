@@ -2,16 +2,14 @@
 
 <?php ob_start(); ?>
 
-<a href="index.php" class="btn btn-outline-secondary btn-sm">Retour</a>
-
-<div class="blog-post">
+<div class="blog-post  bg-light my-3 rounded p-3">
     <h2 class="blog-post-title text-center"><?= $post['title'] ?></h2>
     <p class="blog-post-meta text-muted"><?= $post['date_creation_fr'] ?></p>
     <p><?= $post['post'] ?></p>
 </div>
 
-<div>
-    <h3 class="mt-5">Commentaires :</h3>
+<div class="bg-light my-4 p-3 rounded">
+    <h3>Commentaires :</h3>
 
     <?php if (isset($_SESSION['id_user'])) { ?>
     <hr class="my-4">
@@ -40,7 +38,7 @@
 
 
 <?php foreach ($comments as $comment) { ?>
-<div class="border p-4 m-2 rounded">
+<div class="p-3 m-4 rounded bg-light">
     <div class="d-flex justify-content-between">
         <h6> par <?= strtoupper($getComAuthor['pseudo']) ?></h6>
         <small class="text-muted text-danger"><?= $comment['comment_date_fr'] ?></small>

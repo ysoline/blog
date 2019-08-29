@@ -1,6 +1,5 @@
 <?php ob_start(); ?>
-<h2>Connexion </h2>
-
+<h2 class='text-center my-4'>Connexion</h2>
 
 <div class='d-flex justify-content-center'>
     <form class="form-signin" action='index.php?action=connect' method="post">
@@ -20,8 +19,8 @@
                 <input type="submit" value="Connexion" class='btn btn-primary btn'>
             </div>
 
-            <div class='d-flex flex-column align-items-center'>
-                <a href='index.php?action=suscribePage' class="text-success">Pas encore inscrit ?</a>
+            <div class='d-flex flex-column align-items-center my-2'>
+                <a href='index.php?action=suscribePage' class="btn btn-outline-light">Pas encore inscrit ?</a>
             </div>
         </div>
     </form>
