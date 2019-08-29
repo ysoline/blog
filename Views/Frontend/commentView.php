@@ -4,7 +4,6 @@
 
 <a href="index.php?action=listPosts" class="btn btn-outline-secondary">Accueil</a>
 
-
 <div class="jumbotron">
     <h6> par <?= $getAuthor['pseudo'] ?></h6>
     <p class="lead"><?= $comment['comment'] ?></p>
@@ -19,8 +18,7 @@
         <h6 for="pseudo"><?= $_SESSION['pseudo'] ?></h6>
     </div>
 
-    <div class='d-flex justify-content-center flex-column mt-2'>
-        <label for="comment">Commentaire :</label><br />
+    <div class='d-flex justify-content-center flex-column mt-2'>        
         <textarea id="updateComment" name="updateComment" required><?= $comment['comment'] ?></textarea>
     </div>
 
