@@ -50,15 +50,28 @@
                     <a class="btn btn-sm btn-outline-secondary" href="index.php?action=disconnect">Déconnexion</a>
                     <?php } ?>
                 </div>
-
             </div>
+
+            <div class="p-3">
+    <div class="px-0">
+    <h1 class="display-4 font-italic text-center">Billet simple pour l'Alaska</h1>
+        <img src="public\img\aigle_alaska.png" class="img-fluid rounded shadow" alt='aigle_alaska'>       
+      <p class="lead my-3 font-italic text-muted">Partez l'aventure en compagnie de votre écrivain favori, Jean Forteroche.</p>      
+    </div>
+  </div>
         </header>
 
         <?= $content ?>
 
 </body>
-<script type="text/javascript" src="../../public/js/editor.js"></script>
 
+<footer class="blog-footer text-center">
+<hr class="my-4">
+  <p>Développé par Julie Pilarski.</p>
+  <small>Projet 4 - Formation Développeur Web Junior</small>
+</footer>
+
+<script type="text/javascript" src="../../public/js/editor.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
 </script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous">
