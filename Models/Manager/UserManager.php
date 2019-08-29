@@ -74,15 +74,27 @@ class UserManager extends Manager
      * @param mixed $pseudo
      * @return void
      */
-    public function editProfil($id, $pseudo, $email)
+    public function editPseudo($id, $pseudo)
     {
         $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare("UPDATE users SET pseudo= ?, email=? WHERE id= ?");
-        $editProfil = $req->execute(array($pseudo, $email, $id));
-        return $editProfil;
+        $req = $_bdd->prepare("UPDATE users SET pseudo= ? WHERE id= ?");
+        $editPseudo = $req->execute(array($pseudo, $id));
+        return $editPseudo;
     }
 
-
+/**
+     * Edition du mail 
+     *
+     * @param mixed $mail
+     * @return void
+     */
+    public function editMail($id, $email)
+    {
+        $_bdd = $this->dbConnect();
+        $req = $_bdd->prepare("UPDATE users SET email=? WHERE id= ?");
+        $editMail = $req->execute(array($email, $id));
+        return $editMail;
+    }
     /**
      * Edition du pass
      *

@@ -193,15 +193,23 @@ try {
         }
 
         //Edition du pseudo
-        elseif ($_GET['action'] == "editProfil") {
-            if (!empty($_POST['pseudo'] && !empty($_POST['email']))) {
-                $editProfil = new UserController;
-                $editProfil->editProfil($_SESSION['id_user'], $_POST['pseudo'], $_POST['email']);
+        elseif ($_GET['action'] == "editPseudo") {
+            if (!empty($_POST['pseudo'])) {
+                $editPseudo = new UserController;
+                $editPseudo->editPseudo($_SESSION['id_user'], $_POST['pseudo']);
             } else {
                 throw new Exception("Veuillir remplir tout les champs");
             }
         }
-
+        //Edition du Mail
+        elseif ($_GET['action'] == "editMail") {
+            if (!empty($_POST['email'])) {
+                $editMail = new UserController;
+                $editMail->editMail($_SESSION['id_user'],$_POST['email']);
+            } else {
+                throw new Exception("Veuillir remplir tout les champs");
+            }
+        }
         //Edition du mot de passe
         elseif ($_GET['action'] == "editPass") {
             if (!empty($_POST['pass']) && !empty($_POST['pass2'])) {

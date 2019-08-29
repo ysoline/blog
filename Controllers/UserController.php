@@ -2,6 +2,8 @@
 
 //regroupe les fonctionnalités lié aux utillisateurs 
 // modification mot de passe, changement de pseudo, édition profil...
+
+
 class UserController
 {
     public function profilPage()
@@ -17,18 +19,46 @@ class UserController
      *
      * @return void
      */
-    public function editProfil()
+    public function editPseudo()
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
+        $userCheck = $userManager->getPseudo(($_POST['pseudo']));
+
         if ($_SESSION['id_user'] == $infoUser['id']) {
-            $changePseudo = $userManager->editProfil($_SESSION['id_user'], $_POST['pseudo'], $_POST['email']);
-            header('Location: index.php?action=profil');
+            if ($userCheck == 0) {
+                $changePseudo = $userManager->editPseudo($_SESSION['id_user'], $_POST['pseudo']);
+                header('Location: index.php?action=profil');
+            } else {
+                throw new Exception('Pseudo déjà utilisé');
+            }
         } else {
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
         }
     }
+    /**
+     * Edition du Pseudo
+     *
+     * @return void
+     */
+    public function editMail()
+    {
+        $userManager = new UserManager;
+        $infoUser = $userManager->getInfo($_SESSION['id_user']);
+        $userMail = $userManager->getMail(($_POST['email']));
 
+        if ($_SESSION['id_user'] == $infoUser['id']) {
+            if ($userMail == 0) {
+            $changeMail = $userManager->editMail($_SESSION['id_user'], $_POST['email']);
+            header('Location: index.php?action=profil');
+            } else{
+                throw new Exception('Email déjà utilisé');
+        }
+    }
+        else {
+            throw new Exception('Vous n\'êtes pas autorisé à faire cela');
+        }
+    }
     /**
      * Edition du mot de passe
      *

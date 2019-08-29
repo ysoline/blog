@@ -12,9 +12,9 @@ class AuthController
     {
 
         $userManager = new UserManager;
-        $userCheck = $userManager->getPseudo(htmlspecialchars($_POST['pseudo']));
-        $userMail = $userManager->getMail(htmlspecialchars($_POST['email']));
-        $passHach = htmlspecialchars($_POST['pass']);
+        $userCheck = $userManager->getPseudo(($_POST['pseudo']));
+        $userMail = $userManager->getMail(($_POST['email']));
+        $passHach = ($_POST['pass']);
 
         if ($userCheck == 0) {
             if ($_POST['pass'] == $_POST['pass2']) {
