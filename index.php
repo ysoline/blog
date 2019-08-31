@@ -186,11 +186,11 @@ try {
             if ($_POST['deleteCom'] == "SUPPRIMER") {
                 $deleteComment = new CommentController;
                 $deleteComment->deleteComment($_GET['id']);
-            } else { {
-                    throw new Exception('Impossible de supprimer le commentaire');
-                }
+            } else {
+                throw new Exception('Impossible de supprimer le commentaire');
             }
         }
+
 
         //Edition du pseudo
         elseif ($_GET['action'] == "editPseudo") {
@@ -205,7 +205,7 @@ try {
         elseif ($_GET['action'] == "editMail") {
             if (!empty($_POST['email'])) {
                 $editMail = new UserController;
-                $editMail->editMail($_SESSION['id_user'],$_POST['email']);
+                $editMail->editMail($_SESSION['id_user'], $_POST['email']);
             } else {
                 throw new Exception("Veuillir remplir tout les champs");
             }
@@ -220,12 +220,15 @@ try {
 
         //Suppression de compte
         elseif ($_GET['action'] == "deleteUser") {
-            $deleteUser = new UserController;
-            $deleteUser->deleteUser($_SESSION['id_user']);
+            if ($_POST['deleteUser'] == "SUPPRIMER") {
+                $deleteUser = new UserController;
+                $deleteUser->deleteUser($_SESSION['id_user']);
 
-            $disconnect = new AuthController;
-            $disconnect->disconnect();
-
+                $disconnect = new AuthController;
+                $disconnect->disconnect();
+            } else {
+                throw new Exception('Impossible de supprimer le compte');
+            }
 
             //Accès panel admin liste tous les billets
         } elseif ($_GET['action'] == "panelAdmin") {

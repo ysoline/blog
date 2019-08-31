@@ -12,8 +12,7 @@ class CommentManager extends Manager
     public function getComments($post_id)
     {
         $_bdd = $this->dbConnect();
-        $comments = $_bdd->prepare('SELECT id, comment, id_user, report, published, post_id, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr
-         FROM comments WHERE post_id = ? AND published = 1 ORDER BY comment_date DESC');
+        $comments = $_bdd->prepare('SELECT comments.*, users.pseudo,DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments INNER JOIN posts ON comments.post_id = posts.id INNER JOIN users ON users.id = comments.id_user WHERE posts.id = ? AND published = 1 ORDER BY comment_date DESC');
         $comments->execute(array($post_id));
 
         return $comments;
@@ -98,21 +97,6 @@ class CommentManager extends Manager
         return $getAuthor;
     }
 
-    /**
-     * Récupère les pseudos des commentaires
-     *
-     * @param mixed $id
-     * @return void
-     */
-    public function getCommentAuthor($id)
-    {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('SELECT users.pseudo FROM users INNER JOIN comments ON users.id=comments.id_user WHERE comments.id IN(SELECT id FROM comments WHERE post_id =?)');
-        $req->execute(array($id));
-        $getComAuthor = $req->fetch();
-
-        return $getComAuthor;
-    }
 
     /**
      * Re publie un commentaire (administrateur)
@@ -127,7 +111,7 @@ class CommentManager extends Manager
         $published = $req->execute(array($id));
         return $published;
     }
-        /**
+    /**
      * Ne publie plus un commentaire (administrateur)
      *
      * @param mixed $id
@@ -191,5 +175,11 @@ class CommentManager extends Manager
 
         return $unpublished;
     }
-    
+
+    public function delPostCom($post_id)
+    {
+        $_bdd = $this->dbConnect();
+        $deletePostCom = $_bdd->prepare('DELETE FROM comments WHERE post_id = ?');
+        $deletePostCom->execute(array($post_id));
+    }
 }

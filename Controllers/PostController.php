@@ -25,10 +25,9 @@ class PostController
         $commentManager = new CommentManager;
         $post = $postManager->getPost($_GET['id']);
         $comments = $commentManager->getComments($_GET['id']);
-        $getComAuthor = $commentManager->getCommentAuthor($_GET['id']);
+
         require('Views/Frontend/postView.php');
         return $comments;
-        return $getComAuthor;
     }
     /**
      * Ajout de billet
@@ -39,12 +38,13 @@ class PostController
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] AND $infoUser['rank_id']==1) {
-        $addPost = new PostManager;
-        $addPost->addPost(htmlspecialchars($_POST['title']),($_POST['post']));
-    } else {
-        throw new Exception('Vous n\'êtes pas autorisé à faire cela');
-    }
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
+            $addPost = new PostManager;
+            $addPost->addPost(htmlspecialchars($_POST['title']), ($_POST['post']));
+            header('Location: index.php?action=listPosts');
+        } else {
+            throw new Exception('Vous n\'êtes pas autorisé à faire cela');
+        }
     }
     /**
      * Edition de post
@@ -60,14 +60,13 @@ class PostController
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] AND $infoUser['rank_id']==1) {
-        $postManager = new PostManager;
-        $editPost = $postManager->editPost($_GET['id'], htmlspecialchars($_POST['title']), ($_POST['post']));
-        header('Location: index.php?action=panelAdmin');
-        
-    } else {
-        throw new Exception('Vous n\'êtes pas autorisé à faire cela');
-    }
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
+            $postManager = new PostManager;
+            $editPost = $postManager->editPost($_GET['id'], htmlspecialchars($_POST['title']), ($_POST['post']));
+            header('Location: index.php?action=panelAdmin');
+        } else {
+            throw new Exception('Vous n\'êtes pas autorisé à faire cela');
+        }
     }
     /**
      * Accès page d'édition de post (récupération article)
@@ -78,15 +77,14 @@ class PostController
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] AND $infoUser['rank_id']==1) {
-        
-        $postManager = new PostManager;
-        $post = $postManager->getPost($_GET['id']);
-        require('Views/Backend/editPostView.php');
-        
-    } else {
-        throw new Exception('Vous n\'êtes pas autorisé à faire cela');
-    }
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
+
+            $postManager = new PostManager;
+            $post = $postManager->getPost($_GET['id']);
+            require('Views/Backend/editPostView.php');
+        } else {
+            throw new Exception('Vous n\'êtes pas autorisé à faire cela');
+        }
     }
 
     /**
@@ -98,14 +96,17 @@ class PostController
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] AND $infoUser['rank_id']==1) {
+        $deletePost = new PostManager;
+        $deleteCom = new CommentManager;
 
-        $deletePost = new PostManager();
-        $deletePost->deletePost($_GET['id']);
-        header('Location: index.php?action=panelAdmin');
-    } else {
-        throw new Exception('Vous n\'êtes pas autorisé à faire cela');
-    }
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
+
+            $deleteCom->delPostCom($_GET['id']);
+            $deletePost->deletePost($_GET['id']);
+            header('Location: index.php?action=panelAdmin');
+        } else {
+            throw new Exception('Vous n\'êtes pas autorisé à faire cela');
+        }
     }
 
     /**
@@ -117,5 +118,4 @@ class PostController
     {
         require('Views/Backend/addPostView.php');
     }
-
 }
