@@ -29,30 +29,33 @@
             <input class="btn btn-sm btn-outline-primary" type="submit" />
         </div>
     </form>
-    <?php } else {
-        echo '<small class="text-danger">Vous devez être connecté pour ajouter un commentaire</small><hr class="my-4">';
-    }
+    <?php } else { ?>
+    <div class="alert alert-danger col-sm-8 col-lg-3">
+        <small> Vous devez être connecté pour ajouter un commentaire. <a href="index.php?action=auth"
+                class="alert-link"> Se
+                connecter</a></small>
+    </div>
 
-    ?>
+    <?php } ?>
 </div>
 
 
 <?php foreach ($comments as $comment) { ?>
 <div class="p-3 m-4 rounded bg-light">
     <div class="d-flex justify-content-between">
-        <h6> par <?= strtoupper($getComAuthor['pseudo']) ?></h6>
+        <h6> par <?= strtoupper($comment['pseudo']) ?></h6>
         <small class="text-muted text-danger"><?= $comment['comment_date_fr'] ?></small>
     </div>
 
     <p class="lead pl-4"><?= $comment['comment'] ?></p>
     <div class="d-flex justify-content-between">
-    <a class="btn btn-outline-danger" href='index.php?action=report&amp;id=<?= $comment['id']; ?>'>Signaler</a>
+        <a class="btn btn-outline-danger" href='index.php?action=report&amp;id=<?= $comment['id']; ?>'>Signaler</a>
         <?php if (isset($_SESSION['id_user'])) {
-                if ($_SESSION['id_user'] == $comment['id_user']) { ?>
+                    if ($_SESSION['id_user'] == $comment['id_user']) { ?>
         <a class="btn btn-outline-success" href="index.php?action=comment&amp;id=<?= $comment['id']; ?>">Modifier</a>
         <?php }
-            }  ?>
-        
+                }  ?>
+
     </div>
 </div>
 
