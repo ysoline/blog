@@ -20,9 +20,12 @@ class AuthController
             if ($_POST['pass'] == $_POST['pass2']) {
                 if ($userMail == 0) {
                     if ($_POST['email'] == $_POST['email2']) {
-                        $passHach = password_hash($passHach, PASSWORD_DEFAULT);
-                        $newUser = $userManager->addUser(htmlspecialchars($_POST['pseudo']), $passHach, htmlspecialchars($_POST['email']));
-                        header('Location: index.php?action=listPosts');
+                        if(preg_match(preg_match ( " /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ ", $_POST['email'])
+                            {
+                            $passHach = password_hash($passHach, PASSWORD_DEFAULT);
+                            $newUser = $userManager->addUser(htmlspecialchars($_POST['pseudo']), $passHach, htmlspecialchars($_POST['email']));
+                            header('Location: index.php?action=listPosts');
+                        }
                     } else {
                         throw new Exception("Les adresses emails ne sont pas identiques <a href='index.php?action=suscribePage' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
                     }
