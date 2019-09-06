@@ -12,7 +12,7 @@
     <h4 class="text-center">Modifier mes informations :</h4>
     <div class='d-flex justify-content-center'>
 
-        <form class="form-signin" action="index.php?action=editPseudo" method='POST'>
+        <form class="form-signin" action="editionPseudo" method='POST'>
 
             <div class="d-flex justify-content-end mb-2 align-items-center">
                 <label>Nouveau Pseudo :</label>
@@ -22,7 +22,7 @@
         </form>
     </div>
     <div class='d-flex justify-content-center'>
-        <form class="form-signin" action="index.php?action=editMail" method='POST'>
+        <form class="form-signin" action="editionMail" method='POST'>
 
             <div class=" d-flex justify-content-end mb-2 align-items-center">
                 <label>Nouvel email :</label>
@@ -37,7 +37,7 @@
     <h4 class="text-center">Modifier mon mot de passe :</h4>
     <div class='d-flex justify-content-center'>
 
-        <form class="form-signin" action="index.php?action=editPass" method='POST'>
+        <form class="form-signin" action="editionMdp" method='POST'>
 
             <div class="flex-nowrap justify-content-center">
 
@@ -67,7 +67,7 @@
     <div class="card border-danger mb-3" style="max-width: 20rem;">
         <div class="card-header">Suppression du commentaire</div>
         <div class="card-body text-center">
-            <form action="index.php?action=deleteUser" method="post">
+            <form action="suppressionCompte" method="post">
                 <label>Veuillez confirmer la suppression en écrivant "SUPPRIMER"</label>
                 <input id="deleteUser" name="deleteUser" required><br />
                 <small class='text-danger'>Attention, cette action est irréverssible </small><br />

@@ -11,7 +11,7 @@ class AdminController
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] AND $infoUser['rank_id']==1) {
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
 
             $postManager = new PostManager;
             $commentManager = new CommentManager;
@@ -33,14 +33,17 @@ class AdminController
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] AND $infoUser['rank_id']==1) {
-
-        $commentManager = new CommentManager;
-        $unpublished = $commentManager->published($_GET['id']);
-        header('Location: index.php?action=panelAdmin');
-    } else {
-        throw new Exception('Vous n\'êtes pas autorisé à faire cela');
-    }
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $commentManager = new CommentManager;
+                $unpublished = $commentManager->published($_GET['id']);
+                header('Location: administration');
+            } else {
+                throw new Exception('Impossible de trouvé le commentaire');
+            }
+        } else {
+            throw new Exception('Vous n\'êtes pas autorisé à faire cela');
+        }
     }
 
     /**
@@ -50,27 +53,36 @@ class AdminController
      */
     public function resetReport()
     {
+
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] AND $infoUser['rank_id']==1) {
-        $commentManager = new CommentManager;
-        $resetReport = $commentManager->resetReport($_GET['id']);
-        header('Location: index.php?action=panelAdmin');
-    } else {
-        throw new Exception('Vous n\'êtes pas autorisé à faire cela');
-    }
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $commentManager = new CommentManager;
+                $resetReport = $commentManager->resetReport($_GET['id']);
+                header('Location: administration');
+            } else {
+                throw new Exception('Impossible de trouvé le commentaire');
+            }
+        } else {
+            throw new Exception('Vous n\'êtes pas autorisé à faire cela');
+        }
     }
 
     public function getUnpublished()
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] AND $infoUser['rank_id']==1) {
-        $commentManager = new CommentManager;
-        $unpublished = $commentManager->unpublished($_GET['id']);
-        header('Location: index.php?action=panelAdmin');
-    } else {
-        throw new Exception('Vous n\'êtes pas autorisé à faire cela');
-    }
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $commentManager = new CommentManager;
+                $unpublished = $commentManager->unpublished($_GET['id']);
+                header('Location: administration');
+            } else {
+                throw new Exception('Impossible de trouvé le commentaire');
+            }
+        } else {
+            throw new Exception('Vous n\'êtes pas autorisé à faire cela');
+        }
     }
 }

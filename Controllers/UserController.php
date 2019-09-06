@@ -26,11 +26,15 @@ class UserController
         $userCheck = $userManager->getPseudo(($_POST['pseudo']));
 
         if ($_SESSION['id_user'] == $infoUser['id']) {
-            if ($userCheck == 0) {
-                $changePseudo = $userManager->editPseudo($_SESSION['id_user'], $_POST['pseudo']);
-                header('Location: index.php?action=profil');
+            if (!empty($_POST['pseudo'])) {
+                if ($userCheck == 0) {
+                    $changePseudo = $userManager->editPseudo($_SESSION['id_user'], $_POST['pseudo']);
+                    header('Location: profil');
+                } else {
+                    throw new Exception('Pseudo déjà utilisé <a href="profil">Réessayer</a>');
+                }
             } else {
-                throw new Exception('Pseudo déjà utilisé');
+                throw new Exception('Veuillir remplir tout les champs <a href="profil">Réessayer</a>');
             }
         } else {
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
@@ -48,14 +52,17 @@ class UserController
         $userMail = $userManager->getMail(($_POST['email']));
 
         if ($_SESSION['id_user'] == $infoUser['id']) {
-            if ($userMail == 0) {
-            $changeMail = $userManager->editMail($_SESSION['id_user'], $_POST['email']);
-            header('Location: index.php?action=profil');
-            } else{
-                throw new Exception('Email déjà utilisé');
-        }
-    }
-        else {
+            if (!empty($_POST['email'])) {
+                if ($userMail == 0) {
+                    $changeMail = $userManager->editMail($_SESSION['id_user'], $_POST['email']);
+                    header('Location: profil');
+                } else {
+                    throw new Exception('Email déjà utilisé <a href="profil">Réessayer</a>');
+                }
+            } else {
+                throw new Exception('Veuillir remplir tout les champs <a href="profil">Réessayer</a>');
+            }
+        } else {
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
         }
     }
@@ -70,12 +77,16 @@ class UserController
 
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
         if ($_SESSION['id_user'] == $infoUser['id']) {
-            if ($_POST['pass'] == $_POST['pass2']) {
-                $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-                $changePseudo = $userManager->editPass($_GET['id'], $_POST['pass']);
-                header('Location: index.php?action=profil');
+            if (!empty($_POST['pass']) && !empty($_POST['pass2'])) {
+                if ($_POST['pass'] == $_POST['pass2']) {
+                    $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+                    $changePseudo = $userManager->editPass($_GET['id'], $_POST['pass']);
+                    header('Location: profil');
+                } else {
+                    throw new Exception('Les mots de passe ne sont pas identiques <br/><a href="profil">Retour</a>');
+                }
             } else {
-                throw new Exception('Les mots de passe ne sont pas identiques <br/><a href="index.php?action=profil">Retour</a>');
+                throw new Exception('Veuillir remplir tout les champs <a href="profil">Réessayer</a>');
             }
         } else {
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
@@ -91,8 +102,12 @@ class UserController
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
         if ($_SESSION['id_user'] == $infoUser['id']) {
-            $deleteUser = $userManager->deleteUser($_SESSION['id_user']);
-            header('Location: index.php?action=profil');
+            if ($_POST['deleteUser'] == "SUPPRIMER") {
+                $deleteUser = $userManager->deleteUser($_SESSION['id_user']);
+                header('Location: profil');
+            } else {
+                throw new Exception('Impossible de supprimer le compte');
+            }
         } else {
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
         }

@@ -13,13 +13,21 @@ class CommentController
      */
     public function addComment()
     {
-        $commentManager = new CommentManager;
-        $affectedLines = $commentManager->addComment($_GET['id'], $_SESSION['id_user'], htmlspecialchars($_POST['comment']));
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            if (!empty($_POST['comment'])) {
+                $commentManager = new CommentManager;
+                $affectedLines = $commentManager->addComment($_GET['id'], $_SESSION['id_user'], htmlspecialchars($_POST['comment']));
 
-        if ($affectedLines === false) {
-            throw new Exception('Impossible d\'ajouter le commentaire !');
+                if ($affectedLines === false) {
+                    throw new Exception('Impossible d\'ajouter le commentaire !');
+                } else {
+                    header('Location: article&id=' . $_GET['id']);
+                }
+            } else {
+                throw new Exception('Tous les champs ne sont pas remplis !');
+            }
         } else {
-            header('Location: index.php?action=post&id=' . $_GET['id']);
+            throw new Exception('Post introuvable !');
         }
     }
 
@@ -36,8 +44,13 @@ class CommentController
         $checkIdUser = $commentManager->getComment($_GET['id']);
 
         if ($checkIdUser['id_user'] == $_SESSION['id_user']) {
-            $editcomment = $commentManager->editComment(htmlspecialchars($_POST['updateComment']), $_GET['id']);
-            header('Location: index.php?action=listPosts');
+            if (!empty($_POST['updateComment'])) {
+
+                $editcomment = $commentManager->editComment(htmlspecialchars($_POST['updateComment']), $_GET['id']);
+                header('Location: home');
+            } else {
+                throw new Exception('Impossible de modifier le commentaire');
+            }
         } else {
             throw new Exception("Vous n'avez l'autorisation de faire ceci");
         }
@@ -56,11 +69,15 @@ class CommentController
         $commentManager = new CommentManager;
         $getAuthor = $commentManager->getAuthor($_GET['id']);
         $comment = $commentManager->getComment($_GET['id']);
-        if ($comment['published'] == 1) {
-            require('Views/Frontend/commentView.php');
-            return $getAuthor;
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            if ($comment['published'] == 1) {
+                require('Views/Frontend/commentView.php');
+                return $getAuthor;
+            } else {
+                throw new Exception('Aucun commentaire trouvé');
+            }
         } else {
-            throw new Exception('Aucun commentaire trouvé');
+            throw new Exception('Commentaire introuvable !');
         }
     }
 
@@ -84,8 +101,12 @@ class CommentController
         $commentManager = new CommentManager;
         $checkIdUser = $commentManager->getComment($_GET['id']);
         if ($checkIdUser['id_user'] == $_SESSION['id_user']) {
-            $deleteCom = $commentManager->deleteComment($_GET['id']);
-            header('Location: index.php?action=listPosts');
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $deleteCom = $commentManager->deleteComment($_GET['id']);
+                header('Location: home');
+            } else {
+                throw new Exception('Commentaire introuvable !');
+            }
         } else {
             throw new Exception("Vous n'avez l'autorisation de faire ceci");
         }
@@ -98,13 +119,17 @@ class CommentController
      */
     public function reportComment()
     {
-        $commentManager = new CommentManager;
-        $getComment = $commentManager->getComment($_GET['id']);
-        if ($getComment['report'] == 0) {
-            $reportCom = $commentManager->reportComment($_GET['id']);
-            header('Location: index.php?action=listPosts');
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            $commentManager = new CommentManager;
+            $getComment = $commentManager->getComment($_GET['id']);
+            if ($getComment['report'] == 0) {
+                $reportCom = $commentManager->reportComment($_GET['id']);
+                header('Location: article&amp;id=' . $_GET['id']);
+            } else {
+                throw new Exception('Commentaire déjà signalé');
+            }
         } else {
-            throw new Exception('Commentaire déjà signalé');
+            throw new Exception('Aucun commentaire trouvé');
         }
     }
 }

@@ -2,7 +2,7 @@
 <h2 class='text-center my-3'>Inscription</h2>
 
 <div class='d-flex justify-content-center'>
-    <form class="form-signin" action='index.php?action=suscribe' method="post">
+    <form class="form-signin" action='inscrit' method="post">
 
         <div class="flex-nowrap justify-content-center">
             <div class=" d-flex justify-content-end mb-2">

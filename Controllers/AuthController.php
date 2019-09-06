@@ -16,24 +16,28 @@ class AuthController
         $userMail = $userManager->getMail(($_POST['email']));
         $passHach = ($_POST['pass']);
 
-        if ($userCheck == 0) {
-            if ($_POST['pass'] == $_POST['pass2']) {
-                if ($userMail == 0) {
-                    if ($_POST['email'] == $_POST['email2']) {
-                        $passHach = password_hash($passHach, PASSWORD_DEFAULT);
-                        $newUser = $userManager->addUser(htmlspecialchars($_POST['pseudo']), $passHach, htmlspecialchars($_POST['email']));
-                        header('Location: index.php?action=listPosts');
+        if (!empty($_POST['pseudo']) && !empty($_POST['pass']) && !empty($_POST['pass2']) && !empty($_POST['email']) && !empty($_POST['email2'])) {
+            if ($userCheck == 0) {
+                if ($_POST['pass'] == $_POST['pass2']) {
+                    if ($userMail == 0) {
+                        if ($_POST['email'] == $_POST['email2']) {
+                            $passHach = password_hash($passHach, PASSWORD_DEFAULT);
+                            $newUser = $userManager->addUser(htmlspecialchars($_POST['pseudo']), $passHach, htmlspecialchars($_POST['email']));
+                            header('Location: home');
+                        } else {
+                            throw new Exception("Les adresses emails ne sont pas identiques <a href='inscription' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
+                        }
                     } else {
-                        throw new Exception("Les adresses emails ne sont pas identiques <a href='index.php?action=suscribePage' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
+                        throw new Exception("l'adresse email est déjà utilisée  <a href='inscription' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
                     }
                 } else {
-                    throw new Exception("l'adresse email est déjà utilisée  <a href='index.php?action=suscribePage' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
+                    throw new Exception("Les mots de passes ne sont pas identiques  <a href='inscription' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
                 }
             } else {
-                throw new Exception("Les mots de passes ne sont pas identiques  <a href='index.php?action=suscribePage' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
+                throw new Exception("Le pseudo est déjà utilisé  <a href='inscription' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
             }
         } else {
-            throw new Exception("Le pseudo est déjà utilisé  <a href='index.php?action=suscribePage' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
+            throw new Exception('Veuillez remplir tout les champs !');
         }
     }
 
@@ -45,20 +49,23 @@ class AuthController
     public function login()
     {
         $userManager = new UserManager;
+        if (!empty($_POST['pseudo']) && !empty($_POST['pass'])) {
+            $user = $userManager->getPseudo(htmlspecialchars($_POST['pseudo']));
 
-        $user = $userManager->getPseudo(htmlspecialchars($_POST['pseudo']));
+            $passOk = password_verify(htmlspecialchars($_POST['pass']), htmlspecialchars($user['pass']));
 
-        $passOk = password_verify(htmlspecialchars($_POST['pass']), htmlspecialchars($user['pass']));
+            if ($passOk) {
 
-        if ($passOk) {
+                $_SESSION['id_user'] = $user['id'];
+                $_SESSION['rank'] = $user['rank_id'];
+                $_SESSION['pseudo'] = $user['pseudo'];
 
-            $_SESSION['id_user'] = $user['id'];
-            $_SESSION['rank'] = $user['rank_id'];
-            $_SESSION['pseudo'] = $user['pseudo'];
-
-            header('Location: index.php?action=listPosts');
+                header('Location: home');
+            } else {
+                throw new Exception("Mauvais identifiant ou mot de passe <a href='connexion' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
+            }
         } else {
-            throw new Exception("Mauvais identifiant ou mot de passe <a href='index.php?action=auth' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
+            throw new Exception("Veuillez remplir tout les champs");
         }
     }
 
@@ -92,6 +99,7 @@ class AuthController
         session_start();
         session_unset();
         session_destroy();
-        header('Location: index.php?action=listPosts');
+
+        header('Location: home');
     }
 }

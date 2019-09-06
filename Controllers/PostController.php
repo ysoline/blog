@@ -21,13 +21,17 @@ class PostController
      */
     public function post()
     {
+
         $postManager = new PostManager;
         $commentManager = new CommentManager;
-        $post = $postManager->getPost($_GET['id']);
-        $comments = $commentManager->getComments($_GET['id']);
-
-        require('Views/Frontend/postView.php');
-        return $comments;
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            $post = $postManager->getPost($_GET['id']);
+            $comments = $commentManager->getComments($_GET['id']);
+            require('Views/Frontend/postView.php');
+            return $comments;
+        } else {
+            throw new Exception("Post introuvable !");
+        }
     }
     /**
      * Ajout de billet
@@ -39,9 +43,13 @@ class PostController
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
         if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
-            $addPost = new PostManager;
-            $addPost->addPost(htmlspecialchars($_POST['title']), ($_POST['post']));
-            header('Location: index.php?action=listPosts');
+            if (!empty($_POST['title']) && !empty($_POST['post'])) {
+                $addPost = new PostManager;
+                $addPost->addPost(htmlspecialchars($_POST['title']), ($_POST['post']));
+                header('Location: administration');
+            } else {
+                throw new Exception('Tous les champs ne sont pas remplis !');
+            }
         } else {
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
         }
@@ -51,19 +59,19 @@ class PostController
      *
      * @return void
      */
-    /**
-     * édition d'un post (formulaire édition)
-     *
-     * @return void
-     */
+
     public function editPost()
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
         if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
-            $postManager = new PostManager;
-            $editPost = $postManager->editPost($_GET['id'], htmlspecialchars($_POST['title']), ($_POST['post']));
-            header('Location: index.php?action=panelAdmin');
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $postManager = new PostManager;
+                $editPost = $postManager->editPost($_GET['id'], htmlspecialchars($_POST['title']), ($_POST['post']));
+                header('Location: administration');
+            } else {
+                throw new Exception("Post introuvable !");
+            }
         } else {
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
         }
@@ -78,10 +86,13 @@ class PostController
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
         if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
-
-            $postManager = new PostManager;
-            $post = $postManager->getPost($_GET['id']);
-            require('Views/Backend/editPostView.php');
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $postManager = new PostManager;
+                $post = $postManager->getPost($_GET['id']);
+                require('Views/Backend/editPostView.php');
+            } else {
+                throw new Exception("Post introuvable !");
+            }
         } else {
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
         }
@@ -94,16 +105,20 @@ class PostController
      */
     public function deletePost()
     {
+
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
         $deletePost = new PostManager;
         $deleteCom = new CommentManager;
 
         if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
-
-            $deleteCom->delPostCom($_GET['id']);
-            $deletePost->deletePost($_GET['id']);
-            header('Location: index.php?action=panelAdmin');
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $deleteCom->delPostCom($_GET['id']);
+                $deletePost->deletePost($_GET['id']);
+                header('Location: administration');
+            } else {
+                throw new Exception("Post introuvable !");
+            }
         } else {
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
         }

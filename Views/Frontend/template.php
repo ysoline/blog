@@ -8,9 +8,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.tiny.cloud/1/umdi5wzy8syfdqdun003ztwbhuop2jj1p42n75ixljkydgf1/tinymce/5/tinymce.min.js">
-    </script>
+
     <script>
     tinymce.init({
         selector: '#post',
@@ -23,7 +21,7 @@
 <header class="blog-header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.php?action=listPosts">Jean Forteroche</a>
+            <a class="navbar-brand" href="home">Jean Forteroche</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,32 +32,30 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <?php if (!isset($_SESSION['id_user'])) { ?>
-                        <a class="nav-link" href="index.php?action=suscribePage"><span
-                                class="glyphicon glyphicon-user">Inscription</a>
+                        <a class="nav-link" href="inscription"><span class="glyphicon glyphicon-user">Inscription</a>
                         <?php } ?>
                     </li>
                     <li>
                         <?php if (isset($_SESSION['id_user'])) { ?>
-                        <a class="nav-link text-decoration-none mx-2" href="index.php?action=profil">Profil</a>
+                        <a class="nav-link text-decoration-none mx-2" href="profil">Profil</a>
                     </li>
                     <li>
                         <?php if (($_SESSION['rank']) == 1) { ?>
-                        <a class="nav-link" href="index.php?action=panelAdmin">Administration</a>
+                        <a class="nav-link" href="administration">Administration</a>
                         <?php }
                     } ?>
                 </ul>
                 <ul class="nav navbar-nav">
                     <li>
                         <?php if (!isset($_SESSION['id_user'])) { ?>
-                        <a class="btn btn-sm btn-outline-light" href="index.php?action=auth"><i
-                                class="fas fa-user-alt"></i>
+                        <a class="btn btn-sm btn-outline-light" href="connexion"><i class="fas fa-user-alt"></i>
                             Connexion</a>
                         <?php } ?>
                     </li>
                     <li>
                         <?php if (isset($_SESSION['id_user'])) { ?>
-                        <a class="btn btn-sm btn-outline-light" href="index.php?action=disconnect"><i
-                                class="fas fa-power-off"></i> Déconnexion</a>
+                        <a class="btn btn-sm btn-outline-light" href="deconnexion"><i class="fas fa-power-off"></i>
+                            Déconnexion</a>
                         <?php } ?>
                     </li>
                 </ul>
@@ -110,6 +106,9 @@
     <small class="text-light">Projet 4 - Formation Développeur Web Junior</small>
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/umdi5wzy8syfdqdun003ztwbhuop2jj1p42n75ixljkydgf1/tinymce/5/tinymce.min.js">
+</script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
 </script>

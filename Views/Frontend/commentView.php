@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-<a href="index.php?action=listPosts" class="btn btn-outline-secondary">Accueil</a>
+<a href="home" class="btn btn-outline-secondary">Accueil</a>
 
 <div class="jumbotron">
     <h6> par <?= $getAuthor['pseudo'] ?></h6>
@@ -13,12 +13,12 @@
 <h3>Modification de commentaires :</h3>
 
 
-<form action="index.php?action=editComment&amp;id=<?= $comment['id']; ?>" method="post">
+<form action="editionCommentaire&amp;id=<?= $comment['id']; ?>" method="post">
     <div class='d-flex justify-content-center flex-column'>
         <h6 for="pseudo"><?= $_SESSION['pseudo'] ?></h6>
     </div>
 
-    <div class='d-flex justify-content-center flex-column mt-2'>        
+    <div class='d-flex justify-content-center flex-column mt-2'>
         <textarea id="updateComment" name="updateComment" required><?= $comment['comment'] ?></textarea>
     </div>
 
@@ -31,7 +31,7 @@
 <div class="card border-danger mb-3" style="max-width: 20rem;">
     <div class="card-header">Suppression du commentaire</div>
     <div class="card-body">
-        <form action="index.php?action=deleteComment&amp;id=<?= $comment['id']; ?>" method="post">
+        <form action="supprimerCommentaire&amp;id=<?= $comment['id']; ?>" method="post">
             <label>Veuillez confirmer la suppression en écrivant "SUPPRIMER"</label>
             <input id="deleteCom" name="deleteCom" required><br />
             <small class='text-danger'>Attention, cette action est irréverssible </small><br />

@@ -2,12 +2,13 @@
 <h2 class='text-center my-4'>Connexion</h2>
 
 <div class='d-flex justify-content-center'>
-    <form class="form-signin" action='index.php?action=connect' method="post">
+    <form class="form-signin" action='connecter' method="post">
 
         <div class="flex-nowrap justify-content-center">
             <div class=" d-flex justify-content-end mb-2">
                 <label for="pseudo" class="sr-only">Pseudo : </label>
-                <input class="form-control" type="text" id="pseudo" name="pseudo" placeholder="Pseudo" required autofocus>
+                <input class="form-control" type="text" id="pseudo" name="pseudo" placeholder="Pseudo" required
+                    autofocus>
             </div>
 
             <div class="d-flex justify-content-end">
@@ -20,7 +21,7 @@
             </div>
 
             <div class='d-flex flex-column align-items-center my-2'>
-                <a href='index.php?action=suscribePage' class="btn btn-outline-light">Pas encore inscrit ?</a>
+                <a href='inscription' class="btn btn-outline-secondary">Pas encore inscrit ?</a>
             </div>
         </div>
     </form>

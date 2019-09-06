@@ -9,7 +9,8 @@
             </div>
             <div class="d-flex justify-content-center mb-3">
 
-                <a class="btn btn-outline-primary" href="index.php?action=postPage"><i class="fas fa-plus"></i> Ajouter un billet</a>
+                <a class="btn btn-outline-primary" href="ajouterArticle"><i class="fas fa-plus"></i> Ajouter
+                    un billet</a>
             </div>
             <hr class="my-4">
             <div class="m-3">
@@ -18,8 +19,10 @@
                 <h5><?= $post['title'] ?></h5>
                 <p class="lead"><?= substr($post['post'], 0, 75); ?>...</p>
                 <div class="lead d-flex justify-content-around">
-                    <a class="btn btn-outline-primary btn" href="index.php?action=post&amp;id=<?= $post['id']; ?>" role="button">Lire la suite</a>
-                    <a class="btn btn-success" href="index.php?action=editPostPage&amp;id=<?= $post['id']; ?>" role="button">Modifier</a>
+                    <a class="btn btn-outline-primary btn" href="article&amp;id=<?= $post['id']; ?>" role="button">Lire
+                        la suite</a>
+                    <a class="btn btn-success" href="editionArticle&amp;id=<?= $post['id']; ?>"
+                        role="button">Modifier</a>
                 </div>
                 <hr class="my-4">
                 <?php } ?>
@@ -40,8 +43,10 @@
                         <p class="lead"><?= $comment['comment'] ?></p>
                         <p><?= $comment['comment_date_fr']; ?></p>
 
-                        <a href="index.php?action=unpublished&amp;id=<?= $comment['c_id']; ?>" class="btn btn-outline-danger btn-sm">Désapprouver</a>
-                        <a href="index.php?action=resetReport&amp;id=<?= $comment['c_id']; ?>" class="btn btn-outline-success btn-sm">Approuver</a>
+                        <a href="archiverCommentaire&amp;id=<?= $comment['c_id']; ?>"
+                            class="btn btn-outline-danger btn-sm">Désapprouver</a>
+                        <a href="validerCommentaire&amp;id=<?= $comment['c_id']; ?>"
+                            class="btn btn-outline-success btn-sm">Approuver</a>
                         <hr class="my-4 bg-danger">
                     </div>
 
@@ -56,7 +61,8 @@
                         <h6> par <?= strtoupper($Uncomment['pseudo']) ?></h6>
                         <p class="lead"><?= $Uncomment['comment'] ?></p>
                         <p><?= $Uncomment['comment_date_fr']; ?></p>
-                        <a href="index.php?action=published&amp;id=<?= $Uncomment['c_id']; ?>" class="btn btn-outline-success btn-sm">Re-Publier</a>
+                        <a href="publierCommentaire&amp;id=<?= $Uncomment['c_id']; ?>"
+                            class="btn btn-outline-success btn-sm">Re-Publier</a>
                         <hr class="my-4 bg-warning">
                     </div>
                     <?php } ?>

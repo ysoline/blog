@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 
-<form action="index.php?action=addPost" method="POST">
+<form action="publierArticle" method="POST">
     <legend>Ajout de billet :</legend>
     <input type="text" id="title" name="title" placeholder="Titre de l'article" required> <br />
     <br />
