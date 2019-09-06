@@ -18,10 +18,10 @@ class CommentController
                 $commentManager = new CommentManager;
                 $affectedLines = $commentManager->addComment($_GET['id'], $_SESSION['id_user'], htmlspecialchars($_POST['comment']));
 
-                if ($affectedLines === false) {
-                    throw new Exception('Impossible d\'ajouter le commentaire !');
-                } else {
+                if ($affectedLines === true) {
                     header('Location: article&id=' . $_GET['id']);
+                } else {
+                    throw new Exception('Impossible d\'ajouter le commentaire !');
                 }
             } else {
                 throw new Exception('Tous les champs ne sont pas remplis !');
