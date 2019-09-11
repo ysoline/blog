@@ -1,10 +1,11 @@
 <?php
 
+namespace Models\Manager;
 
-class PostManager extends Manager
+class PostManager extends \Manager
 {
     /**
-     * Récupération de tous les posts
+     * Recuperation de tous les posts
      *
      * @return void
      */
@@ -16,7 +17,7 @@ class PostManager extends Manager
         return $req;
     }
     /**
-     * Récupération d'un post par rapport à son id
+     * Recuperation d'un post par rapport à son id
      *
      * @param mixed $postId
      * @return void
@@ -35,13 +36,13 @@ class PostManager extends Manager
      * @param mixed $postId
      * @return void
      */
-    public function editPost($id, $title, $post) // Editer un poste
+    public function updatePost($id, $title, $post) // Editer un poste
     {
         $_bdd = $this->dbConnect();
         $req = $_bdd->prepare('UPDATE posts SET title=?, post =? WHERE id=?');
-        $editPost = $req->execute(array($title, $post, $id));
+        $updatePost = $req->execute(array($title, $post, $id));
 
-        return $editPost;
+        return $updatePost;
     }
 
     /**

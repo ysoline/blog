@@ -1,10 +1,16 @@
 <?php
 
+namespace Controllers;
+
+use Models\Manager\PostManager;
+use Models\Manager\UserManager;
+use Models\Manager\CommentManager;
+
 class PostController
 
 {
     /**
-     * Récupère tous les posts
+     * Recupere tous les articles
      *
      * @return void
      */
@@ -15,7 +21,7 @@ class PostController
         require('Views/Frontend/listPostView.php');
     }
     /**
-     * Récupère un post grace à son idée
+     * Recupere un article grace à son idée
      *
      * @return void
      */
@@ -30,11 +36,11 @@ class PostController
             require('Views/Frontend/postView.php');
             return $comments;
         } else {
-            throw new Exception("Post introuvable !");
+            throw new Exception("Article introuvable !");
         }
     }
     /**
-     * Ajout de billet
+     * Ajout d'un article
      *
      * @return void
      */
@@ -55,33 +61,33 @@ class PostController
         }
     }
     /**
-     * Edition de post
+     * Edition d'un article
      *
      * @return void
      */
 
-    public function editPost()
+    public function updatePost()
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
         if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $postManager = new PostManager;
-                $editPost = $postManager->editPost($_GET['id'], htmlspecialchars($_POST['title']), ($_POST['post']));
+                $updatePost = $postManager->updatePost($_GET['id'], htmlspecialchars($_POST['title']), ($_POST['post']));
                 header('Location: administration');
             } else {
-                throw new Exception("Post introuvable !");
+                throw new Exception("Article introuvable !");
             }
         } else {
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
         }
     }
     /**
-     * Accès page d'édition de post (récupération article)
+     * Acces page d'édition d'article (Recuperation article)
      *
      * @return void
      */
-    public function editPostPage()
+    public function updatePostPage()
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
@@ -89,9 +95,9 @@ class PostController
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $postManager = new PostManager;
                 $post = $postManager->getPost($_GET['id']);
-                require('Views/Backend/editPostView.php');
+                require('Views/Backend/updatePostView.php');
             } else {
-                throw new Exception("Post introuvable !");
+                throw new Exception("Article introuvable !");
             }
         } else {
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
@@ -99,7 +105,7 @@ class PostController
     }
 
     /**
-     * Supression d'un post
+     * Supression d'un article
      *
      * @return void
      */
@@ -117,7 +123,7 @@ class PostController
                 $deletePost->deletePost($_GET['id']);
                 header('Location: administration');
             } else {
-                throw new Exception("Post introuvable !");
+                throw new Exception("Article introuvable !");
             }
         } else {
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
@@ -125,7 +131,7 @@ class PostController
     }
 
     /**
-     * Redirection page ajout de billet
+     * Redirection page ajout d'article
      *
      * @return void
      */

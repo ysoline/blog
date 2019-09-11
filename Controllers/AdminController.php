@@ -1,9 +1,15 @@
 <?php
 
+namespace Controllers;
+
+use Models\Manager\CommentManager;
+use Models\Manager\PostManager;
+use Models\Manager\UserManager;
+
 class AdminController
 {
     /**
-     * Récupère les billets pour affichage partie administration
+     * Recupere les billets pour affichage partie administration
      *
      * @return void
      */
@@ -25,7 +31,7 @@ class AdminController
     }
 
     /**
-     * N'affiche plus un commentaire 
+     * N'affiche plus un commentaire qui a ete signale
      *
      * @return void
      */
@@ -69,6 +75,12 @@ class AdminController
         }
     }
 
+
+    /**
+     * Archive un commentaire prealablement signale
+     *
+     * @return void
+     */
     public function getUnpublished()
     {
         $userManager = new UserManager;

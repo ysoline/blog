@@ -1,4 +1,11 @@
 <?php
+
+use Controllers\AuthController;
+use Controllers\PostController;
+use Controllers\UserController;
+use Controllers\AdminController;
+use Controllers\CommentController;
+
 require('Autoloader.php');
 Autoloader::register();
 
@@ -23,7 +30,7 @@ try {
 
             /////////////////////////////////////// Articles ///////////////////////////////////////
 
-        case 'article':
+        case 'article': //Liste tous les articles
             $post = new PostController;
             $post->post();
             break;
@@ -38,118 +45,118 @@ try {
             $addPost->postPage();
             break;
 
-        case 'supprimerArticle':
+        case 'supprimerArticle': //Supprime l'article selectionner
             $deletePost = new PostController;
             $deletePost->deletePost($_GET['id']);
             break;
 
-        case 'editionArticle': //Page d'édition
+        case 'editionArticle': //Page d'edition d'article
             $editPPage = new PostController;
-            $editPPage->editPostPage($_GET['id']);
+            $editPPage->updatePostPage($_GET['id']);
             break;
 
-        case 'editerArticle': //action éditer
-            $editPost = new PostController;
-            $editPost->editPost($_GET['id'], $_POST['title'], $_POST['post']);
+        case 'editerArticle': //action editer un article
+            $updatePost = new PostController;
+            $updatePost->updatePost($_GET['id'], $_POST['title'], $_POST['post']);
             break;
 
             /////////////////////////////////////// Commentaires ///////////////////////////////////////
-        case 'ajouterCommentaire':
+        case 'ajouterCommentaire': //Action ajouter un commentaire
             $affectedLines = new CommentController;
             $affectedLines->addComment($_GET['id'], $_SESSION['id_user'], $_POST['comment']);
             break;
 
-        case 'commentaire':
+        case 'commentaire': //Recupere un commentaire
             $comment = new CommentController;
             $comment->comment($_GET['id']);
             break;
 
-        case 'editionCommentaire':
-            $editComment = new CommentController;
-            $editComment->editComment($_POST['updateComment'], $_GET['id']);
+        case 'editionCommentaire': //Edition d'un commentaire
+            $updateComment = new CommentController;
+            $updateComment->updateComment($_POST['updateComment'], $_GET['id']);
             break;
 
 
-        case 'supprimerCommentaire':
+        case 'supprimerCommentaire': //Suppression d'un commentaire
             $deleteComment = new CommentController;
             $deleteComment->deleteComment($_GET['id']);
             break;
 
-        case 'reporterCommentaire':
+        case 'reporterCommentaire': //Signalement d'un commentaire
 
             $reportCom = new CommentController;
             $reportCom->reportComment($_GET['id']);
             break;
 
             /////////////////////////////////////// Administrations ///////////////////////////////////////
-        case 'administration':
+        case 'administration': //Acces au panel d'administration
             $adminPanel = new AdminController;
             $adminPanel->adminPanel();
             break;
 
-        case 'validerCommentaire':
+        case 'validerCommentaire': //Supprimer le signalement d'un commentaire
             $resetReport = new AdminController;
             $resetReport->resetReport($_GET['id']);
             break;
 
-        case 'publierCommentaire':
+        case 'publierCommentaire': //Re publie un commentaire qui a ete archiver
             $published = new AdminController;
             $published->published($_GET['id']);
             break;
 
-        case 'archiverCommentaire':
+        case 'archiverCommentaire': // Artchive un commentaire remonter par signalement
             $unpublished = new AdminController;
             $unpublished->getUnpublished($_GET['id']);
             break;
 
             /////////////////////////////////////// Authentification ///////////////////////////////////////
-        case 'connexion':
+        case 'connexion': //Acces page de connection
             $authUser = new AuthController;
             $authUser->connectPage();
             break;
 
-        case 'connecter':
+        case 'connecter': //Action de se connecter
             $coUser = new AuthController;
             $coUser->login($_POST['pseudo'], $_POST['pass']);
             break;
 
-        case 'deconnexion':
+        case 'deconnexion': //Action de se déconnecter
             $disconnect = new AuthController;
             $disconnect->disconnect();
             break;
 
-        case 'inscription':
+        case 'inscription': //Acces a la page d'inscription
             $suscribeUser = new AuthController;
             $suscribeUser->suscribePage();
             break;
 
-        case 'inscrit':
+        case 'inscrit': //Action de s'inscrire
             $newUser = new AuthController;
             $newUser->newUser($_POST['pseudo'], $_POST['pass'], $_POST['pass2'], $_POST['email'], $_POST['email2']);
             break;
 
-        case 'profil':
+        case 'profil': //Acces a la page de profil utilisateur
             $profil = new UserController;
             $profil->profilPage($_SESSION['id_user']);
             break;
             /////////////////////////////////////// Profil ///////////////////////////////////////
 
-        case 'editionPseudo':
-            $editPseudo = new UserController;
-            $editPseudo->editPseudo($_SESSION['id_user'], $_POST['pseudo']);
+        case 'editionPseudo': //Action d'edition du pseudo
+            $updatePseudo = new UserController;
+            $updatePseudo->updatePseudo($_SESSION['id_user'], $_POST['pseudo']);
             break;
 
-        case 'editionMail':
-            $editMail = new UserController;
-            $editMail->editMail($_SESSION['id_user'], $_POST['email']);
+        case 'editionMail': //Action d'edition de l'adresse email
+            $updateMail = new UserController;
+            $updateMail->updateMail($_SESSION['id_user'], $_POST['email']);
             break;
 
-        case 'editionMdp':
-            $editPass = new UserController;
-            $editPass->editPass($_SESSION['id_user'], $_POST['pass']);
+        case 'editionMdp': //Action d'edition du mot de passe
+            $updatePass = new UserController;
+            $updatePass->updatePass($_SESSION['id_user'], $_POST['pass']);
             break;
 
-        case 'suppressionCompte':
+        case 'suppressionCompte': //Action de supprimer definitivement un compte utilisateur, deconnecte en meme temps
             $deleteUser = new UserController;
             $deleteUser->deleteUser($_SESSION['id_user']);
 
@@ -161,14 +168,6 @@ try {
             require 'Views/Frontend/404.php';
             break;
     }
-
-
-
-    //         //redirection page ajout de post
-    //         elseif ($_GET['action'] == "postPage") {
-    //             $addPost = new PostController;
-    //             $addPost->postPage();
-    //         }
 } catch (Exception $e) {
     $errorMessage = $e->getMessage();
     require('Views/Frontend/error.php');

@@ -1,11 +1,13 @@
 <?php
-//Regrouppe toutes les fonctionnalités liès à l'authentification: connexion, inscription, mot de passe oublié)
+
+namespace Controllers;
+
+use Models\Manager\UserManager;
 
 class AuthController
 {
     /**
-     * newUser
-     * Inscription
+     * Inscription d'un utilisateur
      * @return void
      */
     public function newUser()
@@ -42,8 +44,7 @@ class AuthController
     }
 
     /**
-     * login
-     * Connexion
+     * Connexion utilisateur
      * @return void
      */
     public function login()

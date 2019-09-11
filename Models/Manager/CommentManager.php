@@ -1,10 +1,11 @@
 <?php
 
+namespace Models\Manager;
 
-class CommentManager extends Manager
+class CommentManager extends \Manager
 {
     /**
-     * Récupération de tous les commentaires
+     * Recuperation de tous les commentaires
      *
      * @param mixed $post_id
      * @return void
@@ -57,7 +58,7 @@ class CommentManager extends Manager
      * @param mixed $comment
      * @return void
      */
-    public function editComment($comment, $id)
+    public function updateComment($comment, $id)
     {
         $_bdd = $this->dbConnect();
         $updateComment = $_bdd->prepare('UPDATE comments SET comment=?, comment_date = NOW() WHERE id=?');
@@ -67,7 +68,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * Récupération d'un commentaire
+     * Recuperation d'un commentaire
      *
      * @param mixed $id
      * @return void
@@ -82,7 +83,7 @@ class CommentManager extends Manager
         return $comment;
     }
     /**
-     * Récupère l'autheur d'un commentaire (page d'édition commentaire)[un seul commentaire]
+     * Recupere l'autheur d'un commentaire (page d'édition commentaire)[un seul commentaire]
      *
      * @param mixed $id
      * @return void

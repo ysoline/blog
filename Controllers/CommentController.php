@@ -1,7 +1,9 @@
 <?php
 
-//fonctionnalités des commentaires 
-//ajout/édition...
+namespace Controllers;
+
+use Models\Manager\CommentManager;
+
 class CommentController
 
 {
@@ -38,7 +40,7 @@ class CommentController
      * @param mixed $id_user
      * @return void
      */
-    public function editComment()
+    public function updateComment()
     {
         $commentManager = new CommentManager;
         $checkIdUser = $commentManager->getComment($_GET['id']);
@@ -46,7 +48,7 @@ class CommentController
         if ($checkIdUser['id_user'] == $_SESSION['id_user']) {
             if (!empty($_POST['updateComment'])) {
 
-                $editcomment = $commentManager->editComment(htmlspecialchars($_POST['updateComment']), $_GET['id']);
+                $updateComment = $commentManager->updateComment(htmlspecialchars($_POST['updateComment']), $_GET['id']);
                 header('Location: home');
             } else {
                 throw new Exception('Impossible de modifier le commentaire');
@@ -57,7 +59,7 @@ class CommentController
     }
 
     /**
-     * Récupération d'un commentaire
+     * Recuperation d'un commentaire
      *
      * @param mixed $post_id
      * @param mixed $id

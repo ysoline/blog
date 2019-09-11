@@ -1,11 +1,17 @@
 <?php
 
-//regroupe les fonctionnalités lié aux utillisateurs 
-// modification mot de passe, changement de pseudo, édition profil...
+namespace Controllers;
+
+use Models\Manager\UserManager;
 
 
 class UserController
 {
+    /**
+     * Redirection vers la page profil
+     *
+     * @return void
+     */
     public function profilPage()
     {
         $user = new UserManager;
@@ -19,7 +25,7 @@ class UserController
      *
      * @return void
      */
-    public function editPseudo()
+    public function updatePseudo()
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
@@ -28,7 +34,7 @@ class UserController
         if ($_SESSION['id_user'] == $infoUser['id']) {
             if (!empty($_POST['pseudo'])) {
                 if ($userCheck == 0) {
-                    $changePseudo = $userManager->editPseudo($_SESSION['id_user'], $_POST['pseudo']);
+                    $changePseudo = $userManager->updatePseudo($_SESSION['id_user'], $_POST['pseudo']);
                     header('Location: profil');
                 } else {
                     throw new Exception('Pseudo déjà utilisé <a href="profil">Réessayer</a>');
@@ -45,7 +51,7 @@ class UserController
      *
      * @return void
      */
-    public function editMail()
+    public function updateMail()
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
@@ -54,7 +60,7 @@ class UserController
         if ($_SESSION['id_user'] == $infoUser['id']) {
             if (!empty($_POST['email'])) {
                 if ($userMail == 0) {
-                    $changeMail = $userManager->editMail($_SESSION['id_user'], $_POST['email']);
+                    $changeMail = $userManager->updateMail($_SESSION['id_user'], $_POST['email']);
                     header('Location: profil');
                 } else {
                     throw new Exception('Email déjà utilisé <a href="profil">Réessayer</a>');
@@ -71,7 +77,7 @@ class UserController
      *
      * @return void
      */
-    public function editPass()
+    public function updatePass()
     {
         $userManager = new UserManager;
 
@@ -80,7 +86,7 @@ class UserController
             if (!empty($_POST['pass']) && !empty($_POST['pass2'])) {
                 if ($_POST['pass'] == $_POST['pass2']) {
                     $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-                    $changePseudo = $userManager->editPass($_GET['id'], $_POST['pass']);
+                    $changePseudo = $userManager->updatePass($_GET['id'], $_POST['pass']);
                     header('Location: profil');
                 } else {
                     throw new Exception('Les mots de passe ne sont pas identiques <br/><a href="profil">Retour</a>');

@@ -1,10 +1,13 @@
 <?php
 
-class UserManager extends Manager
+namespace Models\Manager;
+
+class UserManager extends \Manager
 {
     /**
      * Inscription
      * Rang par défault: 2: membre
+     * Rang 1: administrateur
      * @param mixed $pseudo
      * @param mixed $pass
      * @param mixed $email
@@ -19,7 +22,7 @@ class UserManager extends Manager
     }
 
     /**
-     * Récupère les infos utilisateur
+     * Recupere le pseudo d'un utilisateur
      *
      * @param mixed $pseudo
      * @return void
@@ -37,7 +40,7 @@ class UserManager extends Manager
 
 
     /**
-     * Récupère l'email d'un utilisateur
+     * Recupere l'email d'un utilisateur
      *
      * @param mixed $email
      * @return void
@@ -52,7 +55,7 @@ class UserManager extends Manager
     }
 
     /**
-     * Récupère info utilisateur grâce à son id
+     * Recupere info utilisateur grace à son id
      *
      * @param mixed $id
      * @return void
@@ -74,44 +77,44 @@ class UserManager extends Manager
      * @param mixed $pseudo
      * @return void
      */
-    public function editPseudo($id, $pseudo)
+    public function updatePseudo($id, $pseudo)
     {
         $_bdd = $this->dbConnect();
         $req = $_bdd->prepare("UPDATE users SET pseudo= ? WHERE id= ?");
-        $editPseudo = $req->execute(array($pseudo, $id));
-        return $editPseudo;
+        $updatePseudo = $req->execute(array($pseudo, $id));
+        return $updatePseudo;
     }
 
-/**
+    /**
      * Edition du mail 
      *
      * @param mixed $mail
      * @return void
      */
-    public function editMail($id, $email)
+    public function updateMail($id, $email)
     {
         $_bdd = $this->dbConnect();
         $req = $_bdd->prepare("UPDATE users SET email=? WHERE id= ?");
-        $editMail = $req->execute(array($email, $id));
-        return $editMail;
+        $updateMail = $req->execute(array($email, $id));
+        return $updateMail;
     }
     /**
-     * Edition du pass
+     * Edition du mot de passe
      *
      * @param mixed $pass
      * @return void
      */
-    public function editPass($id, $pass)
+    public function updatePass($id, $pass)
     {
         $_bdd = $this->dbConnect();
         $req = $_bdd->prepare('UPDATE users SET pass =? WHERE id =?');
-        $editPass = $req->execute(array($pass, $id));
-        return $editPass;
+        $updatePass = $req->execute(array($pass, $id));
+        return $updatePass;
     }
 
 
     /**
-     * Suppression d'un compte utilisateur
+     * Suppression d'un compte utilisateur (definitivement)
      *
      * @param mixed $id_user
      * @return void
