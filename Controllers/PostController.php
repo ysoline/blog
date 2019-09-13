@@ -89,7 +89,7 @@ class PostController
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $postManager = new PostManager;
                 $post = $postManager->getPost($_GET['id']);
-                require('Views/Backend/updatePostView.php');
+                require('Views/Backend/editPostView.php');
             } else {
                 throw new Exception("Article introuvable !");
             }

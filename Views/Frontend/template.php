@@ -8,7 +8,6 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
-
     <title><?= $title = "Jean Forteroche" ?></title>
 </head>
 
@@ -101,7 +100,12 @@
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.tiny.cloud/1/umdi5wzy8syfdqdun003ztwbhuop2jj1p42n75ixljkydgf1/tinymce/5/tinymce.min.js">
+<script src="public/tinymce/tinymce.min.js"></script>
+<script>
+tinymce.init({
+    selector: '#post',
+    language: 'fr_FR'
+});
 </script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
@@ -109,6 +113,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
     integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous">
 </script>
-<script scr="public\js\script.js"></script>
 
 </html>
