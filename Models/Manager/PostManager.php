@@ -1,8 +1,6 @@
 <?php
 
-namespace Models\Manager;
-
-class PostManager extends \Manager
+class PostManager extends Manager
 {
     /**
      * Recuperation de tous les posts

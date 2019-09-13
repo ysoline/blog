@@ -1,11 +1,5 @@
 <?php
 
-namespace Controllers;
-
-use Models\Manager\PostManager;
-use Models\Manager\UserManager;
-use Models\Manager\CommentManager;
-
 class PostController
 
 {

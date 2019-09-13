@@ -7,7 +7,6 @@ class Autoloader
     {
         spl_autoload_register(function ($class_name) {
 
-
             $dirs = array(
                 'Controllers/',
                 'Models/Manager/',

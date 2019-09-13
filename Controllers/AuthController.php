@@ -1,9 +1,5 @@
 <?php
 
-namespace Controllers;
-
-use Models\Manager\UserManager;
-
 class AuthController
 {
     /**

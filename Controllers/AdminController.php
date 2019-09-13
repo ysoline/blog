@@ -1,11 +1,5 @@
 <?php
 
-namespace Controllers;
-
-use Models\Manager\CommentManager;
-use Models\Manager\PostManager;
-use Models\Manager\UserManager;
-
 class AdminController
 {
     /**

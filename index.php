@@ -1,10 +1,5 @@
 <?php
 
-use Controllers\AuthController;
-use Controllers\PostController;
-use Controllers\UserController;
-use Controllers\AdminController;
-use Controllers\CommentController;
 
 require('Autoloader.php');
 Autoloader::register();
@@ -24,6 +19,7 @@ try {
 
         case '':
         case 'home':
+        case 'accueil':
             $posts = new PostController;
             $posts->listPosts();
             break;

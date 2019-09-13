@@ -9,12 +9,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
 
-    <script>
-    tinymce.init({
-        selector: '#post',
-        language_url: '../../public/tinymce/langs/fr_FR.js'
-    });
-    </script>
     <title><?= $title = "Jean Forteroche" ?></title>
 </head>
 
@@ -115,5 +109,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
     integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous">
 </script>
+<script scr="public\js\script.js"></script>
 
 </html>

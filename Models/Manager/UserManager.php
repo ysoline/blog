@@ -1,6 +1,5 @@
 <?php
 
-namespace Models\Manager;
 
 class UserManager extends \Manager
 {
