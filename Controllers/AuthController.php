@@ -14,6 +14,7 @@ class AuthController
         $userMail = $userManager->getMail(($_POST['email']));
         $passHach = ($_POST['pass']);
 
+<<<<<<< HEAD
         if (!empty($_POST['pseudo']) && !empty($_POST['pass']) && !empty($_POST['pass2']) && !empty($_POST['email']) && !empty($_POST['email2'])) {
             if ($userCheck == 0) {
                 if ($_POST['pass'] == $_POST['pass2']) {
@@ -24,6 +25,17 @@ class AuthController
                             header('Location: home');
                         } else {
                             throw new Exception("Les adresses emails ne sont pas identiques <a href='inscription' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
+=======
+        if ($userCheck == 0) {
+            if ($_POST['pass'] == $_POST['pass2']) {
+                if ($userMail == 0) {
+                    if ($_POST['email'] == $_POST['email2']) {
+                        if (preg_match ( " /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ ", $_POST['email']))
+                            {
+                            $passHach = password_hash($passHach, PASSWORD_DEFAULT);
+                            $newUser = $userManager->addUser(htmlspecialchars($_POST['pseudo']), $passHach, htmlspecialchars($_POST['email']));
+                            header('Location: index.php?action=listPosts');
+>>>>>>> fdc48362be5c60253389f52bff4e5219fd09864e
                         }
                     } else {
                         throw new Exception("l'adresse email est déjà utilisée  <a href='inscription' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
