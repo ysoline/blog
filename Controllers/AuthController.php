@@ -35,6 +35,9 @@ class AuthController
                             $passHach = password_hash($passHach, PASSWORD_DEFAULT);
                             $newUser = $userManager->addUser(htmlspecialchars($_POST['pseudo']), $passHach, htmlspecialchars($_POST['email']));
                             header('Location: index.php?action=listPosts');
+<<<<<<< HEAD
+>>>>>>> fdc48362be5c60253389f52bff4e5219fd09864e
+=======
 >>>>>>> fdc48362be5c60253389f52bff4e5219fd09864e
                         }
                     } else {

@@ -1,9 +1,16 @@
 RewriteEngine On
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php?action=$1 [NC,L]
+=======
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)$ index.php [QSA,L]
+>>>>>>> fdc48362be5c60253389f52bff4e5219fd09864e
 =======
 RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-d
