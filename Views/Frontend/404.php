@@ -1,9 +1,12 @@
-<link rel="stylesheet" type="text/css" href="public\style.css" />
+<?php ob_start(); ?>
+
 
 <div id='oopss'>
     <div id='error-text'>
         <span>404</span>
         <p>Page introuvable !</p>
-        <p class='hmpg'><a href='home' class="back">Accueil</a></p>
+        <a class='btn btn-outline-danger btn-lg mt-3' href="home">Accueil</a>
     </div>
 </div>
+
+<?php require('template.php'); ?>

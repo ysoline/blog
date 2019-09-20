@@ -159,6 +159,9 @@ try {
             $disconnect = new AuthController;
             $disconnect->disconnect();
             break;
+        case 'mentionslegales':
+            require 'Views/Frontend/mentionslegales.php';
+            break;
 
         default:
             require 'Views/Frontend/404.php';
