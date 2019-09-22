@@ -8,6 +8,14 @@ class PostManager extends Manager
     {
         $this->_bdd = Manager::dbConnect();
     }
+
+    /**
+     * Pagination des articles, affichage de 5 articles par pagination
+     *
+     * @return void
+     */
+    public function paging()
+    { }
     /**
      * Recuperation de tous les posts
      *
