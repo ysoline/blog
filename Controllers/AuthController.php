@@ -47,7 +47,7 @@ class AuthController
             $passOk = password_verify(htmlspecialchars($_POST['pass']), htmlspecialchars($user['pass']));
             if ($passOk) {
                 $_SESSION['id_user'] = $user['id'];
-                $_SESSION['rank'] = $user['rank_id'];
+                $_SESSION['rank_id'] = $user['rank_id'];
                 $_SESSION['pseudo'] = $user['pseudo'];
                 header('Location: home');
             } else {
@@ -82,7 +82,6 @@ class AuthController
      */
     public function disconnect()
     {
-        session_start();
         session_unset();
         session_destroy();
         header('Location: home');

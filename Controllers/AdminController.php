@@ -11,7 +11,7 @@ class AdminController
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['slug'] == 'admin') {
 
             $postManager = new PostManager;
             $commentManager = new CommentManager;
@@ -33,7 +33,7 @@ class AdminController
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['slug'] == 'admin') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $commentManager = new CommentManager;
                 $unpublished = $commentManager->published($_GET['id']);
@@ -56,7 +56,7 @@ class AdminController
 
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['slug'] == 'admin') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $commentManager = new CommentManager;
                 $resetReport = $commentManager->resetReport($_GET['id']);
@@ -79,7 +79,7 @@ class AdminController
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['slug'] == 'admin') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $commentManager = new CommentManager;
                 $unpublished = $commentManager->unpublished($_GET['id']);

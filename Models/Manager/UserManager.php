@@ -1,8 +1,14 @@
 <?php
 
 
-class UserManager extends \Manager
+class UserManager extends Manager
 {
+    private $_bdd;
+
+    public function __construct()
+    {
+        $this->_bdd = Manager::dbConnect();
+    }
     /**
      * Inscription
      * Rang par défault: 2: membre
@@ -14,8 +20,7 @@ class UserManager extends \Manager
      */
     public function addUser($pseudo, $pass, $email)
     {
-        $_bdd = $this->dbConnect();
-        $reqUser = $_bdd->prepare('INSERT INTO users(pseudo, pass, email, rank_id) VALUES(?,?,?,2)');
+        $reqUser = $this->_bdd->prepare('INSERT INTO users(pseudo, pass, email, rank_id) VALUES(?,?,?,2)');
         $newUser = $reqUser->execute(array($pseudo, $pass, $email));
         return $newUser;
     }
@@ -28,8 +33,7 @@ class UserManager extends \Manager
      */
     public function getPseudo($pseudo)
     {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('SELECT * FROM users WHERE pseudo=:pseudo');
+        $req = $this->_bdd->prepare('SELECT * FROM users WHERE pseudo=:pseudo');
         $req->execute(array(
             'pseudo' => $pseudo
         ));
@@ -46,8 +50,7 @@ class UserManager extends \Manager
      */
     public function getMail($email)
     {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('SELECT email FROM users WHERE email=:email');
+        $req = $this->_bdd->prepare('SELECT email FROM users WHERE email=:email');
         $req->execute(array('email' => $email));
         $userMail = $req->fetch();
         return $userMail;
@@ -62,8 +65,7 @@ class UserManager extends \Manager
     public function getInfo($id)
     {
 
-        $_bdd = $this->dbConnect();
-        $info = $_bdd->prepare('SELECT * FROM users WHERE id=?');
+        $info = $this->_bdd->prepare('SELECT * FROM users WHERE id=?');
         $info->execute(array($id));
         $userInfo = $info->fetch();
 
@@ -78,8 +80,7 @@ class UserManager extends \Manager
      */
     public function updatePseudo($id, $pseudo)
     {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare("UPDATE users SET pseudo= ? WHERE id= ?");
+        $req = $this->_bdd->prepare("UPDATE users SET pseudo= ? WHERE id= ?");
         $updatePseudo = $req->execute(array($pseudo, $id));
         return $updatePseudo;
     }
@@ -92,8 +93,7 @@ class UserManager extends \Manager
      */
     public function updateMail($id, $email)
     {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare("UPDATE users SET email=? WHERE id= ?");
+        $req = $this->_bdd->prepare("UPDATE users SET email=? WHERE id= ?");
         $updateMail = $req->execute(array($email, $id));
         return $updateMail;
     }
@@ -105,8 +105,7 @@ class UserManager extends \Manager
      */
     public function updatePass($id, $pass)
     {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('UPDATE users SET pass =? WHERE id =?');
+        $req = $this->_bdd->prepare('UPDATE users SET pass =? WHERE id =?');
         $updatePass = $req->execute(array($pass, $id));
         return $updatePass;
     }
@@ -120,8 +119,7 @@ class UserManager extends \Manager
      */
     public function deleteUser($id)
     {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('DELETE FROM users WHERE id =?');
+        $req = $this->_bdd->prepare('DELETE FROM users WHERE id =?');
         $deleteUser = $req->execute(array($id));
 
         return  $deleteUser;

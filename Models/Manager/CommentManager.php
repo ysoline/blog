@@ -1,8 +1,15 @@
 <?php
 
 
-class CommentManager extends \Manager
+class CommentManager extends Manager
 {
+    private $_bdd;
+
+    public function __construct()
+    {
+        $this->_bdd = Manager::dbConnect();
+    }
+
     /**
      * Recuperation de tous les commentaires
      *
@@ -11,8 +18,8 @@ class CommentManager extends \Manager
      */
     public function getComments($post_id)
     {
-        $_bdd = $this->dbConnect();
-        $comments = $_bdd->prepare('SELECT comments.*, users.pseudo,DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments INNER JOIN posts ON comments.post_id = posts.id INNER JOIN users ON users.id = comments.id_user WHERE posts.id = ? AND published = 1 ORDER BY comment_date DESC');
+
+        $comments = $this->_bdd->prepare('SELECT comments.*, users.pseudo,DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments INNER JOIN posts ON comments.post_id = posts.id INNER JOIN users ON users.id = comments.id_user WHERE posts.id = ? AND published = 1 ORDER BY comment_date DESC');
         $comments->execute(array($post_id));
 
         return $comments;
@@ -29,8 +36,8 @@ class CommentManager extends \Manager
      */
     public function addComment($post_id, $id_user, $comment)
     {
-        $_bdd = $this->dbConnect();
-        $comments = $_bdd->prepare('INSERT INTO comments(post_id, id_user, comment, comment_date,report,published) VALUES(?,?,?, NOW(),0, 1)');
+
+        $comments = $this->_bdd->prepare('INSERT INTO comments(post_id, id_user, comment, comment_date,report,published) VALUES(?,?,?, NOW(),0, 1)');
         $affectedLines = $comments->execute(array($post_id, $id_user, $comment));
         return $affectedLines;
     }
@@ -44,8 +51,8 @@ class CommentManager extends \Manager
      */
     public function deleteComment($id)
     {
-        $_bdd = $this->dbConnect();
-        $comments = $_bdd->prepare('DELETE FROM comments WHERE id=?');
+
+        $comments = $this->_bdd->prepare('DELETE FROM comments WHERE id=?');
         $comments->execute(array($id));
     }
 
@@ -59,8 +66,8 @@ class CommentManager extends \Manager
      */
     public function updateComment($comment, $id)
     {
-        $_bdd = $this->dbConnect();
-        $updateComment = $_bdd->prepare('UPDATE comments SET comment=?, comment_date = NOW() WHERE id=?');
+
+        $updateComment = $this->_bdd->prepare('UPDATE comments SET comment=?, comment_date = NOW() WHERE id=?');
         $updateComment->execute(array($comment, $id));
 
         return $updateComment;
@@ -74,8 +81,8 @@ class CommentManager extends \Manager
      */
     public function getComment($id)
     {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('SELECT id, comment, id_user, published,report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ?');
+
+        $req = $this->_bdd->prepare('SELECT id, comment, id_user, published,report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ?');
         $req->execute(array($id));
         $comment = $req->fetch();
 
@@ -89,8 +96,8 @@ class CommentManager extends \Manager
      */
     public function getAuthor($id)
     {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('SELECT users.pseudo FROM users INNER JOIN comments ON users.id = comments.id_user WHERE comments.id = ?');
+
+        $req = $this->_bdd->prepare('SELECT users.pseudo FROM users INNER JOIN comments ON users.id = comments.id_user WHERE comments.id = ?');
         $req->execute(array($id));
         $getAuthor = $req->fetch();
 
@@ -106,8 +113,8 @@ class CommentManager extends \Manager
      */
     public function published($id)
     {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('UPDATE comments SET published = 1 WHERE id = ?');
+
+        $req = $this->_bdd->prepare('UPDATE comments SET published = 1 WHERE id = ?');
         $published = $req->execute(array($id));
         return $published;
     }
@@ -119,8 +126,8 @@ class CommentManager extends \Manager
      */
     public function unpublished($id)
     {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('UPDATE comments SET published = 0 WHERE id = ?');
+
+        $req = $this->_bdd->prepare('UPDATE comments SET published = 0 WHERE id = ?');
         $unpublished = $req->execute(array($id));
         return $unpublished;
     }
@@ -133,8 +140,8 @@ class CommentManager extends \Manager
      */
     public function reportComment($id)
     {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('UPDATE comments SET report = 1 WHERE id =?');
+
+        $req = $this->_bdd->prepare('UPDATE comments SET report = 1 WHERE id =?');
         $report = $req->execute(array($id));
         return $report;
     }
@@ -147,8 +154,8 @@ class CommentManager extends \Manager
      */
     public function resetReport($id)
     {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('UPDATE comments SET report =0 WHERE id= ?');
+
+        $req = $this->_bdd->prepare('UPDATE comments SET report =0 WHERE id= ?');
         $resetReport = $req->execute(array($id));
         return $resetReport;
     }
@@ -160,8 +167,8 @@ class CommentManager extends \Manager
      */
     public function getReport()
     {
-        $_bdd = $this->dbConnect();
-        $req = $_bdd->prepare('SELECT comments.id AS c_id, comments.comment, comments.id_user,comments.report, comments.published, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, users.id AS u_id, users.pseudo FROM users INNER JOIN comments ON users.id=comments.id_user WHERE report =1 AND published = 1 ORDER BY comment_date DESC');
+
+        $req = $this->_bdd->prepare('SELECT comments.id AS c_id, comments.comment, comments.id_user,comments.report, comments.published, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, users.id AS u_id, users.pseudo FROM users INNER JOIN comments ON users.id=comments.id_user WHERE report =1 AND published = 1 ORDER BY comment_date DESC');
         $req->execute();
 
         return $req;
@@ -169,8 +176,8 @@ class CommentManager extends \Manager
 
     public function getUnpublished()
     {
-        $_bdd = $this->dbConnect();
-        $unpublished = $_bdd->prepare('SELECT comments.id AS c_id, comments.comment, comments.id_user,comments.report, comments.published, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, users.id AS u_id, users.pseudo FROM users INNER JOIN comments ON users.id=comments.id_user WHERE  published = 0 ORDER BY comment_date DESC');
+
+        $unpublished = $this->_bdd->prepare('SELECT comments.id AS c_id, comments.comment, comments.id_user,comments.report, comments.published, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, users.id AS u_id, users.pseudo FROM users INNER JOIN comments ON users.id=comments.id_user WHERE  published = 0 ORDER BY comment_date DESC');
         $unpublished->execute();
 
         return $unpublished;
@@ -178,8 +185,8 @@ class CommentManager extends \Manager
 
     public function delPostCom($post_id)
     {
-        $_bdd = $this->dbConnect();
-        $deletePostCom = $_bdd->prepare('DELETE FROM comments WHERE post_id = ?');
+
+        $deletePostCom = $this->_bdd->prepare('DELETE FROM comments WHERE post_id = ?');
         $deletePostCom->execute(array($post_id));
     }
 }

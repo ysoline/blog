@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="public/img/favicon.png" />
     <link rel="stylesheet" type="text/css" href="public/style.css" />
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
@@ -38,7 +39,7 @@
                             <a class="nav-link text-decoration-none mx-2" href="profil">Profil</a>
                         </li>
                         <li>
-                            <?php if (($_SESSION['rank']) == 1) { ?>
+                            <?php if (($_SESSION['rank_id']) == 1) { ?>
                             <a class="nav-link" href="administration">Administration</a>
                             <?php }
                         } ?>
