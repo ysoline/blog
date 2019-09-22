@@ -1,7 +1,5 @@
 <?php
-
 class PostController
-
 {
     /**
      * Recupere tous les articles
@@ -21,7 +19,6 @@ class PostController
      */
     public function post()
     {
-
         $postManager = new PostManager;
         $commentManager = new CommentManager;
         if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -42,7 +39,7 @@ class PostController
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['slug'] == 'admin') {
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
             if (!empty($_POST['title']) && !empty($_POST['post'])) {
                 $addPost = new PostManager;
                 $addPost->addPost(htmlspecialchars($_POST['title']), ($_POST['post']));
@@ -59,12 +56,11 @@ class PostController
      *
      * @return void
      */
-
     public function updatePost()
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['slug'] == 'admin') {
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $postManager = new PostManager;
                 $updatePost = $postManager->updatePost($_GET['id'], htmlspecialchars($_POST['title']), ($_POST['post']));
@@ -85,7 +81,7 @@ class PostController
     {
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
-        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['slug'] == 'admin') {
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $postManager = new PostManager;
                 $post = $postManager->getPost($_GET['id']);
@@ -97,7 +93,6 @@ class PostController
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
         }
     }
-
     /**
      * Supression d'un article
      *
@@ -105,13 +100,11 @@ class PostController
      */
     public function deletePost()
     {
-
         $userManager = new UserManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
         $deletePost = new PostManager;
         $deleteCom = new CommentManager;
-
-        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['slug'] == 'admin') {
+        if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $deleteCom->delPostCom($_GET['id']);
                 $deletePost->deletePost($_GET['id']);
@@ -123,7 +116,6 @@ class PostController
             throw new Exception('Vous n\'êtes pas autorisé à faire cela');
         }
     }
-
     /**
      * Redirection page ajout d'article
      *

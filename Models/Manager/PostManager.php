@@ -15,7 +15,7 @@ class PostManager extends Manager
      */
     public function getPosts()
     {
-        $req = $this->_bdd->prepare('SELECT id, title, post, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS date_creation_fr FROM posts ORDER BY date_creation_fr');
+        $req = $this->_bdd->prepare('SELECT id, title, post, DATE_FORMAT(postDate, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM posts ORDER BY postDate DESC');
         $req->execute();
         return $req;
     }
@@ -27,7 +27,7 @@ class PostManager extends Manager
      */
     public function getPost($postId) // Sélectionne un post 
     {
-        $req = $this->_bdd->prepare('SELECT id, title, post, DATE_FORMAT(postDate, \'%d/%m/%Y\') AS date_creation_fr FROM posts WHERE id = ?');
+        $req = $this->_bdd->prepare('SELECT id, title, post, DATE_FORMAT(postDate, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM posts WHERE id = ?');
         $req->execute(array($postId));
         $post = $req->fetch();
         return $post;
