@@ -7,9 +7,27 @@ class PostController
      * @return void
      */
     public function listPosts()
-    {
+    { 
+        $postPage =4;
+
         $postManager = new PostManager();
-        $posts = $postManager->getPosts();
+        $total= $postManager->paging();
+
+        $nbPage=ceil($total/$postPage);
+
+        if(isset($_GET['page'])){
+            $start=intval($_GET['page']);
+            if($start>$nbPage){
+                $start=$nbPage;
+            }
+        }else{
+            $start=1;
+        }          
+        
+        $posts = $postManager->getPosts(0, $postPage);
+
+       
+        
         require('Views/Frontend/listPostView.php');
     }
     /**
