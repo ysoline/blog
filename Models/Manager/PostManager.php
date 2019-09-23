@@ -11,21 +11,19 @@ class PostManager extends Manager
 
     public function paging(){
         $countPost=$this->_bdd->prepare('SELECT COUNT(id) as id FROM posts');
-        $countPost->execute();       
-        $totalPost=$countPost->fetch(PDO::FETCH_ASSOC);
-
-        $result =$totalPost['id'];
-        return  $result;
+        $totalPost=$countPost->execute();       
+        
+        return $totalPost;
     }
     /**
-     * Recuperation de tous les posts
+     * Recuperation des 4 derniers articles
      *
      * @return void
      */
-    public function getPosts($offset, $limit)
+    public function getPosts()
     {
         
-        $req = $this->_bdd->prepare('SELECT id, title, post, DATE_FORMAT(postDate, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM posts ORDER BY postDate DESC LIMIT '.$offset.','.$limit);
+        $req = $this->_bdd->prepare('SELECT id, title, post, DATE_FORMAT(postDate, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM posts ORDER BY postDate DESC LIMIT 4');
         $req->execute();
         return $req;
     }
