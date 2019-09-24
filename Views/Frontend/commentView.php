@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-<a href="home" class="btn btn-outline-secondary">Accueil</a>
+<a href="./" class="btn btn-outline-secondary">Accueil</a>
 
 <div class="jumbotron">
     <h6> par <?= $getAuthor['pseudo'] ?></h6>

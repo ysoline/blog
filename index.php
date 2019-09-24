@@ -18,8 +18,6 @@ try {
             /////////////////////////////////////// Accueil ///////////////////////////////////////
 
         case '':
-        case 'home':
-        case 'accueil':
             $posts = new PostController;
             $posts->listPosts();
             break;
@@ -31,7 +29,7 @@ try {
             $post->post();
             break;
 
-        case "publierArticle": //action ajouter article
+        case "publierArticle": //Action ajouter article
             $addPost = new PostController;
             $addPost->addPost($_POST['title'], $_POST['post']);
             break;

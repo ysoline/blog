@@ -9,21 +9,31 @@ class PostManager extends Manager
         $this->_bdd = Manager::dbConnect();
     }
 
-    public function paging(){
-        $countPost=$this->_bdd->prepare('SELECT COUNT(id) as id FROM posts');
-        $totalPost=$countPost->execute();       
-        
+    public function paging()
+    {
+        $countPost = $this->_bdd->query('SELECT COUNT(*) as total FROM posts');
+        $result = $countPost->fetch();
+        $totalPost = $result['total'];
+
         return $totalPost;
     }
     /**
-     * Recuperation des 4 derniers articles
+     * Recuperation des articles avec pagination
      *
      * @return void
      */
+    public function getPostsPaging($offset, $limite)
+    {
+        $offset = (int) $offset;
+        $limite = (int) $limite;
+
+        $req = $this->_bdd->prepare('SELECT id, title, post, DATE_FORMAT(postDate, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM posts ORDER BY postDate DESC LIMIT ' . $offset . ',' . $limite);
+        $req->execute();
+        return $req;
+    }
     public function getPosts()
     {
-        
-        $req = $this->_bdd->prepare('SELECT id, title, post, DATE_FORMAT(postDate, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM posts ORDER BY postDate DESC LIMIT 4');
+        $req = $this->_bdd->prepare('SELECT id, title, post, DATE_FORMAT(postDate, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM posts ORDER BY postDate DESC');
         $req->execute();
         return $req;
     }

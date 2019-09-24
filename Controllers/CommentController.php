@@ -45,7 +45,7 @@ class CommentController
             if (!empty($_POST['updateComment'])) {
 
                 $updateComment = $commentManager->updateComment(htmlspecialchars($_POST['updateComment']), $_GET['id']);
-                header('Location: home');
+                header('Location: ./');
             } else {
                 throw new Exception('Impossible de modifier le commentaire');
             }
@@ -101,7 +101,7 @@ class CommentController
         if ($checkIdUser['id_user'] == $_SESSION['id_user']) {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $deleteCom = $commentManager->deleteComment($_GET['id']);
-                header('Location: home');
+                header('Location: ./');
             } else {
                 throw new Exception('Commentaire introuvable !');
             }

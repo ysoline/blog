@@ -19,7 +19,7 @@
     <header class="blog-header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="navbar-header">
-                <a class="navbar-brand" href="home">Jean Forteroche</a>
+                <a class="navbar-brand" href="./">Jean Forteroche</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

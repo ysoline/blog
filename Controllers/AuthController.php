@@ -18,7 +18,7 @@ class AuthController
                         if ($_POST['email'] == $_POST['email2']) {
                             $passHach = password_hash($passHach, PASSWORD_DEFAULT);
                             $newUser = $userManager->addUser(htmlspecialchars($_POST['pseudo']), $passHach, htmlspecialchars($_POST['email']));
-                            header('Location: home');
+                            header('Location: ./');
                         } else {
                             throw new Exception("Les adresses emails ne sont pas identiques <a href='inscription' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
                         }
@@ -49,7 +49,7 @@ class AuthController
                 $_SESSION['id_user'] = $user['id'];
                 $_SESSION['rank_id'] = $user['rank_id'];
                 $_SESSION['pseudo'] = $user['pseudo'];
-                header('Location: home');
+                header('Location: ./');
             } else {
                 throw new Exception("Mauvais identifiant ou mot de passe <a href='connexion' class='btn btn-outline-secondary btn-sm'>Réessayer ?</a>");
             }
@@ -84,6 +84,6 @@ class AuthController
     {
         session_unset();
         session_destroy();
-        header('Location: home');
+        header('Location: ./');
     }
 }

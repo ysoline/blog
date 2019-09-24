@@ -7,9 +7,27 @@ class PostController
      * @return void
      */
     public function listPosts()
-    { 
-        $postManager = new PostManager();      
-        $posts = $postManager->getPosts();
+    {
+        $perPage = 4; //Affiche 4 articles par pages
+
+        $postManager = new PostManager();
+        $totalPost = $postManager->paging();
+
+        $nbPage = ceil($totalPost / $perPage);
+
+        if (isset($_GET['p']) && !empty($_GET['p']) && ctype_digit($_GET['p']) == 1) {
+            if ($_GET['p'] > $nbPage) {
+                $current = $nbPage;
+            } else {
+                $current = $_GET['p'];
+            }
+        } else {
+            $current = 1;
+        }
+
+        $firstOfPage = ($current - 1) * $perPage;
+
+        $posts = $postManager->getPostsPaging($firstOfPage, $perPage);
         require('Views/Frontend/listPostView.php');
     }
     /**

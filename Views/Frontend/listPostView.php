@@ -15,9 +15,44 @@
                 </div>
 
             </div>
-        <?php } 
+        <?php }
         ?>
+        <div class="d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="<?php if ($current == '1') {
+                                echo "disabled";
+                            } ?> page-item">
+                    <a href="?p=<?php if ($current != '1') {
+                                    echo $current - 1;
+                                } else {
+                                    echo $current;
+                                } ?>" class="page-link">&laquo;</a></li>
 
+                <?php
+                for ($i = 1; $i <= $nbPage; $i++) {
+                    if ($i == $current) {
+                        ?><li class="active page-item"><a href="?p=<?= $i ?>" class="page-link"><?= $i ?></a></li>
+
+
+                    <?php } else {
+                            ?>
+                        <li class="page-item"><a href="?p=<?= $i ?>" class="page-link"><?= $i ?></a></li>
+                <?php }
+                } ?>
+
+
+                <li class="<?php if ($current == $nbPage) {
+                                echo "disabled";
+                            } ?> page-item">
+                    <a href="?p=<?php if ($current != $nbPage) {
+                                    echo $current + 1;
+                                } else {
+                                    echo $current;
+                                } ?>" class="page-link">&raquo;</a>
+                </li>
+
+            </ul>
+        </div>
     </div>
 </div>
 <?php
