@@ -71,7 +71,7 @@
                 <label>Veuillez confirmer la suppression en écrivant "SUPPRIMER"</label>
                 <input id="deleteUser" name="deleteUser" required><br />
                 <small class='text-danger'>Attention, cette action est irréverssible </small><br />
-                <input class='btn btn-outline-danger' type="submit" value="Supprimer">
+                <input class='btn btn-outline-danger' type="submit" value="Supprimer" onclick="check_formUser()">
             </form>
         </div>
     </div>

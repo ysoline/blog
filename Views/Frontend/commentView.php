@@ -23,7 +23,7 @@
     </div>
 
     <div class="row justify-content-md-center mt-3 mb-2">
-        <input class="btn btn-primary " type="submit" />
+        <input class="btn btn-primary " type="submit" onclick='check_editComment()'>
     </div>
 </form>
 
@@ -35,7 +35,7 @@
             <label>Veuillez confirmer la suppression en écrivant "SUPPRIMER"</label>
             <input id="deleteCom" name="deleteCom" required><br />
             <small class='text-danger'>Attention, cette action est irréverssible </small><br />
-            <input class='btn btn-outline-danger' type="submit" value="Supprimer">
+            <input class='btn btn-outline-danger' type="submit" value="Supprimer" onclick="check_formCom()">
         </form>
     </div>
 </div>

@@ -15,12 +15,7 @@ class CommentController
             if (!empty($_POST['comment'])) {
                 $commentManager = new CommentManager;
                 $affectedLines = $commentManager->addComment($_GET['id'], $_SESSION['id_user'], htmlspecialchars($_POST['comment']));
-
-                if ($affectedLines === true) {
-                    header('Location: article&id=' . $_GET['id']);
-                } else {
-                    throw new Exception('Impossible d\'ajouter le commentaire !');
-                }
+                header('Location: article&id=' . $_GET['id']);
             } else {
                 throw new Exception('Tous les champs ne sont pas remplis !');
             }
@@ -100,8 +95,12 @@ class CommentController
         $checkIdUser = $commentManager->getComment($_GET['id']);
         if ($checkIdUser['id_user'] == $_SESSION['id_user']) {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $deleteCom = $commentManager->deleteComment($_GET['id']);
-                header('Location: ./');
+                if (htmlspecialchars($_POST['deleteCom']) == 'SUPPRIMER') {
+                    $deleteCom = $commentManager->deleteComment($_GET['id']);
+                    header('Location: ./');
+                } else {
+                    throw new Exception('Vous ne pouvez pas supprimer le commentaire');
+                }
             } else {
                 throw new Exception('Commentaire introuvable !');
             }
@@ -122,7 +121,7 @@ class CommentController
             $getComment = $commentManager->getComment($_GET['id']);
             if ($getComment['report'] == 0) {
                 $reportCom = $commentManager->reportComment($_GET['id']);
-                header('Location: article&amp;id=' . $_GET['id']);
+                header('Location: ./');
             } else {
                 throw new Exception('Commentaire déjà signalé');
             }

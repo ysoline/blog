@@ -81,7 +81,7 @@ class PostController
         if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $postManager = new PostManager;
-                $updatePost = $postManager->updatePost($_GET['id'], htmlspecialchars($_POST['title']), ($_POST['post']));
+                $updatePost = $postManager->updatePost($_GET['id'], htmlspecialchars($_POST['titleEdit']), ($_POST['postEdit']));
                 header('Location: administration');
             } else {
                 throw new Exception("Article introuvable !");
@@ -124,9 +124,13 @@ class PostController
         $deleteCom = new CommentManager;
         if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $deleteCom->delPostCom($_GET['id']);
-                $deletePost->deletePost($_GET['id']);
-                header('Location: administration');
+                if (htmlspecialchars($_POST['deletePost']) == 'SUPPRIMER') {
+                    $deleteCom->delPostCom($_GET['id']);
+                    $deletePost->deletePost($_GET['id']);
+                    header('Location: administration');
+                } else {
+                    throw new Exception('Vous ne pouvez pas supprimer l\'article');
+                }
             } else {
                 throw new Exception("Article introuvable !");
             }

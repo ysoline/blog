@@ -32,8 +32,10 @@ class AdminController
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
         if ($_SESSION['id_user'] == $infoUser['id'] and $infoUser['rank_id'] == 1) {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
+
                 $commentManager = new CommentManager;
                 $unpublished = $commentManager->published($_GET['id']);
+                $resetReport = $commentManager->resetReport($_GET['id']);
                 header('Location: administration');
             } else {
                 throw new Exception('Impossible de trouvé le commentaire');

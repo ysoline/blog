@@ -6,7 +6,7 @@
     <br />
     <textarea id="post" name="post"></textarea>
     <br />
-    <input type="submit" class="btn btn-primary" value="Publier">
+    <input type="submit" class="btn btn-primary" value="Publier" onclick="check_addPost()">
 </form>
 
 <?php $content = ob_get_clean(); ?>
