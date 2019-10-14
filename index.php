@@ -157,8 +157,11 @@ try {
             $disconnect = new AuthController;
             $disconnect->disconnect();
             break;
-        case 'mentionslegales':
+        case 'mentionslegales': //Renvoi vers la page des mentions légales
             require 'Views/Frontend/mentionslegales.php';
+            break;
+        case 'policonf': //Renvoi vers la page des mentions légales
+            require 'Views/Frontend/policonf.php';
             break;
 
         default:
