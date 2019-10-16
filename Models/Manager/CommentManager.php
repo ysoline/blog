@@ -133,7 +133,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * Signalement d'un commentaire (tous le monde)
+     * Signalement d'un commentaire
      *
      * @param mixed $id
      * @return void
@@ -174,6 +174,11 @@ class CommentManager extends Manager
         return $req;
     }
 
+    /**
+     * Re-publie un commentaire qui a été archivé
+     *
+     * @return void
+     */
     public function getUnpublished()
     {
 
@@ -183,10 +188,28 @@ class CommentManager extends Manager
         return $unpublished;
     }
 
+    /**
+     * Suppression des commentaires lié à un article pour suppression d'article
+     *
+     * @param mixed $post_id
+     * @return void
+     */
     public function delPostCom($post_id)
     {
 
         $deletePostCom = $this->_bdd->prepare('DELETE FROM comments WHERE post_id = ?');
         $deletePostCom->execute(array($post_id));
+    }
+
+    /**
+     * Suppression des commentaires lié à un id utilisateur pour suppression de compte
+     *
+     * @param mixed $id_user
+     * @return void
+     */
+    public function delComUser($id_user)
+    {
+        $delComUser = $this->_bdd->prepare('DELETE FROM comments WHERE id_user =?');
+        $delComUser->execute(array($id_user));
     }
 }

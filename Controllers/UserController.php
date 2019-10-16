@@ -94,18 +94,20 @@ class UserController
         }
     }
     /**
-     * Suppression d'un compte utilisateur
+     * Suppression d'un compte utilisateur et de ses commentaires
      *
      * @return void
      */
     public function deleteUser()
     {
         $userManager = new UserManager;
+        $commentManager = new CommentManager;
         $infoUser = $userManager->getInfo($_SESSION['id_user']);
         if ($_SESSION['id_user'] == $infoUser['id']) {
             if ($_POST['deleteUser'] == "SUPPRIMER") {
+                $delComUser = $commentManager->delComUser($_SESSION['id_user']);
                 $deleteUser = $userManager->deleteUser($_SESSION['id_user']);
-                header('Location: profil');
+                header('Location: ./');
             } else {
                 throw new Exception('Impossible de supprimer le compte');
             }
